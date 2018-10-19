@@ -73,3 +73,9 @@ class card(object):
         print card for enumeration in dictionary
         """
         print "{} | {}".format(self.uuid, self.name)
+
+    def detail(self):
+        """
+        print card name and description
+        """
+        print "{} | {}".format(self.name, self.description)

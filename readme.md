@@ -11,3 +11,11 @@ Every 'TODO' is a card, and every card has parents and children that will form t
 ---
 ## Development
 The utility is developed using OOP methodologies, and adhereing to the [Google Python style-guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md), especially regarding the documentation. Is encouraged Test-Drived-Development, as the whole utility will be tested periodically using Continuous Integration practices. Up to now there is no plan in writing a external documentation as the in-code documentation should be enough.
+
+---
+##Usage
+Inside the bin folder there are the two scripts to use the TODAG:
+- **open.py**: create new todos in the DAG, delete or print the DAG
+- **todo.py**: traverse the DAG and print the todos with highest priority (the roots), and for every todo print the connected components it belongs to
+
+For more detail on the usage you can check the in-code docs

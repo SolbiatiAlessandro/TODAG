@@ -14,8 +14,7 @@ def load_cards():
         will raise exception
     """
     with open('cards.pkl', 'rb') as data:
-        global CARDS
-        CARDS = pickle.load(data)
+        return pickle.load(data)
 
 
 def print_cards():
@@ -33,10 +32,11 @@ def write_cards():
     with open('cards.pkl', 'wb') as data:
         pickle.dump(CARDS, data)
 
+
 if __name__ == "__main__":
     sys.path.append('../TODAG')
     from card import card
-    load_cards()
+    CARDS = load_cards()
     print_cards()
     print "\n\nA: new card\nB: add parent\n"
     got = raw_input()
