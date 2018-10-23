@@ -1,6 +1,6 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
-from open import load_cards
+from open import load_cards, write_cards
 
 
 def get_todos(cards):
@@ -16,10 +16,10 @@ def get_todos(cards):
             # type(parent_id) = <class 'uuid.UUID'>
             parent = cards.get(parent_id)
             if not parent:
-                exit('data corrupted: {}'.format(card_id))
-            if parent.done == 0:
+                pass  # means that parent got deleted
+            elif parent.done == 0:
                 add = 0
-        if add:
+        if not iter_card.done and add:
             res.append(card_id)
     return res
 
@@ -84,7 +84,12 @@ def main():
     print_todo(cards, todos, index)
     while True:
         got = raw_input()
-        if got == 'n':
+        if got == 'done':
+            card_done = cards[todos[index]]
+            card_done.done = True
+            write_cards(cards)
+            return
+        elif got == 'n':
             index += 1
             index %= len(todos)
             print_todo(cards, todos, index)

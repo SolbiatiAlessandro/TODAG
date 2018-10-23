@@ -25,37 +25,46 @@ def print_cards():
         _card.pretty_print()
 
 
-def write_cards():
+def write_cards(cards):
     """
     write current cards to CARDS
     """
     with open('cards.pkl', 'wb') as data:
-        pickle.dump(CARDS, data)
+        pickle.dump(cards, data)
 
 
 if __name__ == "__main__":
     sys.path.append('../TODAG')
     from card import card
+    import uuid
     CARDS = load_cards()
     print_cards()
-    print "\n\nA: new card\nB: add parent\n"
+    print "\n\n[A] new card\n[B] add parent\n[C] delete card\n"
     got = raw_input()
     if got == 'A':
         new_card = card()
         new_card.populate()
         CARDS[new_card.uuid] = new_card
+        print "Card added succesfully"
     elif got == 'B':
-        import uuid
         print "Input UUID of children card:"
         read_id = raw_input()
-        #import pdb;pdb.set_trace() 
         read_card = CARDS.get(uuid.UUID(read_id))
         if not read_card:
-            "NOT EXISTING"
+            exit("error: CARD NOT EXISTING")
         else:
             print "Adding new parent to '{}'".format(read_card.name)
             new_card = read_card.add_parent()
             CARDS[new_card.uuid] = new_card
+            print "Card added succesfully"
+    elif got == 'C':
+        print "Input UUID of card to delete"
+        read_id = raw_input()
+        read_card = CARDS.get(uuid.UUID(read_id))
+        if not read_card:
+            exit("error: CARD NOT EXISTING")
+        del(CARDS[uuid.UUID(read_id)])
+        print "Card deleted succesfully"
     else:
-        print 'not implemented'
-    write_cards()
+        exit("error: NOT IMPLEMENTED")
+    write_cards(CARDS)
