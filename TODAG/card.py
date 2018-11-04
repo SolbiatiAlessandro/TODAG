@@ -27,6 +27,7 @@ class card(object):
         self.children = []
         self.done = 0
         self.repeat = 0
+        self.priority = -1
 
     def populate(self):
         """
@@ -45,6 +46,9 @@ class card(object):
         self.description = raw_input()
         print "is_reward(int):"
         self.is_reward = int(raw_input())
+        if self.is_reward:
+            print "priority low 0 : high 10"
+            self.priority = int(raw_input())
         print "is_optional(int):"
         self.is_optional = int(raw_input())
 
@@ -72,10 +76,18 @@ class card(object):
         """
         print card for enumeration in dictionary
         """
-        print "{} | {}".format(self.uuid, self.name)
+        if hasattr(self, 'priority') and self.priority != -1:
+            print "{} | {} | {}".format(self.uuid, self.name,
+                                        self.priority)
+        else:
+            print "{} | {}".format(self.uuid, self.name)
 
     def detail(self):
         """
         print card name and description
         """
-        print "{} | {}".format(self.name, self.description)
+        if hasattr(self, 'priority') and self.priority != -1:
+            print "{} | {} | {}".format(self.name, self.description,
+                                        self.priority)
+        else:
+            print "{} | {}".format(self.name, self.description)
