@@ -7,9 +7,11 @@ def get_todos(cards):
     """
     traverses the DAG and find nodes with with all completed parents
 
-    return: list[uuid] with the todos
+    return: list[uuid] with the todos sorted by priority of component
     """
     res = []
+
+    # get todos traversing the DAG
     for card_id, iter_card in cards.items():
         add = 1
         for parent_id in iter_card.parents:
@@ -21,7 +23,17 @@ def get_todos(cards):
                 add = 0
         if not iter_card.done and add:
             res.append(card_id)
-    return res
+
+    # sort todos by priority of component
+    for index, todo in enumerate(res):
+        priority = -1
+        for component in find_components(cards, todo):
+            if hasattr(cards[component], 'priority'):
+                priority = max(priority, cards[component].priority)
+        res[index] = (priority, todo)
+    res.sort()
+
+    return [todo for _, todo in res[::-1]]
 
 
 def print_todo(cards, todos, index):
