@@ -42,35 +42,58 @@ def find_rewards(cards):
     return [card_id for card_id, _card in cards.items() if _card.is_reward]
 
 
-def get_parents(cards, todo):
+def validate(parent_id):
     """
-    given a todo find all the parents of the todo and return them
-    i.e. backtrack on the DAG
+    returns True if parent is valid
+
+    data is often corrupted, because of deletion of cards
+    there are some id that point to non-exisiting cards.
+    This procedure validate that the parent exists
+    """
+    if CARDS.get(parent_id) is None:
+        return False
+    return True
+
+
+def backward_bfs(cards, todo):
+    """
+    given a todo launches a BFS backward and returns
+    the other cards layered by distance
 
     Args:
         cards: global dict of card instances
         todo: (uuid) of the todo
 
     Returns:
-        parents: list[int, list[int, list[int]], ..]
-            the format for the return value is unusual, for
-            visualization reason every time the DAG branches during the
-            backtrack, one whole branch (list[int]) while be a single
-            element of the list, instead of appending all the elements
-            in the branch to the parents list
+        ordered_parents: list[list[int], list[int], ..]
+            every member is a layer of the DAG seen
+            backward from the input todo, where a layer is a set
+            of cards with same distance from starting point
+            of the bfs
     """
-    res = []
-    curr = todo
-    while CARDS.get(curr) and CARDS[curr].parents:
-        if len(CARDS[curr].parents) == 1:
-            curr = CARDS[curr].parents[0]
-            res.append(curr)
+
+    ordered_parents = []
+    queue = [todo]
+    distances = {todo: 0}
+    while queue:
+        elem = queue.pop()
+
+        # here we populate ordered_parents
+        if distances.get(elem) is None:
+            exit("error: distances in bfs was not assigned")
+        distance = distances[elem]
+        if distance < len(ordered_parents):
+            # every layer is a elem of the list indexed by its distance
+            ordered_parents[distance].append(elem)
         else:
-            last = []
-            for parent in CARDS[curr].parents:
-                last.append([parent] + get_parents(cards, parent))
-            return res + [last]
-    return res
+            ordered_parents.append([elem])
+
+        for parent in cards[elem].parents:
+            if validate(parent):
+                distances[parent] = distances[elem] + 1
+                queue.insert(0, parent)
+
+    return ordered_parents
 
 
 if __name__ == "__main__":
@@ -79,8 +102,8 @@ if __name__ == "__main__":
     import uuid
     CARDS = load_cards()
     print_cards()
-    print "\n\n[A] new card\n[B] add parent\n[C] delete card\n\
-    [D] explore decision tree\n"
+    print "\n\n[A] new card\n[B] add parent\n[C] delete card\n" + \
+          "[D] explore decision tree\n"
     got = raw_input()
     if got == 'A':
         new_card = card()
@@ -119,8 +142,20 @@ if __name__ == "__main__":
             reward_id = rewards[got_index]
             print "\n[REWARD]"
             CARDS[reward_id].detail()
-            parents_id = get_parents(CARDS, reward_id)
-            print parents_id  # TODO: figure out how to print this stuff
+            parents = backward_bfs(CARDS, reward_id)
+            parents = parents[1:]
+            ITEM_SIZE = 30
+            for layer in parents:
+                separator = (("="*ITEM_SIZE)+"|")*len(layer)
+                content = ""
+                for parent in layer:
+                    name = CARDS[parent].name
+                    content += name[:ITEM_SIZE] + \
+                        " "*(ITEM_SIZE - min(len(name), ITEM_SIZE))+"|"
+                print (" "*(ITEM_SIZE/2)+"^"+" "*(ITEM_SIZE/2))*len(layer)
+                print separator
+                print content
+                print separator
         else:
             exit("error: reward index out of range")
 
