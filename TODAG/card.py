@@ -11,8 +11,8 @@ class card(object):
         description: str
         is_reward: bool, is this card a reward card
         is_optional: bool, is this card optional or necessary
-        parents: list[card] of parents card
-        children: list[card] of children
+        parents: list[uuid] of parents card
+        children: list[uuid] of children
         done: bool, is the todo done
         repeat: int, still need to be done 'repeat' times
     """
