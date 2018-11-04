@@ -89,7 +89,7 @@ def backward_bfs(cards, todo):
             ordered_parents.append([elem])
 
         for parent in cards[elem].parents:
-            if validate(parent):
+            if validate(parent) and not cards[parent].done:
                 distances[parent] = distances[elem] + 1
                 queue.insert(0, parent)
 
