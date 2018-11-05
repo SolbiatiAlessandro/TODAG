@@ -123,7 +123,7 @@ if __name__ == "__main__":
         print "Input UUID of children card:"
         child = read_card(CARDS)
         print "\nAdding new parent to '{}'\n".format(child.name)
-        print "\n\n[A] add new parent from existing cards\n[B] add new card as a parent\n"
+        print "\n\n[A] -> Existing Card\n[B] -> New Card\n"
         gott = raw_input()
         if gott == 'B':
             new_card = child.add_parent()
