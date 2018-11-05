@@ -7,7 +7,7 @@ def get_todos(cards):
     """
     traverses the DAG and find nodes with with all completed parents
 
-    return: list[uuid] with the todos sorted by priority of component
+    return: list[[weight,uuid]] with the todos sorted by priority of component
     """
     res = []
 
@@ -26,14 +26,14 @@ def get_todos(cards):
 
     # sort todos by priority of component
     for index, todo in enumerate(res):
-        priority = -1
+        weight = 0
         for component in find_components(cards, todo):
             if hasattr(cards[component], 'priority'):
-                priority = max(priority, cards[component].priority)
-        res[index] = (priority, todo)
+                weight += cards[component].priority
+        res[index] = (weight, todo)
     res.sort()
 
-    return [todo for _, todo in res[::-1]]
+    return res[::-1]
 
 
 def print_todo(cards, todos, index):
@@ -44,21 +44,22 @@ def print_todo(cards, todos, index):
 
     Args:
         cards: global dict of card instances
-        todos: list[uuid] with the todos
+        todos: list[[weight, uuid]] with the todos
         index: int, index of the todo to print
     """
     print "\n"*55
-    todo = todos[index]
+    weight, todo = todos[index]
     components = find_components(cards, todo)
     cards[todo].detail()
+    print "Weight: " + str(weight) + "\n"
     for component in components:
-        print "\n"
         cards[component].pretty_print()
 
 
 def find_components(cards, todo):
     """
     given a todo find the connected component it belongs to,
+    where the component is a card with a reward
     i.e. traverse the DAG with a DFS until the last leaf
 
     Args:
@@ -72,12 +73,12 @@ def find_components(cards, todo):
     while stack:
         curr = stack.pop()
         curr_card = cards[curr]
+        if curr_card.is_reward:
+            res.append(curr)
         has_children = True if curr_card.children else False
         if has_children:
             for child in curr_card.children:
                 stack.append(child)
-        else:
-            res.append(curr)
     return res
 
 
