@@ -96,6 +96,15 @@ def backward_bfs(cards, todo):
     return ordered_parents
 
 
+def read_card(cards):
+    """utiliy to handle read card exceptions"""
+    _read_id = raw_input()
+    _read_card = cards.get(uuid.UUID(_read_id))
+    if not _read_card:
+        exit("error: CARD NOT EXISTING")
+    return _read_card
+
+
 if __name__ == "__main__":
     sys.path.append('../TODAG')
     from card import card
@@ -112,15 +121,21 @@ if __name__ == "__main__":
         print "Card added succesfully"
     elif got == 'B':
         print "Input UUID of children card:"
-        read_id = raw_input()
-        read_card = CARDS.get(uuid.UUID(read_id))
-        if not read_card:
-            exit("error: CARD NOT EXISTING")
-        else:
-            print "Adding new parent to '{}'".format(read_card.name)
-            new_card = read_card.add_parent()
+        child = read_card(CARDS)
+        print "\nAdding new parent to '{}'\n".format(child.name)
+        print "\n\n[A] add new parent from existing cards\n[B] add new card as a parent\n"
+        gott = raw_input()
+        if gott == 'B':
+            new_card = child.add_parent()
             CARDS[new_card.uuid] = new_card
-            print "Card added succesfully"
+        elif gott == 'A':
+            print "Input UUID of parent card:"
+            parent = read_card(CARDS)
+            parent.children.append(child.uuid)
+            child.parents.append(parent.uuid)
+        else:
+            exit("Error: not implemented")
+        print "Parent added succesfully"
     elif got == 'C':
         print "Input UUID of card to delete"
         read_id = raw_input()
