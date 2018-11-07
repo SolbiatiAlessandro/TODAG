@@ -98,9 +98,10 @@ def main():
     while True:
         got = raw_input()
         if got == 'done':
-            card_done = cards[todos[index]]
+            card_done = cards[todos[index][1]]
             card_done.done = True
             write_cards(cards)
+            print "GREAT!"
             return
         elif got == 'n':
             index += 1
