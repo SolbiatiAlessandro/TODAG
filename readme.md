@@ -4,6 +4,8 @@
 This is a command-line utility to organize TODOs and priorities on a day-to-day basis.
 The concept is to structure the TODOs in a TODO-DAG (or TODAG), where DAG stands for [Directed Acylic Graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph), instead of following the more common TODO-list format.
 
+You can read more about my TODO frame-work [here.](https://raw.githubusercontent.com/SolbiatiAlessandro/TODAG/master/docs/concept.rst)
+
 ---
 ## Implementation
 Every 'TODO' is a card, and every card has parents and children that will form the DAG. A card can be marked as done only when all the parents are also flagged as done. The language choosen for the implementation is Python, and the cards are kept in a dictionary. The dictionary is made persistent using the pickle module, and there are high-level CLI API to create and save cards. The basic use cases are to add cards, add parents cards, and run the 'TODO' routine, that consist in finding all the cards with all the parents already completed (to advance in the todo tree). 
