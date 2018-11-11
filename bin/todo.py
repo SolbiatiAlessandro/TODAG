@@ -49,11 +49,8 @@ def print_todo(cards, todos, index):
     """
     print "\n"*55
     weight, todo = todos[index]
-    components = find_components(cards, todo)
     cards[todo].detail()
     print "Weight: " + str(weight) + "\n"
-    for component in components:
-        cards[component].pretty_print()
 
 
 def find_components(cards, todo):
@@ -96,20 +93,28 @@ def main():
     index = 0
     print_todo(cards, todos, index)
     while True:
-        got = raw_input()
-        if got == 'done':
-            card_done = cards[todos[index][1]]
-            card_done.done = True
-            write_cards(cards)
-            print "GREAT!"
-            return
-        elif got == 'n':
-            index += 1
-            index %= len(todos)
-            print_todo(cards, todos, index)
-        else:
-            print "\n"*60
-            return
+        try:
+            got = raw_input()
+            if got == 'done':
+                card_done = cards[todos[index][1]]
+                card_done.done = True
+                write_cards(cards)
+                print "GREAT!"
+                return
+            elif got == "why":
+                _, todo = todos[index]
+                components = find_components(cards, todo)
+                for component in components:
+                    cards[component].pretty_print()
+            elif got == 'n':
+                index += 1
+                index %= len(todos)
+                print_todo(cards, todos, index)
+            else:
+                print "\n"*60
+                return
+        except EOFError:
+            exit()
 
 
 if __name__ == "__main__":
