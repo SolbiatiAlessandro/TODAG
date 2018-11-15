@@ -27,7 +27,8 @@ def get_todos(cards):
     # sort todos by priority of component
     for index, todo in enumerate(res):
         weight = 0
-        for component in find_components(cards, todo):
+        components = find_components(cards, todo)
+        for component in set(components):
             if hasattr(cards[component], 'priority'):
                 weight += cards[component].priority
         res[index] = (weight, todo)

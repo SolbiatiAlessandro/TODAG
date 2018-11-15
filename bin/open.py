@@ -39,7 +39,8 @@ def find_rewards(cards):
 
     return: list[uuid] with reward cards
     """
-    return [card_id for card_id, _card in cards.items() if _card.is_reward]
+    return [card_id for card_id, _card in cards.items()
+            if (_card.is_reward and not _card.done)]
 
 
 def validate(parent_id):
