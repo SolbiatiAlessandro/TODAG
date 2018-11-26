@@ -12,3 +12,4 @@ IDEAS
 - deadlines: so deadlines is an important part in the TODO process, now I am writing [DEADLINE] or [DUE DATE] in the name of the TODO and than when I get it as a current todo and today is not DUE DATE I skip it, let's think about how to integrate time dimension into TODAG
 - notes: i like the feature to write 'why' and it tells me the components, would be nice to write 'notes' and I can input some notes and progress about the todo
 - daily todo: what about when I start every morning I can write I sort of temporary todo queue that is parallel to the TODAG, to keep track of low level todo (buy this, do that, go there))
+- recalibrate todag: change rewards and weight
