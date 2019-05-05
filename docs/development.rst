@@ -1,7 +1,6 @@
 The main development workflow can be found in the git commit messages.
 This space is mainly for development ideas.
 
-====
 IDEAS
 ====
 - gamification: rewards to be considered as gems with higher and higher value, and to get the next gem the game become more difficult ('game of life?'), cfr. Ray Dalio Principles cap. 8, he speaks about this concept
@@ -13,3 +12,12 @@ IDEAS
 - notes: i like the feature to write 'why' and it tells me the components, would be nice to write 'notes' and I can input some notes and progress about the todo
 - daily todo: what about when I start every morning I can write I sort of temporary todo queue that is parallel to the TODAG, to keep track of low level todo (buy this, do that, go there))
 - recalibrate todag: change rewards and weight
+
+
+ITERATION A
+==
+
+Iteration started 05.05.2019, London
+
+- [ ] add feature: edit priority
+- [ ] fix feature: change questions
