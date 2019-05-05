@@ -49,8 +49,11 @@ class card(object):
         if self.is_reward:
             print "priority low 0 : high 10"
             self.priority = int(raw_input())
-        print "is_optional(int):"
-        self.is_optional = int(raw_input())
+
+        # not needed, need to refactor better later
+        # print "is_optional(int):"
+        # self.is_optional = int(raw_input())
+        self.is_optional = 1
 
     def _debug(self):
         """
