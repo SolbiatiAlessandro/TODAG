@@ -17,6 +17,7 @@ IDEAS
 - incorporate metrics
 - move on cloud exposing APIs
 - add TAGS, and make different TODOs in different part of the days
+- not really tags but tree nodes 
 
 
 ITERATION A
@@ -26,5 +27,4 @@ Iteration started 05.05.2019, London
 
 - [x] add feature: edit priority
 - [x] fix feature: change questions
-- [ ] add feature: tags
 - [ ] add feature: events (facebook events, codeforces contests)
