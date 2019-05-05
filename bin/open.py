@@ -152,7 +152,7 @@ if __name__ == "__main__":
             print "[{}]".format(index)
             CARDS[reward].detail()
         print "\n"
-        print "Choose reward card you want backtrack from"
+        print "Choose card you want backtrack from"
         got_index = int(raw_input())
         if got_index in range(len(rewards)):
             reward_id = rewards[got_index]

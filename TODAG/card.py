@@ -49,12 +49,13 @@ class card(object):
             print "description(str):"
             self.description = raw_input()
 
-        if self.is_reward: 
-            print "Edit priority? {}".format(self.priority)
-            edit = int(raw_input())
-            if edit:
-                print "priority low 0 : high 10"
-                self.priority = int(raw_input())
+        print "Edit priority? {}".format(self.priority if self.is_reward else "No priority")
+        edit = int(raw_input())
+        if edit: 
+            if not self.is_reward:
+                self.is_reward = 1
+            print "priority low 0 : high 10"
+            self.priority = int(raw_input())
 
 
     def populate(self):
