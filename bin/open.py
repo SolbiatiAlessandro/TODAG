@@ -113,7 +113,7 @@ if __name__ == "__main__":
     CARDS = load_cards()
     print_cards()
     print "\n\n[A] new card\n[B] add parent\n[C] delete card\n" + \
-          "[D] explore decision tree\n"
+          "[D] explore decision tree\n[E] edit card\n"
     got = raw_input()
     if got == 'A':
         new_card = card()
@@ -174,7 +174,14 @@ if __name__ == "__main__":
                 print separator
         else:
             exit("error: reward index out of range")
-
+    elif got == 'E':
+        print "Input UUID of card to edit"
+        read_id = raw_input()
+        read_card = CARDS.get(uuid.UUID(read_id))
+        if not read_card:
+            exit("error: CARD NOT EXISTING")
+        read_card.edit()
+        print "Card edited succesfully"
     else:
         exit("error: NOT IMPLEMENTED")
     write_cards(CARDS)

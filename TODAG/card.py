@@ -29,6 +29,34 @@ class card(object):
         self.repeat = 0
         self.priority = -1
 
+    def edit(self):
+        """
+        this is a command line procedure to edit card
+
+        all this stuff should be tested later
+        """
+        print "Edit card {}".format(self.uuid)
+
+        print "Edit name? {}".format(self.name)
+        edit = int(raw_input())
+        if edit:
+            print "name(str):"
+            self.name = raw_input()
+
+        print "Edit description? {}".format(self.description)
+        edit = int(raw_input())
+        if edit:
+            print "description(str):"
+            self.description = raw_input()
+
+        if self.is_reward: 
+            print "Edit priority? {}".format(self.priority)
+            edit = int(raw_input())
+            if edit:
+                print "priority low 0 : high 10"
+                self.priority = int(raw_input())
+
+
     def populate(self):
         """
         this is a command line procedure to populate the card

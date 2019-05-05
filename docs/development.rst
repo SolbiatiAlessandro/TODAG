@@ -13,11 +13,18 @@ IDEAS
 - daily todo: what about when I start every morning I can write I sort of temporary todo queue that is parallel to the TODAG, to keep track of low level todo (buy this, do that, go there))
 - recalibrate todag: change rewards and weight
 
+- integrate TODAG with facebook calendar
+- incorporate metrics
+- move on cloud exposing APIs
+- add TAGS, and make different TODOs in different part of the days
+
 
 ITERATION A
 ==
 
 Iteration started 05.05.2019, London
 
-- [ ] add feature: edit priority
-- [ ] fix feature: change questions
+- [x] add feature: edit priority
+- [x] fix feature: change questions
+- [ ] add feature: tags
+- [ ] add feature: events (facebook events, codeforces contests)
