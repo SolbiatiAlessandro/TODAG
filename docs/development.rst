@@ -34,9 +34,16 @@ Iteration started 05.05.2019, London
 - [x] add feature: edit priority
 - [x] fix feature: change questions
 - [ ] add feature: todo based on location
+
+Location notes:
+subprocess.check_output('/Users/lessandro/coding/SCRIPTS/whereami')
+Longitude of house(Fabric) -> -0.1019
+Longitude of office(Rathbone) -> -0.1305
+
 - [ ] add feature: record metrics on location and time
 - [ ] infra upgrade: move the whole thing on cloud and expose APIs
 - [ ] add feature: integration with Google Assistant to use todo
+  
 
 ITERATION B
 ===

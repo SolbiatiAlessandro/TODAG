@@ -1,11 +1,12 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
 from open import load_cards, write_cards
-
+LOCATION = None
 
 def get_todos(cards):
     """
     traverses the DAG and find nodes with with all completed parents
+    filter todos based on location contraints
 
     return: list[[weight,uuid]] with the todos sorted by priority of component
     """
@@ -29,8 +30,21 @@ def get_todos(cards):
         weight = 0
         components = find_components(cards, todo)
         for component in set(components):
+            #
+            # cumsum of all the priorities on the branch from root to card
+            #
             if hasattr(cards[component], 'priority'):
                 weight += cards[component].priority
+
+            #
+            # this enable location for the TODAG
+            # if a card has a location_constraint enabling the priority will be increased
+            # by a factor of 100
+            #
+            if hasattr(cards[component], 'location_constraint'):
+                if cards[component].location_constraint == LOCATION:
+                    weight += 100
+        
         res[index] = (weight, todo)
     res.sort()
 
@@ -119,4 +133,13 @@ def main():
 
 
 if __name__ == "__main__":
+    try: # reading location from phyiscal machine
+        import subprocess
+        read_location = subprocess.check_output('/Users/lessandro/coding/SCRIPTS/whereami')
+        start = read_location.find('Longitude')+len("Longitude: -")
+        end = start + 4
+        LOCATION = float(read_location[start:end])
+    except Exception as e:
+        print("warning: couldn't get location of machine\n'")
+        print(e)
     main()

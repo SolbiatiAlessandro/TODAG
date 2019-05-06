@@ -28,6 +28,7 @@ class card(object):
         self.done = 0
         self.repeat = 0
         self.priority = -1
+        self.location_constraint = None
 
     def edit(self):
         """
