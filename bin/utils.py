@@ -1,4 +1,5 @@
 """utils for TODAG scripts"""
+import pickle 
 
 class Logger():
     """
@@ -39,3 +40,31 @@ class Logger():
             print("warning: couldn't get location of machine\n'")
             print(e)
             return None
+
+class Loader():
+    """
+    loads and write cards locally or from cloud
+    """
+    def __init__(self, local=True):
+        self.local = local
+        self.cards = self.load_cards()
+
+    def load_cards(self, local=None):
+        """
+        load cards from pickle to global variable CARDS
+
+        Exception:
+            to be used after having imported card, otherwise
+            will raise exception
+        """
+        if local is None: local = self.local
+        with open('cards.pkl', 'rb') as data:
+            return pickle.load(data)
+
+    def write_cards(self, local=None):
+        """
+        write current cards to CARDS
+        """
+        if local is None: local = self.local
+        with open('cards.pkl', 'wb') as data:
+            pickle.dump(self.cards, data)

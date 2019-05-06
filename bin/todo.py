@@ -1,7 +1,6 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
-from open import load_cards, write_cards
-from utils import Logger
+from utils import Logger, Loader
 logger = None
 
 def get_todos(cards):
@@ -53,20 +52,20 @@ def get_todos(cards):
 
 def print_todo(cards, todos, index):
     """
-    print a given todos with a given index in the list of todos,
+    print( a given todos with a given index in the list of todos,
     also traverse the DAG to find the connected component representative
     (the last child)
 
     Args:
         cards: global dict of card instances
         todos: list[[weight, uuid]] with the todos
-        index: int, index of the todo to print
+        index: int, index of the todo to print(
     """
-    print "\n"*55
+    print( "\n"*55)
     weight, todo = todos[index]
     cards[todo].detail()
     logger.log_action("open_todo",cards[todo].uuid)
-    print "Weight: " + str(weight) + "\n"
+    print( "Weight: " + str(weight) + "\n")
 
 def find_components(cards, todo):
     """
@@ -98,25 +97,26 @@ def main():
 
     -load cards
     -look for todos
-    -interactive session to print todos: input 'n' for next todo
+    -interactive session to print( todos: input 'n' for next todo
     """
     global logger
-    logger = Logger()
     sys.path.append('../TODAG')
     from card import card
-    cards = load_cards()
+    logger = Logger()
+    loader = Loader(local=True)
+    cards = loader.cards
     todos = get_todos(cards)
     index = 0
     print_todo(cards, todos, index)
     while True:
         try:
-            got = raw_input()
+            got = input()
             if got == 'done':
                 card_done = cards[todos[index][1]]
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
-                write_cards(cards)
-                print "GREAT!"
+                loader.write_cards()
+                print( "GREAT!")
                 return
             elif got == "why":
                 _, todo = todos[index]
@@ -130,7 +130,7 @@ def main():
                 print_todo(cards, todos, index)
             else:
                 logger.log_action("quit","todo.py")
-                print "\n"*60
+                print( "\n"*60)
                 return
         except EOFError:
             exit()

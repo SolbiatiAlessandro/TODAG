@@ -45,6 +45,12 @@ Longitude of office(Rathbone) -> -0.1305
 
 - [ ] infra upgrade: move the whole thing on cloud and expose APIs
 sub tasks
+
+infra upgrade
+- GCP Storage to keep .pkl files for cards and .csv for logs
+- GCP Function to have serverless API end points to call todo.py
+- open.py will not be implemented in GCP Function but just keep on my local machine accessing data from GCP Storage
+
 - [ ] write tests before shipping to the cloud
 
 - [ ] add feature: integration with Google Assistant to use todo
