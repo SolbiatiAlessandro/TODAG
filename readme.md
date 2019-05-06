@@ -15,6 +15,10 @@ Every 'TODO' is a card, and every card has parents and children that will form t
 The utility is developed using OOP methodologies, and adhereing to the [Google Python style-guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md), especially regarding the documentation. Is encouraged Test-Drived-Development, as the whole utility will be tested periodically using Continuous Integration practices. Up to now there is no plan in writing a external documentation as the in-code documentation should be enough.
 
 ---
+## Roadmap
+You can read about the roadmap of the project in the [development.md](https://github.com/SolbiatiAlessandro/TODAG/blob/master/docs/development.rst) file.
+
+---
 ## Usage
 Inside the bin folder there are the two scripts to use the TODAG:
 - **open.py**: create new todos in the DAG, delete or print the DAG

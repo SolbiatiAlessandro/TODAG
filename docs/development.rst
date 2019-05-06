@@ -1,5 +1,5 @@
 DOCS
-==
+====
 child: higher level abstraction task
 parent: lower level abstraction task
 
@@ -27,7 +27,7 @@ This space is mainly for development ideas.
 
 
 ITERATION A
-==
+====
 
 Iteration started 05.05.2019, London
 
@@ -51,6 +51,6 @@ sub tasks
   
 
 ITERATION B
-===
+====
 - [ ] add feature: events (facebook events, codeforces contests)
 (more)
