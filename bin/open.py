@@ -1,8 +1,9 @@
 """this is a script that let you look into the DAG and modify cards"""
 import pickle
 import sys
-
+from utils import Logger
 CARDS = None
+logger = None
 
 
 def load_cards():
@@ -110,16 +111,18 @@ if __name__ == "__main__":
     sys.path.append('../TODAG')
     from card import card
     import uuid
+    logger = Logger()
     CARDS = load_cards()
     print_cards()
-    print "\n\n[A] new card\n[B] add parent\n[C] delete card\n" + \
-          "[D] explore decision tree\n[E] edit card\n"
+    print("\n\n[A] new card\n[B] add parent\n[C] delete card\n" + \
+          "[D] explore decision tree\n[E] edit card\n")
     got = raw_input()
     if got == 'A':
         new_card = card()
         new_card.populate()
         CARDS[new_card.uuid] = new_card
-        print "Card added succesfully"
+        print("Card added succesfully")
+        logger.log_action("add_card",new_card.uuid)
     elif got == 'B':
         print "Input UUID of children card:"
         child = read_card(CARDS)
@@ -129,11 +132,13 @@ if __name__ == "__main__":
         if gott == 'B':
             new_card = child.add_parent()
             CARDS[new_card.uuid] = new_card
+            logger.log_action("add_card",new_card.uuid)
         elif gott == 'A':
             print "Input UUID of parent card:"
             parent = read_card(CARDS)
             parent.children.append(child.uuid)
             child.parents.append(parent.uuid)
+            logger.log_action("add_edge",parent.uuid)
         else:
             exit("Error: not implemented")
         print "Parent added succesfully"
@@ -143,6 +148,7 @@ if __name__ == "__main__":
         read_card = CARDS.get(uuid.UUID(read_id))
         if not read_card:
             exit("error: CARD NOT EXISTING")
+        logger.log_action("delete_card",read_card.name)
         del(CARDS[uuid.UUID(read_id)])
         print "Card deleted succesfully"
     elif got == 'D':
@@ -157,6 +163,7 @@ if __name__ == "__main__":
         if got_index in range(len(rewards)):
             reward_id = rewards[got_index]
             print "\n[REWARD]"
+            logger.log_action("explore_tree",CARDS[reward_id].uuid)
             CARDS[reward_id].detail()
             parents = backward_bfs(CARDS, reward_id)
             parents = parents[1:]
@@ -181,7 +188,9 @@ if __name__ == "__main__":
         if not read_card:
             exit("error: CARD NOT EXISTING")
         read_card.edit()
+        logger.log_action("edit_card",read_card.uuid)
         print "Card edited succesfully"
     else:
         exit("error: NOT IMPLEMENTED")
+    logger.log_action("quit","open.py")
     write_cards(CARDS)

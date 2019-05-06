@@ -25,19 +25,19 @@ Rp10
 S'repeat'
 p12
 I0
-sS'uuid'
+sS'description'
 p13
-g5
-sS'location_constraint'
+S'to be done in Facebook time'
 p14
+sS'location_constraint'
+p15
 F0.13
 sS'is_reward'
-p15
-I1
-sS'name'
 p16
-S'FACEBOOK TASK'
+I1
+sS'uuid'
 p17
+g5
 sS'priority'
 p18
 I1
@@ -69,9 +69,9 @@ I0
 sS'children'
 p29
 (lp30
-sS'description'
+sS'name'
 p31
-S'to be done in Facebook time'
+S'FACEBOOK TASK'
 p32
 sbsg1
 (g2
@@ -90,33 +90,33 @@ Rp37
 g12
 I0
 sg13
-g34
-sg15
-I1
-sg16
-S'CS294-112 (ex May project)'
+S'Doing CS294 is the best way to get hands dirty in Reinforcement Learning, doing together with Oana. Great final projects of replicating famous RL papers.'
 p39
+sg16
+I1
+sg31
+S'CS294-112 (ex May project)'
+p40
 sg18
 I4
 sg19
-(lp40
+(lp41
 sg27
 I1
 sg28
 I0
 sg29
-(lp41
+(lp42
 g1
 (g2
 g3
-Ntp42
-Rp43
-(dp44
+Ntp43
+Rp44
+(dp45
 g7
 L204055060763784161917252022631887368850L
-sbasg31
-S'Doing CS294 is the best way to get hands dirty in Reinforcement Learning, doing together with Oana. Great final projects of replicating famous RL papers.'
-p45
+sbasg17
+g34
 sbsg22
 g1
 (g8
@@ -127,26 +127,26 @@ Rp47
 g12
 I0
 sg13
-g22
-sg15
-I0
-sg16
-S'Onboarding HR tasks'
+S'Get on with all the onboarding tasks, choosing benefits, NINO. Check People Portal'
 p49
+sg16
+I0
+sg31
+S'Onboarding HR tasks'
+p50
 sg18
 I-1
 sg19
-(lp50
+(lp51
 sg27
 I1
 sg28
 I0
 sg29
-(lp51
+(lp52
 g5
-asg31
-S'Get on with all the onboarding tasks, choosing benefits, NINO. Check People Portal'
-p52
+asg17
+g22
 sbsg1
 (g2
 g3
@@ -163,34 +163,34 @@ Rp57
 (dp58
 g12
 I0
-sg31
-S'Figure out eating for the weekend '
-p59
-sg15
-I1
+sg17
+g54
 sg16
+I1
+sg31
 S'Figure out eating (outside Facebook)'
-p60
+p59
 sg18
 I2
 sg19
-(lp61
+(lp60
 sg27
 I0
 sg28
 I0
 sg29
-(lp62
+(lp61
 g1
 (g2
 g3
-Ntp63
-Rp64
-(dp65
+Ntp62
+Rp63
+(dp64
 g7
 L254006154411207209277278245722035524089L
 sbasg13
-g54
+S'Figure out eating for the weekend '
+p65
 sbsg1
 (g2
 g3
@@ -208,22 +208,23 @@ Rp70
 g12
 I0
 sg13
-g67
-sg15
-I5
-sg16
-S'Build TODAG 2.0, personal assistant'
+S'I just started new stage of my life. I highly need TODAG, and I need to ricalibrate to my new needs. The new needs are mainly long terms. One big use case is to track long term the progress on a lot of side project, so the TODAG will also be used to collect metrics. Also I am using different machines so it need to be on cloud exposing some APIs. Another idea is to integrate with Google Home. '
 p72
+sg16
+I5
+sg31
+S'Build TODAG 2.0, personal assistant'
+p73
 sg18
 I5
 sg19
-(lp73
+(lp74
 g1
 (g2
 g3
-Ntp74
-Rp75
-(dp76
+Ntp75
+Rp76
+(dp77
 g7
 L238482745317648653010773741434702823816L
 sbasg27
@@ -231,11 +232,10 @@ I1
 sg28
 I0
 sg29
-(lp77
-g43
-asg31
-S'I just started new stage of my life. I highly need TODAG, and I need to ricalibrate to my new needs. The new needs are mainly long terms. One big use case is to track long term the progress on a lot of side project, so the TODAG will also be used to collect metrics. Also I am using different machines so it need to be on cloud exposing some APIs. Another idea is to integrate with Google Home. '
-p78
+(lp78
+g44
+asg17
+g67
 sbsg1
 (g2
 g3
@@ -253,27 +253,27 @@ Rp83
 g12
 I0
 sg13
-g80
-sg15
-I1
-sg16
-S'Codeforces'
+S"Codeforces is an excellent way to keep my fresh on coding skills and algorithms. It 'keeps me young',  great away to avoid settling down coding algorithmically trivial things. Also I dedicated a lot of time in it and I finally made progress in recent times after a lot of years."
 p85
+sg16
+I1
+sg31
+S'Codeforces'
+p86
 sg18
 I3
 sg19
-(lp86
-g75
+(lp87
+g76
 asg27
 I1
 sg28
 I0
 sg29
-(lp87
-g43
-asg31
-S"Codeforces is an excellent way to keep my fresh on coding skills and algorithms. It 'keeps me young',  great away to avoid settling down coding algorithmically trivial things. Also I dedicated a lot of time in it and I finally made progress in recent times after a lot of years."
-p88
+(lp88
+g44
+asg17
+g80
 sbsg1
 (g2
 g3
@@ -290,28 +290,28 @@ Rp93
 (dp94
 g12
 I0
-sg31
-S'Kaggle is great way to transition into ML, and also get practical exprience on how to train ML models. Great activity similar to codeforces that cumulative over time could yield high results.'
-p95
-sg15
-I1
+sg17
+g90
 sg16
+I1
+sg31
 S'Kaggle'
-p96
+p95
 sg18
 I3
 sg19
-(lp97
-g75
+(lp96
+g76
 asg27
 I1
 sg28
 I0
 sg29
-(lp98
-g43
+(lp97
+g44
 asg13
-g90
+S'Kaggle is great way to transition into ML, and also get practical exprience on how to train ML models. Great activity similar to codeforces that cumulative over time could yield high results.'
+p98
 sbsg25
 g1
 (g8
@@ -321,24 +321,23 @@ Rp100
 (dp101
 g12
 I0
-sg31
-S'need to look for teams for the third week'
-p102
-sg15
-I1
+sg17
+g25
 sg16
+I1
+sg31
 S'Look for ML product teams'
-p103
+p102
 sg18
 I3
 sg19
-(lp104
+(lp103
 g1
 (g2
 g3
-Ntp105
-Rp106
-(dp107
+Ntp104
+Rp105
+(dp106
 g7
 L177803446098938620952431096779972731448L
 sbasg27
@@ -346,11 +345,12 @@ I1
 sg28
 I0
 sg29
-(lp108
+(lp107
 g5
 asg13
-g25
-sbsg64
+S'need to look for teams for the third week'
+p108
+sbsg63
 g1
 (g8
 g3
@@ -360,27 +360,27 @@ Rp110
 g12
 I0
 sg13
-g64
-sg15
-I1
-sg16
-S'LIFE TASK '
+S'this are side life task, to be done in remaining time'
 p112
+sg16
+I1
+sg31
+S'LIFE TASK '
+p113
 sg18
 I1
 sg19
-(lp113
+(lp114
 g54
 asg27
 I1
 sg28
 I0
 sg29
-(lp114
-sg31
-S'this are side life task, to be done in remaining time'
-p115
-sbsg43
+(lp115
+sg17
+g63
+sbsg44
 g1
 (g8
 g3
@@ -390,14 +390,14 @@ Rp117
 g12
 I0
 sg13
-g43
-sg14
-F0.1
-sg15
-I1
-sg16
-S'PERSONAL TASK'
+S'To be done in personal time'
 p119
+sg15
+F0.1
+sg16
+I1
+sg17
+g44
 sg18
 I1
 sg19
@@ -413,6 +413,6 @@ I0
 sg29
 (lp121
 sg31
-S'To be done in personal time'
+S'PERSONAL TASK'
 p122
 sbs.

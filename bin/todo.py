@@ -1,7 +1,8 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
 from open import load_cards, write_cards
-LOCATION = None
+from utils import Logger
+logger = None
 
 def get_todos(cards):
     """
@@ -42,14 +43,13 @@ def get_todos(cards):
             # by a factor of 100
             #
             if hasattr(cards[component], 'location_constraint'):
-                if cards[component].location_constraint == LOCATION:
+                if cards[component].location_constraint == logger.location:
                     weight += 100
         
         res[index] = (weight, todo)
     res.sort()
 
     return res[::-1]
-
 
 def print_todo(cards, todos, index):
     """
@@ -65,8 +65,8 @@ def print_todo(cards, todos, index):
     print "\n"*55
     weight, todo = todos[index]
     cards[todo].detail()
+    logger.log_action("open_todo",cards[todo].uuid)
     print "Weight: " + str(weight) + "\n"
-
 
 def find_components(cards, todo):
     """
@@ -93,7 +93,6 @@ def find_components(cards, todo):
                 stack.append(child)
     return res
 
-
 def main():
     """script
 
@@ -101,6 +100,8 @@ def main():
     -look for todos
     -interactive session to print todos: input 'n' for next todo
     """
+    global logger
+    logger = Logger()
     sys.path.append('../TODAG')
     from card import card
     cards = load_cards()
@@ -113,11 +114,13 @@ def main():
             if got == 'done':
                 card_done = cards[todos[index][1]]
                 card_done.done = True
+                logger.log_action("completed_todo",card_done.uuid)
                 write_cards(cards)
                 print "GREAT!"
                 return
             elif got == "why":
                 _, todo = todos[index]
+                logger.log_action("examined_todo",cards[todo].uuid)
                 components = find_components(cards, todo)
                 for component in components:
                     cards[component].pretty_print()
@@ -126,20 +129,11 @@ def main():
                 index %= len(todos)
                 print_todo(cards, todos, index)
             else:
+                logger.log_action("quit","todo.py")
                 print "\n"*60
                 return
         except EOFError:
             exit()
 
-
 if __name__ == "__main__":
-    try: # reading location from phyiscal machine
-        import subprocess
-        read_location = subprocess.check_output('/Users/lessandro/coding/SCRIPTS/whereami')
-        start = read_location.find('Longitude')+len("Longitude: -")
-        end = start + 4
-        LOCATION = float(read_location[start:end])
-    except Exception as e:
-        print("warning: couldn't get location of machine\n'")
-        print(e)
     main()
