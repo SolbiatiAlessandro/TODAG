@@ -33,4 +33,12 @@ Iteration started 05.05.2019, London
 
 - [x] add feature: edit priority
 - [x] fix feature: change questions
+- [ ] add feature: todo based on location
+- [ ] add feature: record metrics on location and time
+- [ ] infra upgrade: move the whole thing on cloud and expose APIs
+- [ ] add feature: integration with Google Assistant to use todo
+
+ITERATION B
+===
 - [ ] add feature: events (facebook events, codeforces contests)
+(more)
