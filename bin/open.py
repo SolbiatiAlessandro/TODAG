@@ -86,7 +86,7 @@ if __name__ == "__main__":
     from card import card
     import uuid
     logger = Logger()
-    loader = Loader(local=True)
+    loader = Loader()
     CARDS = loader.cards
     print_cards()
     print("\n\n[A] new card\n[B] add parent\n[C] delete card\n" + \

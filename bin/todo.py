@@ -103,7 +103,7 @@ def main():
     sys.path.append('../TODAG')
     from card import card
     logger = Logger()
-    loader = Loader(local=True)
+    loader = Loader()
     cards = loader.cards
     todos = get_todos(cards)
     index = 0

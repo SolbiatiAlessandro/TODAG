@@ -39,24 +39,24 @@ class card(object):
         print( "Edit card {}".format(self.uuid))
 
         print( "Edit name? {}".format(self.name))
-        edit = int(raw_input())
-        if edit:
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
             print( "name(str):")
-            self.name = raw_input()
+            self.name = input()
 
         print( "Edit description? {}".format(self.description))
-        edit = int(raw_input())
-        if edit:
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
             print( "description(str):")
-            self.description = raw_input()
+            self.description = input()
 
         print( "Edit priority? {}".format(self.priority if self.is_reward else "No priority"))
-        edit = int(raw_input())
-        if edit: 
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
             if not self.is_reward:
                 self.is_reward = 1
             print( "priority low 0 : high 10")
-            self.priority = int(raw_input())
+            self.priority = int(input())
 
 
     def populate(self):
@@ -71,18 +71,18 @@ class card(object):
         """
         print( "Populate new card {}".format(self.uuid))
         print( "name(str):")
-        self.name = raw_input()
+        self.name = input()
         print( "description(str):")
-        self.description = raw_input()
+        self.description = input()
         print( "is_reward(int):")
-        self.is_reward = int(raw_input())
+        self.is_reward = int(input())
         if self.is_reward:
             print( "priority low 0 : high 10")
-            self.priority = int(raw_input())
+            self.priority = int(input())
 
         # not needed, need to refactor better later
         # print( "is_optional(int):")
-        # self.is_optional = int(raw_input())
+        # self.is_optional = int(input())
         self.is_optional = 1
 
     def _debug(self):
