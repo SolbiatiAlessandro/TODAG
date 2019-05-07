@@ -2,7 +2,9 @@
 import pickle 
 import os
 from google.cloud import storage
+# this is the id of the GCS bucket
 BUCKET_NAME = 'todag-bucket'
+# this is the path of the script whereami for geolocalization
 WHEREAMI_PATH = '/Users/lessandro/coding/SCRIPTS/whereami'
 
 class Logger():
@@ -53,7 +55,8 @@ class Loader():
     """
     def __init__(self, local=False):
         if not local:
-            self.gcs_load()
+            self.proxy = GCSproxy()
+            self.proxy.gcs_load('cards.pkl')
         self.cards = self.load_cards()
 
     def __del__(self):
@@ -79,31 +82,36 @@ class Loader():
         """
         with open('cards.pkl', 'wb') as data:
             pickle.dump(self.cards, data)
-        self.gcs_write()
+        self.proxy.gcs_write('cards.pkl')
 
-    def gcs_load(self):
+class GCSproxy():
+    """basic proxy to handle gcs APIs"""
+
+    def __init__(self):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '../gcskey.json'
+        self.client = storage.Client()
+        self.bucket = self.client.get_bucket(BUCKET_NAME)
+
+    def gcs_load(self, filename):
         """
         loads cards from gcs
+        args:
+            filename [cards.pkl, logs.csv]
 
         need key in ../gcskey.json
         """
         print("[Logger.gcs_load] interacting with Google Cloud Storage to retrieve data ")
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '../gcskey.json'
-        client = storage.Client()
-        bucket = client.get_bucket(BUCKET_NAME)
-        blob = bucket.get_blob('cards.pkl')
-        blob.download_to_filename('cards.pkl')
+        blob = self.bucket.get_blob(filename)
+        blob.download_to_filename(filename)
 
-    def gcs_write(self):
+    def gcs_write(self, filename):
         """
         write cards to gcs
+        args:
+            filename [cards.pkl, logs.csv]
 
         need key in ../gcskey.json
         """
         print("[Logger.gcs_load] interacting with Google Cloud Storage to upload data ")
-        os.system("export GOOGLE_APPLICATION_CREDENTIALS='../gcskey.json'")
-        storage_client = storage.Client()
-        bucket = storage_client.get_bucket(BUCKET_NAME)
-        blob = bucket.blob('cards.pkl')
-
-        blob.upload_from_filename('cards.pkl')
+        blob = self.bucket.blob(filenmae)
+        blob.upload_from_filename(filename)
