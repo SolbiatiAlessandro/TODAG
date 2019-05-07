@@ -2,6 +2,8 @@
 import pickle 
 import os
 from google.cloud import storage
+BUCKET_NAME = 'todag-bucket'
+WHEREAMI_PATH = '/Users/lessandro/coding/SCRIPTS/whereami'
 
 class Logger():
     """
@@ -33,7 +35,7 @@ class Logger():
             # how to get geographical location of the machine
             import subprocess
             print("[Logger.populate_location] loading machine location")
-            read_location = subprocess.check_output('/Users/lessandro/coding/SCRIPTS/whereami')
+            read_location = subprocess.check_output(WHEREAMI_PATH)
             read_location = str(read_location)
             start = read_location.find('Longitude')+len("Longitude: -")
             end = start + 4
@@ -86,9 +88,9 @@ class Loader():
         need key in ../gcskey.json
         """
         print("[Logger.gcs_load] interacting with Google Cloud Storage to retrieve data ")
-        os.system("export GOOGLE_APPLICATION_CREDENTIALS='../gcskey.json'")
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '../gcskey.json'
         client = storage.Client()
-        bucket = client.get_bucket('todag-bucket')
+        bucket = client.get_bucket(BUCKET_NAME)
         blob = bucket.get_blob('cards.pkl')
         blob.download_to_filename('cards.pkl')
 
@@ -101,7 +103,7 @@ class Loader():
         print("[Logger.gcs_load] interacting with Google Cloud Storage to upload data ")
         os.system("export GOOGLE_APPLICATION_CREDENTIALS='../gcskey.json'")
         storage_client = storage.Client()
-        bucket = storage_client.get_bucket('todag-bucket')
+        bucket = storage_client.get_bucket(BUCKET_NAME)
         blob = bucket.blob('cards.pkl')
 
         blob.upload_from_filename('cards.pkl')
