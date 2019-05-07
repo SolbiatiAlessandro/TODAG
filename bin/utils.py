@@ -113,5 +113,5 @@ class GCSproxy():
         need key in ../gcskey.json
         """
         print("[Logger.gcs_load] interacting with Google Cloud Storage to upload data ")
-        blob = self.bucket.blob(filenmae)
+        blob = self.bucket.blob(filename)
         blob.upload_from_filename(filename)
