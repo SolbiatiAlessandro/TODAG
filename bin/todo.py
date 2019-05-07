@@ -130,6 +130,7 @@ def main():
                 print_todo(cards, todos, index)
             else:
                 logger.log_action("quit","todo.py")
+                loader.write()
                 print( "\n"*60)
                 return
         except EOFError:

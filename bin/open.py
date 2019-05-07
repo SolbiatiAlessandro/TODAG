@@ -166,6 +166,6 @@ if __name__ == "__main__":
         logger.log_action("edit_card",read_card.uuid)
         print( "Card edited succesfully")
     else:
-        exit("error: NOT IMPLEMENTED")
+        print("error: NOT IMPLEMENTED")
     logger.log_action("quit","open.py")
-    loader.write_cards()
+    loader.write()

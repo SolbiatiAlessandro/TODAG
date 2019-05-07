@@ -6,13 +6,18 @@ from google.cloud import storage
 BUCKET_NAME = 'todag-bucket'
 # this is the path of the script whereami for geolocalization
 WHEREAMI_PATH = '/Users/lessandro/coding/SCRIPTS/whereami'
+global GCSPROXY
+GCSPROXY = None
 
 class Logger():
     """
     logger for the TODAG to build custom metrics
     """
-    def __init__(self):
+    def __init__(self, local=False):
         self.location = self.populate_location()
+        if not local:
+            # anything non-local is done inside loader
+            pass
 
     def log_action(self, action, arg):
         """
@@ -23,6 +28,7 @@ class Logger():
         """
         from time import ctime
         with open("logs.csv","a") as f:
+            # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
             f.write(ctime()+','+str(self.location)+','+str(action)+','+str(arg)+'\n')
 
     def populate_location(self):
@@ -55,15 +61,19 @@ class Loader():
     """
     def __init__(self, local=False):
         if not local:
-            self.proxy = GCSproxy()
+            self.proxy = GCSproxy() 
             self.proxy.gcs_load('cards.pkl')
+            self.proxy.gcs_load('logs.csv')
         self.cards = self.load_cards()
 
     def __del__(self):
         """
         clean env after ending
         """
-        os.system("rm cards.pkl")
+        try:
+            os.system("rm cards.pkl")
+            os.system("rm logs.csv")
+        except: pass
 
     def load_cards(self):
         """
@@ -76,12 +86,13 @@ class Loader():
         with open('cards.pkl', 'rb') as data:
             return pickle.load(data)
 
-    def write_cards(self):
+    def write(self):
         """
         write current cards to CARDS
         """
         with open('cards.pkl', 'wb') as data:
             pickle.dump(self.cards, data)
+        self.proxy.gcs_write('logs.csv')
         self.proxy.gcs_write('cards.pkl')
 
 class GCSproxy():
@@ -100,7 +111,7 @@ class GCSproxy():
 
         need key in ../gcskey.json
         """
-        print("[Logger.gcs_load] interacting with Google Cloud Storage to retrieve data ")
+        print("[GCSproxy.gcs_load] interacting with Google Cloud Storage to retrieve data: {}".format(filename))
         blob = self.bucket.get_blob(filename)
         blob.download_to_filename(filename)
 
@@ -112,6 +123,6 @@ class GCSproxy():
 
         need key in ../gcskey.json
         """
-        print("[Logger.gcs_load] interacting with Google Cloud Storage to upload data ")
+        print("[GCSproxy.gcs_load] interacting with Google Cloud Storage to upload data: {}".format(filename))
         blob = self.bucket.blob(filename)
         blob.upload_from_filename(filename)

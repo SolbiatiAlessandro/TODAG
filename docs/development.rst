@@ -25,6 +25,9 @@ This space is mainly for development ideas.
 - add TAGS, and make different TODOs in different part of the days
 - not really tags but tree nodes 
 
+- to add new todos, should write them on some temp list and then when I am at machine put them into the TODAG
+- feature request: priority of events coming up (need to be reminded)
+- feature request: integrate outlook with TODAG
 
 ITERATION A
 ====
