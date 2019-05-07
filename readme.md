@@ -43,15 +43,15 @@ Inside the bin folder there are the two scripts to use the TODAG:
 For more detail on the usage of bin commands you can check the in-code docs
 
 ---
-##Setup interaction with Google Cloud Storage
+## Setup interaction with Google Cloud Storage
 
 To enable interaction with Google Cloud Storage you need to 
 1. set up your own bucket on GCS
 2. change the name (hardcoded) in utils at line 5
 3. download your access key and store it in root folder (folder where README.md resides) as gcskey.json, to get your key you need to navigate inside GCP console -> IAM & Admin -> Service Accounts -> Create Key -> Download Key as JSON. <b>IMPORTANT</b>: save it with the name gcskey.json otherwise it will be committed on the public repo and hackerbot will penetrate the cloud account in minutes.
 
---
-##Setup geolocalization for your local machine
+---
+## Setup geolocalization for your local machine
 
 To enable geolocalization for your local machine you need to
 1. download the objective-C tool [WhereAmI](https://github.com/robmathers/WhereAmI) from [this link](https://github.com/robmathers/WhereAmI/releases/download/v1.02/whereami-1.02.zip)
