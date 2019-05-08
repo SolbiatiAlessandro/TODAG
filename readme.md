@@ -28,7 +28,7 @@ git clone https://github.com/SolbiatiAlessandro/TODAG
 cd TODAG
 virtualenv venv -p python3
 source venv/bin/activate
-pip install -r requirements.txt
+(venv) pip install -r requirements.txt
 ``` 
 
 Inside the bin folder there are the two scripts to use the TODAG:
