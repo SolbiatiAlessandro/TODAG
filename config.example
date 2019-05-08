@@ -1,0 +1,5 @@
+### this is an example file, modify as you need, delete this line, and rename the file as config.ini
+[bin]
+whereami = /Users/alex/Desktop/Coding/SCRIPTS/whereami
+bucketid = todag-bucket
+

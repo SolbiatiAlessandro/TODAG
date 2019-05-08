@@ -26,7 +26,8 @@ If you want to run the TODAG on your local iOS machine you need to do the follow
 ```
 git clone https://github.com/SolbiatiAlessandro/TODAG
 cd TODAG
-virtualenv venv p python3
+virtualenv venv -p python3
+source venv/bin/activate
 pip install -r requirements.txt
 ``` 
 

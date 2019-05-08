@@ -2,12 +2,19 @@
 import pickle 
 import os
 from google.cloud import storage
-# this is the id of the GCS bucket
-BUCKET_NAME = 'todag-bucket'
-# this is the path of the script whereami for geolocalization
-WHEREAMI_PATH = '/Users/lessandro/coding/SCRIPTS/whereami'
-global GCSPROXY
-GCSPROXY = None
+import configparser
+CONFIG_PATH = "../config.ini"
+
+def readconfig(arg):
+    """
+    read from config file inside CONFIG_PATH
+    """
+    config = configparser.ConfigParser()
+    config.read(CONFIG_PATH)
+    try: return config['bin'][arg]
+    except:
+        print("[utils:readconfig] warning couldn't read '{}' from config gile in {}".format(arg, CONFIG_PATH))
+        return None
 
 class Logger():
     """
@@ -43,6 +50,7 @@ class Logger():
             # how to get geographical location of the machine
             import subprocess
             print("[Logger.populate_location] loading machine location")
+            WHEREAMI_PATH = readconfig('whereami')
             read_location = subprocess.check_output(WHEREAMI_PATH)
             read_location = str(read_location)
             start = read_location.find('Longitude')+len("Longitude: -")
@@ -101,6 +109,7 @@ class GCSproxy():
     def __init__(self):
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '../gcskey.json'
         self.client = storage.Client()
+        BUCKET_NAME = readconfig('bucketid')
         self.bucket = self.client.get_bucket(BUCKET_NAME)
 
     def gcs_load(self, filename):

@@ -106,5 +106,8 @@ venv.bak/
 # csv
 *.csv
 
-#gcs
+# gcs
 gcskey.json
+
+# config file
+config.ini
