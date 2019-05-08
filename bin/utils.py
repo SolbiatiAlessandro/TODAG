@@ -2,6 +2,8 @@
 import pickle 
 import os
 from google.cloud import storage
+import socket
+from uuid import getnode
 import configparser
 CONFIG_PATH = "../config.ini"
 
@@ -22,6 +24,7 @@ class Logger():
     """
     def __init__(self, local=False):
         self.location = self.populate_location()
+        self.machine = str(getnode())+":"+socket.gethostname()
         if not local:
             # anything non-local is done inside loader
             pass
@@ -36,7 +39,9 @@ class Logger():
         from time import ctime
         with open("logs.csv","a") as f:
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
-            f.write(ctime()+','+str(self.location)+','+str(action)+','+str(arg)+'\n')
+
+            #time, location, machine, action, arguments
+            f.write(ctime()+','+str(self.location)+','+str(self.machine)+','+str(action)+','+str(arg)+'\n')
 
     def populate_location(self):
         """
