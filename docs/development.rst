@@ -1,9 +1,14 @@
+DOCS
+====
+child: higher level abstraction task
+parent: lower level abstraction task
+
+
+IDEAS
+====
 The main development workflow can be found in the git commit messages.
 This space is mainly for development ideas.
 
-====
-IDEAS
-====
 - gamification: rewards to be considered as gems with higher and higher value, and to get the next gem the game become more difficult ('game of life?'), cfr. Ray Dalio Principles cap. 8, he speaks about this concept
 - priority: every reward has a priority and I print the todos in order of the priority of their own reward, the idea is that I need to have tons of reward and when I want to do something I just iterates on the todos
 - weight: every reward has a weight (not a priority), and the weight of the todo is the some of all the weight of all the rewards card it leads to
@@ -13,3 +18,48 @@ IDEAS
 - notes: i like the feature to write 'why' and it tells me the components, would be nice to write 'notes' and I can input some notes and progress about the todo
 - daily todo: what about when I start every morning I can write I sort of temporary todo queue that is parallel to the TODAG, to keep track of low level todo (buy this, do that, go there))
 - recalibrate todag: change rewards and weight
+
+- integrate TODAG with facebook calendar
+- incorporate metrics
+- move on cloud exposing APIs
+- add TAGS, and make different TODOs in different part of the days
+- not really tags but tree nodes 
+
+- to add new todos, should write them on some temp list and then when I am at machine put them into the TODAG
+- feature request: priority of events coming up (need to be reminded)
+- feature request: integrate outlook with TODAG
+
+ITERATION A
+====
+
+Iteration started 05.05.2019, London
+
+- [x] add feature: edit priority
+- [x] fix feature: change questions
+
+- [x] add feature: todo based on location
+
+Location notes:
+subprocess.check_output('/Users/lessandro/coding/SCRIPTS/whereami')
+Longitude of house(Fabric) -> -0.1019
+Longitude of office(Rathbone) -> -0.1305
+
+- [x] add feature: record metrics on location and time
+
+- [ ] infra upgrade: move the whole thing on cloud and expose APIs
+sub tasks
+
+infra upgrade
+- GCP Storage to keep .pkl files for cards and .csv for logs
+- GCP Function to have serverless API end points to call todo.py
+- open.py will not be implemented in GCP Function but just keep on my local machine accessing data from GCP Storage
+
+- [ ] write tests before shipping to the cloud
+
+- [ ] add feature: integration with Google Assistant to use todo
+  
+
+ITERATION B
+====
+- [ ] add feature: events (facebook events, codeforces contests)
+(more)

@@ -28,6 +28,36 @@ class card(object):
         self.done = 0
         self.repeat = 0
         self.priority = -1
+        self.location_constraint = None
+
+    def edit(self):
+        """
+        this is a command line procedure to edit card
+
+        all this stuff should be tested later
+        """
+        print( "Edit card {}".format(self.uuid))
+
+        print( "Edit name? {}".format(self.name))
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
+            print( "name(str):")
+            self.name = input()
+
+        print( "Edit description? {}".format(self.description))
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
+            print( "description(str):")
+            self.description = input()
+
+        print( "Edit priority? {}".format(self.priority if self.is_reward else "No priority"))
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
+            if not self.is_reward:
+                self.is_reward = 1
+            print( "priority low 0 : high 10")
+            self.priority = int(input())
+
 
     def populate(self):
         """
@@ -39,33 +69,36 @@ class card(object):
         -is_optional
         -is_reward
         """
-        print "Populate new card {}".format(self.uuid)
-        print "name(str):"
-        self.name = raw_input()
-        print "description(str):"
-        self.description = raw_input()
-        print "is_reward(int):"
-        self.is_reward = int(raw_input())
+        print( "Populate new card {}".format(self.uuid))
+        print( "name(str):")
+        self.name = input()
+        print( "description(str):")
+        self.description = input()
+        print( "is_reward(int):")
+        self.is_reward = int(input())
         if self.is_reward:
-            print "priority low 0 : high 10"
-            self.priority = int(raw_input())
-        print "is_optional(int):"
-        self.is_optional = int(raw_input())
+            print( "priority low 0 : high 10")
+            self.priority = int(input())
+
+        # not needed, need to refactor better later
+        # print( "is_optional(int):")
+        # self.is_optional = int(input())
+        self.is_optional = 1
 
     def _debug(self):
         """
-        print debug all attributes
+        print( debug all attributes)
         """
         for attr in dir(self):
             if attr[0] != '_':
-                print getattr(self, attr)
+                print( getattr(self, attr))
 
     def add_parent(self):
         """
         add a parent card to the current card with a
         command line procedure
         """
-        print "Create new parent card for card {}".format(self.name)
+        print( "Create new parent card for card {}".format(self.name))
         res = card()
         res.populate()
         self.parents.append(res.uuid)
@@ -74,20 +107,20 @@ class card(object):
 
     def pretty_print(self):
         """
-        print card for enumeration in dictionary
+        print( card for enumeration in dictionary)
         """
         if hasattr(self, 'priority') and self.priority != -1:
-            print "{} | {} | {}".format(self.uuid, self.name,
-                                        self.priority)
+            print( "{} | {} | {}".format(self.uuid, self.name,
+                                        self.priority))
         else:
-            print "{} | {}".format(self.uuid, self.name)
+            print( "{} | {}".format(self.uuid, self.name))
 
     def detail(self):
         """
-        print card name and description
+        print( card name and description)
         """
         if hasattr(self, 'priority') and self.priority != -1:
-            print "{} | {} | {}".format(self.name, self.description,
-                                        self.priority)
+            print( "{} | {} | {}".format(self.name, self.description,
+                                        self.priority))
         else:
-            print "{} | {}".format(self.name, self.description)
+            print( "{} | {}".format(self.name, self.description))

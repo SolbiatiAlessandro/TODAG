@@ -15,9 +15,45 @@ Every 'TODO' is a card, and every card has parents and children that will form t
 The utility is developed using OOP methodologies, and adhereing to the [Google Python style-guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md), especially regarding the documentation. Is encouraged Test-Drived-Development, as the whole utility will be tested periodically using Continuous Integration practices. Up to now there is no plan in writing a external documentation as the in-code documentation should be enough.
 
 ---
+## Roadmap
+You can read about the roadmap of the project in the [development.md](https://github.com/SolbiatiAlessandro/TODAG/blob/master/docs/development.rst) file.
+
+---
 ## Usage
+
+If you want to run the TODAG on your local iOS machine you need to do the following.
+
+```
+git clone https://github.com/SolbiatiAlessandro/TODAG
+cd TODAG
+virtualenv venv p python3
+pip install -r requirements.txt
+``` 
+
 Inside the bin folder there are the two scripts to use the TODAG:
 - **open.py**: create new todos in the DAG, delete or print the DAG
-- **todo.py**: traverse the DAG and print the todos with highest priority (the roots), and for every todo print the connected components it belongs to
+```
+(venv) python bin/open.py
+```
 
-For more detail on the usage you can check the in-code docs
+- **todo.py**: traverse the DAG and print the todos with highest priority (the roots), and for every todo print the connected components it belongs to
+```
+(venv) python bin/todo.py
+```
+For more detail on the usage of bin commands you can check the in-code docs
+
+---
+## Setup interaction with Google Cloud Storage
+
+To enable interaction with Google Cloud Storage you need to 
+1. set up your own bucket on GCS
+2. change the name (hardcoded) in utils at line 5
+3. download your access key and store it in root folder (folder where README.md resides) as gcskey.json, to get your key you need to navigate inside GCP console -> IAM & Admin -> Service Accounts -> Create Key -> Download Key as JSON. <b>IMPORTANT</b>: save it with the name gcskey.json otherwise it will be committed on the public repo and hackerbot will penetrate the cloud account in minutes.
+
+---
+## Setup geolocalization for your local machine
+
+To enable geolocalization for your local machine you need to
+1. download the objective-C tool [WhereAmI](https://github.com/robmathers/WhereAmI) from [this link](https://github.com/robmathers/WhereAmI/releases/download/v1.02/whereami-1.02.zip)
+2. WhereAmI is just a command line script, put the path to it inside WHEREAMI_PATH in utils:6
+
