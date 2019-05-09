@@ -1,5 +1,6 @@
 """this is the main module that contains the OOP structure for the cards"""
-
+from uuid import uuid4
+from datetime import datetime, timedelta
 
 class card(object):
     """
@@ -10,25 +11,23 @@ class card(object):
         name: str
         description: str
         is_reward: bool, is this card a reward card
-        is_optional: bool, is this card optional or necessary
         parents: list[uuid] of parents card
         children: list[uuid] of children
         done: bool, is the todo done
         repeat: int, still need to be done 'repeat' times
     """
     def __init__(self):
-        from uuid import uuid4
         self.uuid = uuid4()
         self.name = ''
         self.description = ''
         self.is_reward = 0
-        self.is_optional = 0
         self.parents = []
         self.children = []
         self.done = 0
         self.repeat = 0
         self.priority = -1
         self.location_constraint = None
+        self.deadline = None
 
     def edit(self):
         """
@@ -57,7 +56,60 @@ class card(object):
                 self.is_reward = 1
             print( "priority low 0 : high 10")
             self.priority = int(input())
+        print( "Edit deadline? {}".format(self.deadline))
+        edit = input()
+        if edit == "yes" or edit == "y" or edit == "1":
+            self.set_deadline()
 
+    def get_priority(self,k=100):
+        """
+        evaluate priority of the task, return non-negative ints 
+        the higher the int the higher the priority
+
+        k is the constant for the inverse proportionality of time_priority
+        """
+        if not hasattr(self, 'deadline') or self.deadline is None:
+            return self.priority
+
+        # the formula is: priority ~ k / (hours left)
+        datetime_left = self.deadline - datetime.now()
+        hours_left =datetime_left.days * 24 + datetime_left.seconds/3600
+        time_priority = k / hours_left
+
+        return self.priority + time_priority
+
+    def set_deadline(self):
+        """
+        use datetime module to access and modify deadline of card
+        """
+        print("Setting deadline for card {}".format(self.uuid))
+        year=datetime.now().year
+        print("year={}, confirm? (y/n)".format(year))
+        got = input()
+        if got == "n":
+            print("year=")
+            year = int(input())
+            
+        month=datetime.now().month
+        print("month={}, confirm? (y/n)".format(month))
+        got = input()
+        if got == "n":
+            print("month=")
+            month = int(input())
+        day=datetime.now().day
+        print("day={}, confirm? (y/n)".format(day))
+        got = input()
+        if got == "n":
+            print("day=")
+            day = int(input())
+        hour=datetime.now().hour
+        print("hour={}, confirm? (y/n)".format(hour))
+        got = input()
+        if got == "n":
+            print("hour=")
+            hour = int(input())
+        self.deadline = datetime(year,month,day,hour)
+        print("Deadline of card {} set to {}".format(self.uuid, self.deadline))
 
     def populate(self):
         """
@@ -66,7 +118,6 @@ class card(object):
 
         -name
         -description
-        -is_optional
         -is_reward
         """
         print( "Populate new card {}".format(self.uuid))
@@ -74,16 +125,13 @@ class card(object):
         self.name = input()
         print( "description(str):")
         self.description = input()
-        print( "is_reward(int):")
-        self.is_reward = int(input())
-        if self.is_reward:
-            print( "priority low 0 : high 10")
-            self.priority = int(input())
-
-        # not needed, need to refactor better later
-        # print( "is_optional(int):")
-        # self.is_optional = int(input())
-        self.is_optional = 1
+        print( "(baseline) priority(int):")
+        got = int(input())
+        self.is_reward = got > 0
+        self.priority = got
+        print("set a deadline(y/n):")
+        got = input()
+        if got == "y": self.set_deadline()
 
     def _debug(self):
         """

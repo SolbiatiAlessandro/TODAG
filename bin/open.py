@@ -107,7 +107,6 @@ def write_buffer(buffer_list):
             _writer.writerow(row)
 
 if __name__ == "__main__":
-
     # external IO downloaders
     logger = Logger()
     loader = Loader()
@@ -115,104 +114,110 @@ if __name__ == "__main__":
     CARDS = loader.cards
 
     print_cards()
-    while True:
-        print("\n\n=====prompt====="+
-                "\n[A] new card"+
-                "\n[B] add parent"+
-                "\n[C] delete card"+
-                "\n[D] explore decision tree"+
-                "\n[E] edit card"+
-                "\n[F] check next item from todo buffer")
+    try:
+        while True:
+            print("\n\n=====prompt====="+
+                    "\n[A] new card"+
+                    "\n[B] add parent"+
+                    "\n[C] delete card"+
+                    "\n[D] explore decision tree"+
+                    "\n[E] edit card"+
+                    "\n[F] check next item from todo buffer"+
+                    "\n[G] print cards")
 
-        got = input()
-        if got == 'A':
-            new_card = card()
-            new_card.populate()
-            CARDS[new_card.uuid] = new_card
-            print("Card added succesfully")
-            logger.log_action("add_card",new_card.uuid)
-        elif got == 'B':
-            print( "Input UUID of children card:")
-            child = read_card(CARDS)
-            print( "\nAdding new parent to '{}'\n".format(child.name))
-            print( "\n\n[A] -> Existing Card\n[B] -> New Card\n")
-            gott = input()
-            if gott == 'B':
-                new_card = child.add_parent()
+            got = input()
+            if got == 'A':
+                new_card = card()
+                new_card.populate()
                 CARDS[new_card.uuid] = new_card
+                print("Card added succesfully")
                 logger.log_action("add_card",new_card.uuid)
-            elif gott == 'A':
-                print( "Input UUID of parent card:")
-                parent = read_card(CARDS)
-                parent.children.append(child.uuid)
-                child.parents.append(parent.uuid)
-                logger.log_action("add_edge",parent.uuid)
+            elif got == 'B':
+                print( "Input UUID of children card:")
+                child = read_card(CARDS)
+                print( "\nAdding new parent to '{}'\n".format(child.name))
+                print( "\n\n[A] -> Existing Card\n[B] -> New Card\n")
+                gott = input()
+                if gott == 'B':
+                    new_card = child.add_parent()
+                    CARDS[new_card.uuid] = new_card
+                    logger.log_action("add_card",new_card.uuid)
+                elif gott == 'A':
+                    print( "Input UUID of parent card:")
+                    parent = read_card(CARDS)
+                    parent.children.append(child.uuid)
+                    child.parents.append(parent.uuid)
+                    logger.log_action("add_edge",parent.uuid)
+                else:
+                    exit("Error: not implemented")
+                print( "Parent added succesfully")
+            elif got == 'C':
+                print( "Input UUID of card to delete")
+                read_id = input()
+                read_card = CARDS.get(uuid.UUID(read_id))
+                if not read_card:
+                    exit("error: CARD NOT EXISTING")
+                logger.log_action("delete_card",read_card.name)
+                del(CARDS[uuid.UUID(read_id)])
+                print( "Card deleted succesfully")
+            elif got == 'D':
+                print( "Rewards on the DAG:\n")
+                rewards = find_rewards(CARDS)
+                for index, reward in enumerate(rewards):
+                    print( "[{}]".format(index))
+                    CARDS[reward].detail()
+                print( "\n")
+                print( "Choose card you want backtrack from")
+                got_index = int(input())
+                if got_index in range(len(rewards)):
+                    reward_id = rewards[got_index]
+                    print( "\n[REWARD]")
+                    logger.log_action("explore_tree",CARDS[reward_id].uuid)
+                    CARDS[reward_id].detail()
+                    parents = backward_bfs(CARDS, reward_id)
+                    parents = parents[1:]
+                    ITEM_SIZE = 30
+                    for layer in parents:
+                        separator = (("="*ITEM_SIZE)+"|")*len(layer)
+                        content = ""
+                        for parent in layer:
+                            name = CARDS[parent].name
+                            content += name[:ITEM_SIZE] + \
+                                " "*(ITEM_SIZE - min(len(name), ITEM_SIZE))+"|"
+                        print((" "*(int(ITEM_SIZE/2))+"^"+" "*(int(ITEM_SIZE/2)))*len(layer))
+                        print(separator)
+                        print(content)
+                        print(separator)
+                else:
+                    exit("error: reward index out of range")
+            elif got == 'E':
+                print( "Input UUID of card to edit")
+                read_id = input()
+                read_card = CARDS.get(uuid.UUID(read_id))
+                if not read_card:
+                    exit("error: CARD NOT EXISTING")
+                read_card.edit()
+                logger.log_action("edit_card",read_card.uuid)
+                print( "Card edited succesfully")
+            elif got == 'F':
+                try:
+                    buffer_next = next(buffer_iterator)
+                    print("\nNext item on the TODO buffer (item will be deleted from buffer)\n"+
+                            "\nitem: "+str(buffer_next[0])+
+                            "\npriority: "+str(buffer_next[1])+
+                            "\n\n")
+                    logger.log_action("pop_buffer",buffer_next[0])
+                except StopIteration:
+                    buffer_next = None
+                    print("Buffer empty")
+            elif got == 'G':
+                print_cards()
             else:
-                exit("Error: not implemented")
-            print( "Parent added succesfully")
-        elif got == 'C':
-            print( "Input UUID of card to delete")
-            read_id = input()
-            read_card = CARDS.get(uuid.UUID(read_id))
-            if not read_card:
-                exit("error: CARD NOT EXISTING")
-            logger.log_action("delete_card",read_card.name)
-            del(CARDS[uuid.UUID(read_id)])
-            print( "Card deleted succesfully")
-        elif got == 'D':
-            print( "Rewards on the DAG:\n")
-            rewards = find_rewards(CARDS)
-            for index, reward in enumerate(rewards):
-                print( "[{}]".format(index))
-                CARDS[reward].detail()
-            print( "\n")
-            print( "Choose card you want backtrack from")
-            got_index = int(input())
-            if got_index in range(len(rewards)):
-                reward_id = rewards[got_index]
-                print( "\n[REWARD]")
-                logger.log_action("explore_tree",CARDS[reward_id].uuid)
-                CARDS[reward_id].detail()
-                parents = backward_bfs(CARDS, reward_id)
-                parents = parents[1:]
-                ITEM_SIZE = 30
-                for layer in parents:
-                    separator = (("="*ITEM_SIZE)+"|")*len(layer)
-                    content = ""
-                    for parent in layer:
-                        name = CARDS[parent].name
-                        content += name[:ITEM_SIZE] + \
-                            " "*(ITEM_SIZE - min(len(name), ITEM_SIZE))+"|"
-                    print((" "*(int(ITEM_SIZE/2))+"^"+" "*(int(ITEM_SIZE/2)))*len(layer))
-                    print(separator)
-                    print(content)
-                    print(separator)
-            else:
-                exit("error: reward index out of range")
-        elif got == 'E':
-            print( "Input UUID of card to edit")
-            read_id = input()
-            read_card = CARDS.get(uuid.UUID(read_id))
-            if not read_card:
-                exit("error: CARD NOT EXISTING")
-            read_card.edit()
-            logger.log_action("edit_card",read_card.uuid)
-            print( "Card edited succesfully")
-        elif got == 'F':
-            try:
-                buffer_next = next(buffer_iterator)
-                print("\nNext item on the TODO buffer (item will be deleted from buffer)\n"+
-                        "\nitem: "+str(buffer_next[0])+
-                        "\npriority: "+str(buffer_next[1])+
-                        "\n\n")
-                logger.log_action("pop_buffer",buffer_next[0])
-            except StopIteration:
-                buffer_next = None
-                print("Buffer empty")
-        else:
-            print("[bin:open.py] {} choice not implemented, quitting program".format(got))
-            break
-
+                print("[bin:open.py] {} choice not implemented, quitting program".format(got))
+                break
+    except Exception:
+        print(Exception)
+        print("[bin:open.py] you did something illegal")
     # external IO uploaders
     logger.log_action("quit","open.py")
     loader.write()

@@ -34,7 +34,7 @@ def get_todos(cards):
             # cumsum of all the priorities on the branch from root to card
             #
             if hasattr(cards[component], 'priority'):
-                weight += cards[component].priority
+                weight += cards[component].get_priority()
 
             #
             # this enable location for the TODAG
@@ -115,7 +115,7 @@ def main():
                 card_done = cards[todos[index][1]]
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
-                loader.write_cards()
+                loader.write()
                 print( "GREAT!")
                 return
             elif got == "why":
