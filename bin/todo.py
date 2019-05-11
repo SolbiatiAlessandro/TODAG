@@ -1,6 +1,7 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
 from utils import Logger, Loader
+import argparse
 logger = None
 
 def get_todos(cards):
@@ -99,10 +100,16 @@ def main():
     -look for todos
     -interactive session to print( todos: input 'n' for next todo
     """
+    # argparse 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-l', '--location', type=float, help='0.1 to force home, 0.13 to force work', nargs='?')
+    args = parser.parse_args()
+
+    # external IO
     global logger
     sys.path.append('../TODAG')
     from card import card
-    logger = Logger()
+    logger = Logger(args.location)
     loader = Loader()
     cards = loader.cards
     todos = get_todos(cards)

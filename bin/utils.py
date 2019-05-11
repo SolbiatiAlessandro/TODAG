@@ -22,12 +22,13 @@ class Logger():
     """
     logger for the TODAG to build custom metrics
     """
-    def __init__(self, local=False):
-        self.location = self.populate_location()
+    def __init__(self, location=None):
+        """
+        args:
+            location = [0.1, 0.13] forces location (home or work) instead of reading from GPS
+        """
+        self.location = self.populate_location() if location is None else location
         self.machine = str(getnode())+":"+socket.gethostname()
-        if not local:
-            # anything non-local is done inside loader
-            pass
 
     def log_action(self, action, arg):
         """

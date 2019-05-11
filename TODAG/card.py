@@ -56,6 +56,8 @@ class card(object):
                 self.is_reward = 1
             print( "priority low 0 : high 10")
             self.priority = int(input())
+
+        if not hasattr(self,'deadline'): self.deadline = None
         print( "Edit deadline? {}".format(self.deadline))
         edit = input()
         if edit == "yes" or edit == "y" or edit == "1":

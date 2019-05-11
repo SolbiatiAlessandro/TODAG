@@ -5,6 +5,7 @@ from utils import Logger, Loader
 sys.path.append('../TODAG')
 from card import card
 import uuid
+import argparse
 CARDS = None
 logger = None
 buffer_location = "./buffer.csv" # move this to a conflig and implement on cloud 
@@ -107,8 +108,13 @@ def write_buffer(buffer_list):
             _writer.writerow(row)
 
 if __name__ == "__main__":
+    # argparse 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-l', '--location', type=float, help='0.1 to force home, 0.13 to force work', nargs='?')
+    args = parser.parse_args()
+
     # external IO downloaders
-    logger = Logger()
+    logger = Logger(args.location)
     loader = Loader()
     buffer_iterator = read_buffer()
     CARDS = loader.cards
