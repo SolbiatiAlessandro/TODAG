@@ -75,7 +75,9 @@ class card(object):
 
         # the formula is: priority ~ k / (hours left)
         datetime_left = self.deadline - datetime.now()
-        hours_left =datetime_left.days * 24 + datetime_left.seconds/3600
+        hours_left = datetime_left.days * 24 + datetime_left.seconds/3600
+        if hours_left < 0 + 1e6:
+            hours_left = (k/100)
         time_priority = k / hours_left
 
         return self.priority + time_priority
