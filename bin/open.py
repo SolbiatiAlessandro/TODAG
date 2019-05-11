@@ -123,7 +123,8 @@ if __name__ == "__main__":
                     "\n[D] explore decision tree"+
                     "\n[E] edit card"+
                     "\n[F] check next item from todo buffer"+
-                    "\n[G] print cards")
+                    "\n[G] print cards"+
+                    "\n[H] examine single card")
 
             got = input()
             if got == 'A':
@@ -212,11 +213,20 @@ if __name__ == "__main__":
                     print("Buffer empty")
             elif got == 'G':
                 print_cards()
+            elif got == 'H':
+                print("card id you want to examine")
+                read_id = input()
+                read_card = CARDS.get(uuid.UUID(read_id))
+                if not read_card:
+                    exit("error: CARD NOT EXISTING")
+                read_card.detail()
+            
             else:
                 print("[bin:open.py] {} choice not implemented, quitting program".format(got))
                 break
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        import pdb;pdb.set_trace()
+        print(e)
         print("[bin:open.py] you did something illegal")
     # external IO uploaders
     logger.log_action("quit","open.py")
