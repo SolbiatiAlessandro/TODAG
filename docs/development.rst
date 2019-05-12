@@ -26,8 +26,12 @@ This space is mainly for development ideas.
 - not really tags but tree nodes 
 
 - to add new todos, should write them on some temp list and then when I am at machine put them into the TODAG -> write them on google todo and then push to todag regulrarly ?
-- feature request: priority of events coming up (need to be reminded)
+- OK feature request: priority of events coming up (need to be reminded)
 - feature request: integrate outlook with TODAG
+
+- metrics on mood -> productivity
+- estimate of how much time is required for a task!
+ 
  
 
 ITERATION A
@@ -54,6 +58,9 @@ infra upgrade
 - GCP Storage to keep .pkl files for cards and .csv for logs
 - GCP Function to have serverless API end points to call todo.py
 - open.py will not be implemented in GCP Function but just keep on my local machine accessing data from GCP Storage
+
+figured out a good calibration:
+no need to figure out 'priority' every time, just add to parent,and set deadlines to daily tasks. e.g. PERSONAL (1) -> Codeforces (4) -> Contest (0) + deadline
 
 - [ ] write tests before shipping to the cloud
 

@@ -132,11 +132,11 @@ class card(object):
         self.name = input()
         print( "description(str):")
         self.description = input()
-        print( "(baseline) priority(int):")
+        print( "what is the reward of completing this task not taking into account the parents? (int):")
         got = int(input())
         self.is_reward = got > 0
         self.priority = got
-        print("set a deadline(y/n):")
+        print("set a deadline? (y/n):")
         got = input()
         if got == "y": self.set_deadline()
 
@@ -179,4 +179,4 @@ class card(object):
                                         self.priority))
         else:
             print( "{} | {}".format(self.name, self.description))
-        print(self.deadline)
+        if hasattr(self,'deadline'): print(self.deadline) 
