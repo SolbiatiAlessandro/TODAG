@@ -28,14 +28,14 @@ def get_todos(cards):
 
     # sort todos by priority of component
     for index, todo in enumerate(res):
-        weight = 0
+
+        weight = cards[todo].get_priority()
         components = find_components(cards, todo)
         for component in set(components):
             #
             # cumsum of all the priorities on the branch from root to card
             #
-            if hasattr(cards[component], 'priority'):
-                weight += cards[component].get_priority()
+            weight += cards[component].get_priority()
 
             #
             # this enable location for the TODAG
@@ -79,7 +79,7 @@ def find_components(cards, todo):
         todo: (uuid) of the todo
 
     Returns:
-        components: list[uuid] of representative cards for the component
+        components: list[uuid] of representative cards for the component, without the todo
     """
     stack, res = [todo], []
     while stack:

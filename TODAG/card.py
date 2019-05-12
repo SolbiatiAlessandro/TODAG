@@ -70,6 +70,9 @@ class card(object):
 
         k is the constant for the inverse proportionality of time_priority
         """
+        if not self.is_reward:
+            self.priority = 0
+
         if not hasattr(self, 'deadline') or self.deadline is None:
             return self.priority
 
@@ -176,3 +179,4 @@ class card(object):
                                         self.priority))
         else:
             print( "{} | {}".format(self.name, self.description))
+        print(self.deadline)
