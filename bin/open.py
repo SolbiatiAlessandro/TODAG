@@ -130,7 +130,8 @@ if __name__ == "__main__":
                     "\n[E] edit card"+
                     "\n[F] check next item from todo buffer"+
                     "\n[G] print cards"+
-                    "\n[H] examine single card")
+                    "\n[H] examine single card"+
+                    "\n[I] mood dashboard")
 
             got = input()
             if got == 'A':
@@ -226,7 +227,12 @@ if __name__ == "__main__":
                 if not read_card:
                     exit("error: CARD NOT EXISTING")
                 read_card.detail()
-            
+            elif got == 'I':
+                print("How is mood right now?")
+                mood_value = int(input())
+                logger.log_action("mood",mood_value,verbose=True)
+
+
             else:
                 print("[bin:open.py] {} choice not implemented, quitting program".format(got))
                 break

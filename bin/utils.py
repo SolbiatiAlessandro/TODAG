@@ -5,6 +5,8 @@ from google.cloud import storage
 import socket
 from uuid import getnode
 import configparser
+import datetime
+from time import ctime
 CONFIG_PATH = "../config.ini"
 
 def readconfig(arg):
@@ -22,7 +24,7 @@ class Logger():
     """
     logger for the TODAG to build custom metrics
     """
-    def __init__(self, location=None):
+    def __init__(self, location=None, time_format='google-BASIC'):
         """
         args:
             location = [0.1, 0.13] forces location (home or work) instead of reading from GPS
@@ -30,19 +32,29 @@ class Logger():
         self.location = self.populate_location() if location is None else location
         self.machine = str(getnode())+":"+socket.gethostname()
 
-    def log_action(self, action, arg):
+        # this is to refactor_time in the google data studio format
+        # if you wanna log in different way change format here
+        if time_format == 'google-BASIC':
+            self.refactor_time = lambda s: datetime.datetime.strptime(s, "%a %b %d %H:%M:%S %Y").strftime("%Y/%m/%d-%H:%M:%S")
+        else:
+            self.refactor_time = lambda s: s
+
+    def log_action(self, action, arg, verbose=False):
         """
         log action for metric reports
 
         action: str to be written in action column
         arg: str to be written in action column
         """
-        from time import ctime
+        if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
         with open("logs.csv","a") as f:
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
 
-            #time, location, machine, action, arguments
-            f.write(ctime()+','+str(self.location)+','+str(self.machine)+','+str(action)+','+str(arg)+'\n')
+            # logs.csv FORMAT
+            # time, location, machine, action, arguments
+            to_print = [self.refactor_time(ctime()), self.location, self.machine, action, arg]
+
+            f.write(','.join(map(str, to_print)) + "\n")
 
     def populate_location(self):
         """

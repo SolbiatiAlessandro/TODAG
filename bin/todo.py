@@ -135,8 +135,13 @@ def main():
                 index += 1
                 index %= len(todos)
                 print_todo(cards, todos, index)
+            elif got == "mood":
+                print("How is mood right now?")
+                mood_value = int(input())
+                logger.log_action("mood",mood_value, verbose=True)
             else:
                 logger.log_action("quit","todo.py")
+                import pdb;pdb.set_trace()
                 loader.write()
                 print( "\n"*60)
                 return
