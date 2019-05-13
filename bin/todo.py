@@ -85,7 +85,7 @@ def find_components(cards, todo):
     while stack:
         curr = stack.pop()
         curr_card = cards[curr]
-        if curr_card.is_reward:
+        if curr_card.is_reward and curr != todo:
             res.append(curr)
         has_children = True if curr_card.children else False
         if has_children:
