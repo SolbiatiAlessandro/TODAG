@@ -60,3 +60,9 @@ To enable geolocalization for your local machine you need to
 1. Download the objective-C tool [WhereAmI](https://github.com/robmathers/WhereAmI) from [this link](https://github.com/robmathers/WhereAmI/releases/download/v1.02/whereami-1.02.zip)
 2. Create a `config.init` file from like `config.example`, modify line `whereami = your_path_to_whereami_here`
 
+---
+## Dashboards
+
+TODAG is plugged in into the Google Cloud Storage environment. There are some dynamic dashboards updated in real time with the metrics coming from TODAG, NOTE: you need to be granted access.
+- Mood Dashboard: https://datastudio.google.com/s/qDSW0Xm_NKo
+
