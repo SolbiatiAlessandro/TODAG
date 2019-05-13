@@ -1,6 +1,7 @@
 """this is the main module that contains the OOP structure for the cards"""
 from uuid import uuid4
 from datetime import datetime, timedelta
+from card_utils import multiline_input
 
 class card(object):
     """
@@ -47,7 +48,7 @@ class card(object):
         edit = input()
         if edit == "yes" or edit == "y" or edit == "1":
             print( "description(str):")
-            self.description = input()
+            self.description = multiline_input()
 
         print( "Edit priority? {}".format(self.priority if self.is_reward else "No priority"))
         edit = input()
@@ -131,7 +132,7 @@ class card(object):
         print( "name(str):")
         self.name = input()
         print( "description(str):")
-        self.description = input()
+        self.description = multiline_input()
         print( "what is the reward of completing this task not taking into account the parents? (int):")
         got = int(input())
         self.is_reward = got > 0

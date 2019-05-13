@@ -118,30 +118,40 @@ def main():
     while True:
         try:
             got = input()
-            if got == 'done':
+            if got == "h" or got == "help":
+                print("h, help\n"+
+                        "d, done\n"+
+                        "w, why\n"+
+                        "n, next\n"+
+                        "m, mood\n"+
+                        "e, edit\n"+
+                        "")
+            elif got == "d" or got == 'done':
                 card_done = cards[todos[index][1]]
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
                 loader.write()
                 print( "GREAT!")
                 return
-            elif got == "why":
+            elif got == "w" or got == "why":
                 _, todo = todos[index]
                 logger.log_action("examined_todo",cards[todo].uuid)
                 components = find_components(cards, todo)
                 for component in components:
                     cards[component].pretty_print()
-            elif got == 'n':
+            elif got == 'n' or got == "next":
                 index += 1
                 index %= len(todos)
                 print_todo(cards, todos, index)
-            elif got == "mood":
+            elif got == "m" or got == "mood":
                 print("How is mood right now?")
                 mood_value = int(input())
                 logger.log_action("mood",mood_value, verbose=True)
+            elif got == "e" or got == "edit":
+                _, todo = todos[index]
+                cards[todo].edit()
             else:
                 logger.log_action("quit","todo.py")
-                import pdb;pdb.set_trace()
                 loader.write()
                 print( "\n"*60)
                 return
