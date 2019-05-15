@@ -29,8 +29,10 @@ This space is mainly for development ideas.
 - OK feature request: priority of events coming up (need to be reminded)
 - feature request: integrate outlook with TODAG
 
-- metrics on mood -> productivity
+- metrics on mood -> productivity SHIPPED
 - estimate of how much time is required for a task!
+
+- time tracker, what did I do today? 
  
  
 
