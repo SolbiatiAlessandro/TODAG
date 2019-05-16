@@ -33,6 +33,9 @@ This space is mainly for development ideas.
 - estimate of how much time is required for a task!
 
 - time tracker, what did I do today? 
+
+- when I have todos, I can 'check' or 'done'
+- priority increases the less time I saw a card
  
  
 

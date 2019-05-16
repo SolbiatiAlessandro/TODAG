@@ -39,12 +39,12 @@ class Logger():
         else:
             self.refactor_time = lambda s: s
 
-    def log_action(self, action, arg, verbose=False):
+    def log_action(self, action, *arg, verbose=False):
         """
         log action for metric reports
 
         action: str to be written in action column
-        arg: str to be written in action column
+        *arg: will be casted to strings and logged
         """
         if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
         with open("logs.csv","a") as f:
@@ -52,7 +52,7 @@ class Logger():
 
             # logs.csv FORMAT
             # time, location, machine, action, arguments
-            to_print = [self.refactor_time(ctime()), self.location, self.machine, action, arg]
+            to_print = [self.refactor_time(ctime()), self.location, self.machine, action] + list(arg)
 
             f.write(','.join(map(str, to_print)) + "\n")
 

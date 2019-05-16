@@ -120,11 +120,12 @@ def main():
             got = input()
             if got == "h" or got == "help":
                 print("h, help\n"+
-                        "d, done\n"+
-                        "w, why\n"+
-                        "n, next\n"+
-                        "m, mood\n"+
-                        "e, edit\n"+
+                        "d, done -> used when a task is finish at it will be deleted\n"+
+                        "b, blocked -> I can not progress on this task for external reasons\n"+
+                        "c, checked -> I worked on this task and didn't finished yet\n"+
+                        "w, why -> why am I to do this task?\n"+
+                        "m, mood -> right now I am feeling ..\n"+
+                        "e, edit -> update the task\n"+
                         "")
             elif got == "d" or got == 'done':
                 card_done = cards[todos[index][1]]
@@ -133,13 +134,21 @@ def main():
                 loader.write()
                 print( "GREAT!")
                 return
+            elif got == "c" or got == 'checked':
+                print("Nice, how much time was that? (float, where 1.0 == 1 hour)")
+                duration = float(input())
+                _, todo = todos[index]
+                logger.log_action("checked_todo",cards[todo].uuid,duration)
+                index += 1
+                index %= len(todos)
+                print_todo(cards, todos, index)
             elif got == "w" or got == "why":
                 _, todo = todos[index]
                 logger.log_action("examined_todo",cards[todo].uuid)
                 components = find_components(cards, todo)
                 for component in components:
                     cards[component].pretty_print()
-            elif got == 'n' or got == "next":
+            elif got == 'b' or got == "blocked":
                 index += 1
                 index %= len(todos)
                 print_todo(cards, todos, index)
