@@ -64,18 +64,14 @@ class card(object):
         if edit == "yes" or edit == "y" or edit == "1":
             self.set_deadline()
 
-    def get_priority(self,k=100):
+    def get_deadline_priority(self, k=100):
         """
-        evaluate priority of the task, return non-negative ints 
-        the higher the int the higher the priority
-
         k is the constant for the inverse proportionality of time_priority
-        """
-        if not self.is_reward:
-            self.priority = 0
 
+        return deadline priority as hour delta
+        """
         if not hasattr(self, 'deadline') or self.deadline is None:
-            return self.priority
+            return 0
 
         # the formula is: priority ~ k / (hours left)
         datetime_left = self.deadline - datetime.now()
@@ -84,7 +80,53 @@ class card(object):
             hours_left = (k/100)
         time_priority = k / hours_left
 
-        return self.priority + time_priority
+        return time_priority
+
+    def get_reshake_priority(self) -> float:
+        """
+        return priority from not being checked for a long time
+
+        return hours of last update of query_uuid card, in orderd
+        - last checked
+        - last created
+        - beginning of logs
+
+        args:
+            query_uuid -> (str)
+
+        FIX: funny bug with type annotation,
+        if you annotate str: query_uuid it 'memoize' last variable
+        """
+        query_uuid = str(self.uuid)
+        logs = pd.read_csv(open("logs.csv","r"))
+
+        checked = list(logs[logs.arg1 == quer_uuid][logs.action == "checked_todo"]["date"])
+
+        if checked: # set last checked as last update
+            last_updated = checked[-1]
+        else:
+            created = list(logs[logs.arg1 == query_uuid][logs.action == "add_card"]["date"])
+            if created: # set creation time as last update
+                last_updated = created[0]
+            else: # set beginning time as last update
+                start_time = logs.iloc[0]['date']
+                last_updated = start_time
+
+        datetime_last_updated = datetime.strptime(last_updated, TIME_FORMAT)
+        datetime_delta = datetime.now() - datetime_last_updated
+        hours_delta = datetime_delta.days * 24 + datetime_delta.seconds/3600
+        return hours_delta
+
+
+
+    def get_priority(self,k=100):
+        """
+        evaluate priority of the task, return non-negative ints 
+        the higher the int the higher the priority
+        """
+        baseline_priority = self.priority 
+        deadline_priority = self.get_deadline_priority()
+        return sum([baseline_priority, deadline_priority])
 
     def set_deadline(self):
         """

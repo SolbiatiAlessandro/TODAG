@@ -1,0 +1,32 @@
+def get_last_update(query_uuid) -> float:
+		"""
+        return hours of last update of query_uuid card, in orderd
+        - last checked
+        - last created
+        - beginning of logs
+        
+        args:
+            query_uuid -> (str)
+            
+            FIX: funny bug with type annotation, 
+            if you annotate str: query_uuid it 'memoize' last variable
+		"""
+        logs = pd.read_csv(open(\"logs.csv\",\"r\"))
+        #import pdb;pdb.set_trace()
+        print(query_uuid)
+        checked = list(logs[logs.arg1 == query_uuid][logs.action == \"checked_todo\"][\"date\"])
+        
+        if checked: # set last checked as last update
+            last_updated = checked[-1]
+        else:
+            created = list(logs[logs.arg1 == query_uuid][logs.action == \"add_card\"][\"date\"])
+            if created: # set creation time as last update
+                last_updated = created[0]
+            else: # set beginning time as last update
+                start_time = logs.iloc[0]['date']
+                last_updated = start_time
+            
+        datetime_last_updated = datetime.strptime(last_updated, TIME_FORMAT)
+        datetime_delta = datetime.now() - datetime_last_updated
+        hours_delta = datetime_delta.days * 24 + datetime_delta.seconds/3600
+        return hours_delta
