@@ -2,6 +2,8 @@
 from uuid import uuid4
 from datetime import datetime, timedelta
 from card_utils import multiline_input
+from utils import TIME_FORMAT
+import pandas as pd
 
 class card(object):
     """
@@ -29,6 +31,7 @@ class card(object):
         self.priority = -1
         self.location_constraint = None
         self.deadline = None
+        self.debug_string = ""
 
     def edit(self):
         """
@@ -100,7 +103,7 @@ class card(object):
         query_uuid = str(self.uuid)
         logs = pd.read_csv(open("logs.csv","r"))
 
-        checked = list(logs[logs.arg1 == quer_uuid][logs.action == "checked_todo"]["date"])
+        checked = list(logs[logs.arg1 == query_uuid][logs.action == "checked_todo"]["date"])
 
         if checked: # set last checked as last update
             last_updated = checked[-1]
@@ -116,8 +119,6 @@ class card(object):
         datetime_delta = datetime.now() - datetime_last_updated
         hours_delta = datetime_delta.days * 24 + datetime_delta.seconds/3600
         return hours_delta
-
-
 
     def get_priority(self,k=100):
         """

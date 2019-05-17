@@ -28,15 +28,19 @@ def get_todos(cards):
 
     # sort todos by priority of component
     for index, todo in enumerate(res):
+        cards[todo].debug_string = "======\nPRIORITY DEBUG\n\n"
 
         weight = cards[todo].get_priority()
+        cards[todo].debug_string += "+get_priority() = {}\n".format(weight)
         components = find_components(cards, todo)
         for component in set(components):
             #
             # cumsum of all the priorities on the branch from root to card
             #
             weight += cards[component].get_priority()
-
+            cards[todo].debug_string += "+component get_priority() {} = {}\n".format(
+                    cards[component].name,
+                    weight)
             #
             # this enable location for the TODAG
             # if a card has a location_constraint enabling the priority will be increased
@@ -45,10 +49,13 @@ def get_todos(cards):
             if hasattr(cards[component], 'location_constraint'):
                 if cards[component].location_constraint == logger.location:
                     weight += 100
+
+        weight += cards[todo].get_reshake_priority()
+        cards[todo].debug_string += "+get_reshake_priority() = {}\n".format(weight)
         
         res[index] = (weight, todo)
-    res.sort()
 
+    res.sort()
     return res[::-1]
 
 def print_todo(cards, todos, index):
@@ -126,6 +133,7 @@ def main():
                         "w, why -> why am I to do this task?\n"+
                         "m, mood -> right now I am feeling ..\n"+
                         "e, edit -> update the task\n"+
+                        "tdb, TODAG debugger\n"+
                         "")
             elif got == "d" or got == 'done':
                 card_done = cards[todos[index][1]]
@@ -159,6 +167,9 @@ def main():
             elif got == "e" or got == "edit":
                 _, todo = todos[index]
                 cards[todo].edit()
+            elif got == "tdb":
+                _, todo = todos[index]
+                cards[todo]._debug()
             else:
                 logger.log_action("quit","todo.py")
                 loader.write()
