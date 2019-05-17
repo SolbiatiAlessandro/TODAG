@@ -8,6 +8,7 @@ import configparser
 import datetime
 from time import ctime
 CONFIG_PATH = "../config.ini"
+TIME_FORMAT = "%Y/%m/%d-%H:%M:%S"
 
 def readconfig(arg):
     """
@@ -24,20 +25,16 @@ class Logger():
     """
     logger for the TODAG to build custom metrics
     """
-    def __init__(self, location=None, time_format='google-BASIC'):
+    def __init__(self, location=None, time_format=TIME_FORMAT):
         """
         args:
             location = [0.1, 0.13] forces location (home or work) instead of reading from GPS
+            time_format = you can specify how the time is logged
         """
         self.location = self.populate_location() if location is None else location
         self.machine = str(getnode())+":"+socket.gethostname()
 
-        # this is to refactor_time in the google data studio format
-        # if you wanna log in different way change format here
-        if time_format == 'google-BASIC':
-            self.refactor_time = lambda s: datetime.datetime.strptime(s, "%a %b %d %H:%M:%S %Y").strftime("%Y/%m/%d-%H:%M:%S")
-        else:
-            self.refactor_time = lambda s: s
+        self.refactor_time = lambda s: datetime.datetime.strptime(s, "%a %b %d %H:%M:%S %Y").strftime(time_format)
 
     def log_action(self, action, *arg, verbose=False):
         """
