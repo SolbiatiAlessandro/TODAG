@@ -48,8 +48,13 @@ class Logger():
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
 
             # logs.csv FORMAT
-            # time, location, machine, action, arguments
-            to_print = [self.refactor_time(ctime()), self.location, self.machine, action] + list(arg)
+            # time, location, machine, action, arg1, arg2, arg3
+
+            arg0 = arg[0] if len(arg) > 0 else ""
+            arg1 = arg[1] if len(arg) > 1 else ""
+            arg2 = arg[2] if len(arg) > 2 else ""
+
+            to_print = [self.refactor_time(ctime()), self.location, self.machine, action, arg0, arg1, arg2] 
 
             f.write(','.join(map(str, to_print)) + "\n")
 
