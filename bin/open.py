@@ -2,6 +2,7 @@
 import sys
 import csv
 from utils import Logger, Loader
+import interactions
 sys.path.append('../TODAG')
 from card import card
 import uuid
@@ -228,11 +229,7 @@ if __name__ == "__main__":
                     exit("error: CARD NOT EXISTING")
                 read_card.detail()
             elif got == 'I':
-                print("How is mood right now?")
-                mood_value = int(input())
-                logger.log_action("mood",mood_value,verbose=True)
-
-
+                interactions.mood_interaction(logger)
             else:
                 print("[bin:open.py] {} choice not implemented, quitting program".format(got))
                 break

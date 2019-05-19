@@ -2,6 +2,7 @@
 import sys
 from utils import Logger, Loader
 import argparse
+import interactions
 logger = None
 
 def get_todos(cards):
@@ -161,9 +162,7 @@ def main():
                 index %= len(todos)
                 print_todo(cards, todos, index)
             elif got == "m" or got == "mood":
-                print("How is mood right now?")
-                mood_value = int(input())
-                logger.log_action("mood",mood_value, verbose=True)
+                interactions.mood_interaction(logger)
             elif got == "e" or got == "edit":
                 _, todo = todos[index]
                 cards[todo].edit()
