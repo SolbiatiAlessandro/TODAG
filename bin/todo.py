@@ -171,10 +171,16 @@ def main():
                 _, todo = todos[index]
                 cards[todo]._debug()
             else:
-                logger.log_action("quit","todo.py")
-                loader.write()
-                print( "\n"*60)
-                return
+                print("do you want to check? [y]/[n] -> close")
+                got = input()
+                if got == "y":
+                    card = cards[todos[index][1]]
+                    interactions.checked_interaction(logger, str(card.uuid), start_time)
+                else:
+                    logger.log_action("quit","todo.py")
+                    loader.write()
+                    print( "\n"*60)
+                    return
         except EOFError:
             exit()
 
