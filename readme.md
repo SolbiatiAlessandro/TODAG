@@ -78,4 +78,4 @@ TODAG is plugged in into the Google Cloud Storage environment. There are some dy
 - Dashboard end-point: https://datastudio.google.com/open/1XemSx8qknY35rjlHnehxefj2178omHSn
 
 Here is a preview of the dashboard
-![alt text](https://raw.githubusercontent.com/SolbiatiAlessandro/TODAG/dashboard.png)
+![alt text](https://github.com/SolbiatiAlessandro/TODAG/blob/master/dashboard.png?raw=true)
