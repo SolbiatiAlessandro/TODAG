@@ -37,7 +37,11 @@ This space is mainly for development ideas.
 - OK when I have todos, I can 'check' or 'done'
 - OK priority increases the less time I saw a card
 
-- in the action I can do 'start' and a timer starts -> then check
+- OK in the action I can do 'start' and a timer starts -> then check
+
+- how long is required for a task? can put an additional arguement like python todo --available-time-to-work 2 hours
+  and he chooses to give me tasks with that size
+ 
  
  
 
