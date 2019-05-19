@@ -44,7 +44,7 @@ Inside the bin folder there are the two scripts to use the TODAG:
 For more detail on the usage of bin commands you can check the in-code docs
 
 ---
-## Setup interaction with Google Cloud Storage
+## [REQUIRED] Setup interaction with Google Cloud Storage
 
 To enable interaction with Google Cloud Storage you need to 
 1. set up your own bucket on [GCS](https://cloud.google.com/)
@@ -54,14 +54,28 @@ To enable interaction with Google Cloud Storage you need to
 <b>IMPORTANT</b>: save it with the name `gcskey.json` (or modify `.gitignore`) otherwise it will be committed on the public repo and hackerbot will penetrate the cloud account in minutes.
 
 ---
-## Setup geolocalization for your local machine
+## [OPTIONAL] Setup geolocalization for your local machine
 
 To enable geolocalization for your local machine you need to
 1. Download the objective-C tool [WhereAmI](https://github.com/robmathers/WhereAmI) from [this link](https://github.com/robmathers/WhereAmI/releases/download/v1.02/whereami-1.02.zip)
 2. Create a `config.init` file from like `config.example`, modify line `whereami = your_path_to_whereami_here`
+
+
+---
+## [OPTIONAL] Setup termwdown on your localmachine
+
+`todo.py` will automatically start a [termdown](https://github.com/trehn/termdown) session on your local machine for you to keep track of the time spent on your task. To enable it you need to install it **outside the virutal environment** with:
+
+```
+pip install termdown
+```
+
 
 ---
 ## Dashboards
 
 TODAG is plugged in into the Google Cloud Storage environment. There are some dynamic dashboards updated in real time with the metrics coming from TODAG, NOTE: you need to be granted access.
 - Dashboard end-point: https://datastudio.google.com/open/1XemSx8qknY35rjlHnehxefj2178omHSn
+
+Here is a preview of the dashboard
+![alt text](https://raw.githubusercontent.com/SolbiatiAlessandro/TODAG/dashboard.png)
