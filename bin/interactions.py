@@ -14,13 +14,13 @@ def mood_interaction(logger, verbose=False):
     mood_comment = input().replace(',','-')
     logger.log_action("mood",mood_value,mood_comment,verbose=verbose)
 
-def checked_interaction(logger, todo, start_time, verbose=False):
+def checked_interaction(logger, todo_uuid, start_time, verbose=False):
     """
     checking means working on a TODO and logging in time
 
     args:
         logger -> instance of utils.Logger()
-        todo -> _, todo = todos[index]
+        todo_uuid -> str
         start_time - > datetime.now()
     """
     end_time = datetime.now()
@@ -28,6 +28,6 @@ def checked_interaction(logger, todo, start_time, verbose=False):
     duration = str(_duration.days * 24 + _duration.seconds / 3600)
     print("Nice, you just logged {} hours for this card".format(duration))
     logger.log_action("checked_todo",
-            cards[todo].uuid,
+            todo_uuid,
             duration,
             verbose=verbose)

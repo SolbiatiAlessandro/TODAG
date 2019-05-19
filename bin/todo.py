@@ -141,18 +141,17 @@ def main():
                         "")
             elif got == "d" or got == 'done':
                 #check
-                _, todo = todos[index]
-                checked_interaction(logger, todo, start_time)
-                #done
                 card_done = cards[todos[index][1]]
+                interactions.checked_interaction(logger, str(card_done.uuid), start_time)
+                #done
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
                 loader.write()
                 print( "GREAT! Task is done ;)")
                 return
             elif got == "c" or got == 'checked':
-                _, todo = todos[index]
-                checked_interaction(logger, todo, start_time)
+                card = cards[todos[index][1]]
+                interactions.checked_interaction(logger, str(card.uuid), start_time)
             elif got == "w" or got == "why":
                 _, todo = todos[index]
                 logger.log_action("examined_todo",cards[todo].uuid)
