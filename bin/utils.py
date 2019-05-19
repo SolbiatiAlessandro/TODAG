@@ -21,6 +21,21 @@ def readconfig(arg):
         print("[utils:readconfig] warning couldn't read '{}' from config gile in {}".format(arg, CONFIG_PATH))
         return None
 
+def open_termdown():
+    """
+    open termdown stopwatch
+    """
+    cmd="""
+    osascript -e 'tell application "Terminal"
+        activate
+        tell application "System Events"
+            keystroke "f" using {control down, command down}
+        end tell
+        do script "termdown" 
+    end tell'
+    """
+    os.system(cmd)
+
 class Logger():
     """
     logger for the TODAG to build custom metrics

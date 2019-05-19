@@ -34,8 +34,10 @@ This space is mainly for development ideas.
 
 - time tracker, what did I do today? 
 
-- when I have todos, I can 'check' or 'done'
-- priority increases the less time I saw a card
+- OK when I have todos, I can 'check' or 'done'
+- OK priority increases the less time I saw a card
+
+- in the action I can do 'start' and a timer starts -> then check
  
  
 

@@ -1,7 +1,8 @@
 """this is a script that traverse the TODAG to find TODOs"""
 import sys
-from utils import Logger, Loader
+from utils import Logger, Loader, open_termdown
 import argparse
+from datetime import datetime, timedelta
 import interactions
 logger = None
 
@@ -123,6 +124,8 @@ def main():
     todos = get_todos(cards)
     index = 0
     print_todo(cards, todos, index)
+    open_termdown()
+    start_time = datetime.now()
     while True:
         try:
             got = input()
@@ -137,20 +140,19 @@ def main():
                         "tdb, TODAG debugger\n"+
                         "")
             elif got == "d" or got == 'done':
+                #check
+                _, todo = todos[index]
+                checked_interaction(logger, todo, start_time)
+                #done
                 card_done = cards[todos[index][1]]
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
                 loader.write()
-                print( "GREAT!")
+                print( "GREAT! Task is done ;)")
                 return
             elif got == "c" or got == 'checked':
-                print("Nice, how much time was that? (float, where 1.0 == 1 hour)")
-                duration = float(input())
                 _, todo = todos[index]
-                logger.log_action("checked_todo",cards[todo].uuid,duration)
-                index += 1
-                index %= len(todos)
-                print_todo(cards, todos, index)
+                checked_interaction(logger, todo, start_time)
             elif got == "w" or got == "why":
                 _, todo = todos[index]
                 logger.log_action("examined_todo",cards[todo].uuid)

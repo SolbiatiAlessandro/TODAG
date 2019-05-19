@@ -64,5 +64,4 @@ To enable geolocalization for your local machine you need to
 ## Dashboards
 
 TODAG is plugged in into the Google Cloud Storage environment. There are some dynamic dashboards updated in real time with the metrics coming from TODAG, NOTE: you need to be granted access.
-- Mood Dashboard: https://datastudio.google.com/open/1XemSx8qknY35rjlHnehxefj2178omHSn
-
+- Dashboard end-point: https://datastudio.google.com/open/1XemSx8qknY35rjlHnehxefj2178omHSn

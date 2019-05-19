@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from card_utils import multiline_input
 from utils import TIME_FORMAT
 import pandas as pd
+from time import ctime
 
 class card(object):
     """
@@ -47,11 +48,15 @@ class card(object):
             print( "name(str):")
             self.name = input()
 
-        print( "Edit description? {}".format(self.description))
+        print( "Edit description? [a (add), r (reset), else (no)] {}".format(self.description))
         edit = input()
-        if edit == "yes" or edit == "y" or edit == "1":
-            print( "description(str):")
+        if edit == "r" or edit == "reset":
+            print( "reset description(str):")
             self.description = multiline_input()
+        if edit == "a" or edit == "add":
+            print( "add description(str):")
+            self.description += "\n\n(added on {})\n".format(ctime())
+            self.description += multiline_input()
 
         print( "Edit priority? {}".format(self.priority if self.is_reward else "No priority"))
         edit = input()
