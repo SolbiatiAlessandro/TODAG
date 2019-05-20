@@ -25,15 +25,7 @@ def open_termdown():
     """
     open termdown stopwatch
     """
-    cmd="""
-    osascript -e 'tell application "Terminal"
-        activate
-        tell application "System Events"
-            keystroke "f" using {control down, command down}
-        end tell
-        do script "termdown" 
-    end tell'
-    """
+    cmd="""osascript -e 'tell application "Terminal" to activate' -e 'tell application "Terminal" to do script "termdown"'"""
     os.system(cmd)
 
 class Logger():
