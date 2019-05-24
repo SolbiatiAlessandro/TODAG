@@ -47,6 +47,10 @@ This space is mainly for development ideas.
 
 - new feature-> log time without using the todo.py
  
+- add 'take a break' for time counter
+
+- add notification when mood updates come!
+- add float support for mood
  
  
 
