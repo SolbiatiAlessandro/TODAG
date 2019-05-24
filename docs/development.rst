@@ -44,6 +44,8 @@ This space is mainly for development ideas.
 
 - ship mood feature to oana
 - add time on mood dashboard, now is cool but I can't visually see time patterns since x axis is just 1 by 1 and not time scaled
+
+- new feature-> log time without using the todo.py
  
  
  
