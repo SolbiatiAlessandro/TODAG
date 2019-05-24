@@ -46,6 +46,9 @@ This space is mainly for development ideas.
 - add time on mood dashboard, now is cool but I can't visually see time patterns since x axis is just 1 by 1 and not time scaled
 
 - add 'take a break' for time counter
+
+- add notification when mood updates come!
+- add float support for mood
  
  
 
