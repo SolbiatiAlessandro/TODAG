@@ -36,3 +36,11 @@ The runtime execution part of the process needs to be as less-distracting, compu
 The whole efficiency of the TODAG workflow is that the whole energy of the user will be concentrated in executing the TODO without questioning or analysisng the decision tree at 'runtime'.
 
 The implementation of the above mentioned workflow is found in bin/todo.py
+
+=======================================================
+Reflections after using the TODAG for more then 6 months
+=======================================================
+
+The first strength of the TODAG is when it makes you do things that you would otherwise not do. Remember, your evaluation of priority is often biased, whereas TODAG is not. Adding timing counter if you don't want to do something you can just do it for 1 minute just to check it. This on the long run really makes a difference on what you get done in your life, especially regarding the small things.
+
+The second strength of the TODAG is that is SO easy to get distracted if you don't use it. Your activity flow start digressing, LinkedIn, github, Twitter.. Even if is work related it still not focused and not productive. TODAG + the counter really gives you an amazing productivity boost
