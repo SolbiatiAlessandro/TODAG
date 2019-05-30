@@ -1,6 +1,5 @@
 DOCS
-====
-child: higher level abstraction task
+==== child: higher level abstraction task
 parent: lower level abstraction task
 
 
@@ -51,8 +50,12 @@ This space is mainly for development ideas.
 
 - add notification when mood updates come!
 - add float support for mood
+
+- add  'gamification' for toing todag in terms of metrics
  
- 
+- added 'do specific task' -> concept: 
+1) is ok if you want to do something and todag let you do it
+2) what is not ok is for you to 'pick something to do' from the todag
 
 ITERATION A
 ====
