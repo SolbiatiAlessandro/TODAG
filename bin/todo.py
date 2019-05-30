@@ -112,6 +112,7 @@ def main():
     # argparse 
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--location', type=float, help='0.1 to force home, 0.13 to force work', nargs='?')
+    parser.add_argument('-t', '--task', type=str, help='you can put a task id if you want to work specifically on that', nargs='?')
     args = parser.parse_args()
 
     # external IO
@@ -123,6 +124,13 @@ def main():
     cards = loader.cards
     todos = get_todos(cards)
     index = 0
+    if args.task is not None:
+        found = False
+        for i, card in enumerate(todos):
+            if str(card[1]) == args.task:
+                index, found = i, True
+        if not found:
+            print("[todo.py] didn't find specified task -t {}".format(args.task))
     print_todo(cards, todos, index)
     open_termdown()
     start_time = datetime.now()
