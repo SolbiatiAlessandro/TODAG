@@ -1,6 +1,5 @@
 DOCS
-====
-child: higher level abstraction task
+==== child: higher level abstraction task
 parent: lower level abstraction task
 
 
@@ -51,6 +50,8 @@ This space is mainly for development ideas.
 
 - add notification when mood updates come!
 - add float support for mood
+
+- add  'gamification' for toing todag in terms of metrics
  
  
 
