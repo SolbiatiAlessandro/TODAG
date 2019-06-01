@@ -3,7 +3,7 @@ DOCS
 parent: lower level abstraction task
 
 
-IDEAS
+IDEAS/SPARSE FEATURES
 ====
 The main development workflow can be found in the git commit messages.
 This space is mainly for development ideas.
@@ -57,6 +57,12 @@ This space is mainly for development ideas.
 - [X] added 'do specific task' -> concept: 
 1) is ok if you want to do something and todag let you do it
 2) what is not ok is for you to 'pick something to do' from the todag
+
+- [ ] technical vs non technical task, command line option? or location based?
+  it was really nice today to go out in the park and do non-technical task. This might be a good solution for life-task. A temporary solution might be using location.
+  -l 0.12 technical office task
+  -l 0.10 techinical personal task
+  -l (else) non technical task
 
 ITERATION A
 ====
