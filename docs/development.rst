@@ -64,6 +64,8 @@ This space is mainly for development ideas.
   -l 0.10 techinical personal task
   -l (else) non technical task
 
+- [ ] mood dashboard: put mood from the phone! not only from computer
+
 ITERATION A
 ====
 
