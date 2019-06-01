@@ -60,6 +60,13 @@ This space is mainly for development ideas.
 
 - [ ] mood dashboard: put mood from the phone! not only from computer
 
+- [ ] DATA STUDIO DASHBOARDS this are some ideas for the datastudio dashboard
+  -> what is the current priority distribution on the todag?  (this work when is correctly calibrated) how urgent are the tasks
+  -> how many different tasks of different kind are there
+  -> how much did I work today? Day recap
+
+
+
 ITERATION A
 ====
 
