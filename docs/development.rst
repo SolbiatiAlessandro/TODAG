@@ -58,6 +58,8 @@ This space is mainly for development ideas.
 1) is ok if you want to do something and todag let you do it
 2) what is not ok is for you to 'pick something to do' from the todag
 
+- [ ] mood dashboard: put mood from the phone! not only from computer
+
 ITERATION A
 ====
 
