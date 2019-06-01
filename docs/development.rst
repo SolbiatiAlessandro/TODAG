@@ -24,36 +24,37 @@ This space is mainly for development ideas.
 - add TAGS, and make different TODOs in different part of the days
 - not really tags but tree nodes 
 
-- to add new todos, should write them on some temp list and then when I am at machine put them into the TODAG -> write them on google todo and then push to todag regulrarly ?
-- OK feature request: priority of events coming up (need to be reminded)
-- feature request: integrate outlook with TODAG
+- [ ] to add new todos, should write them on some temp list and then when I am at machine put them into the TODAG -> write them on google todo and then push to todag regulrarly ?
+  
+- [X] feature request: priority of events coming up (need to be reminded)
+- [ ] feature request: integrate outlook with TODAG
 
-- metrics on mood -> productivity SHIPPED
-- estimate of how much time is required for a task!
+- [X] metrics on mood -> productivity SHIPPED
+- [ ] estimate of how much time is required for a task!
 
-- time tracker, what did I do today? 
+- [X] time tracker, what did I do today? 
 
-- OK when I have todos, I can 'check' or 'done'
-- OK priority increases the less time I saw a card
+- [X] when I have todos, I can 'check' or 'done'
+- [X] priority increases the less time I saw a card
 
-- OK in the action I can do 'start' and a timer starts -> then check
+- [X] in the action I can do 'start' and a timer starts -> then check
 
-- how long is required for a task? can put an additional arguement like python todo --available-time-to-work 2 hours
+- [ ] how long is required for a task? can put an additional arguement like python todo --available-time-to-work 2 hours
   and he chooses to give me tasks with that size
 
-- ship mood feature to oana
-- add time on mood dashboard, now is cool but I can't visually see time patterns since x axis is just 1 by 1 and not time scaled
+- [X] ship mood feature to oana
+- [ ] add time on mood dashboard, now is cool but I can't visually see time patterns since x axis is just 1 by 1 and not time scaled
 
-- new feature-> log time without using the todo.py
+- [?] new feature-> log time without using the todo.py
  
-- add 'take a break' for time counter
+- [ ] add 'take a break' for time counter
 
 - add notification when mood updates come!
-- add float support for mood
+- [X] add float support for mood
 
-- add  'gamification' for toing todag in terms of metrics
+- [ ] add  'gamification' for toing todag in terms of metrics
  
-- added 'do specific task' -> concept: 
+- [X] added 'do specific task' -> concept: 
 1) is ok if you want to do something and todag let you do it
 2) what is not ok is for you to 'pick something to do' from the todag
 
