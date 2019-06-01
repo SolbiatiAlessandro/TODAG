@@ -9,7 +9,7 @@ def mood_interaction(logger, verbose=False):
     input data for mood dashboard
     """
     print("How is mood right now? (int)")
-    mood_value = int(input())
+    mood_value = float(input().replace(',','.'))
     print("Comment? (str)")
     mood_comment = input().replace(',','-')
     logger.log_action("mood",mood_value,mood_comment,verbose=verbose)
