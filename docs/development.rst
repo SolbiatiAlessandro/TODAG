@@ -104,6 +104,8 @@ no need to figure out 'priority' every time, just add to parent,and set deadline
 - [ ] write tests before shipping to the cloud
 
 - [ ] add feature: integration with Google Assistant to use todo
+
+- [ ] think about some system to figure out: what increases my mood, what decreases my mood
   
 
 ITERATION B
