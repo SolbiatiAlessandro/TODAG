@@ -2,6 +2,7 @@
 import pickle 
 import os
 from google.cloud import storage
+import stackdriver_logger
 import socket
 from uuid import getnode
 import configparser
@@ -10,13 +11,13 @@ from time import ctime
 CONFIG_PATH = "../config.ini"
 TIME_FORMAT = "%Y/%m/%d-%H:%M:%S"
 
-def readconfig(arg):
+def readconfig(arg, section="bin"):
     """
     read from config file inside CONFIG_PATH
     """
     config = configparser.ConfigParser()
     config.read(CONFIG_PATH)
-    try: return config['bin'][arg]
+    try: return config[section][arg]
     except:
         print("[utils:readconfig] warning couldn't read '{}' from config gile in {}".format(arg, CONFIG_PATH))
         return None
@@ -51,6 +52,11 @@ class Logger():
         *arg: will be casted to strings and logged
         """
         if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
+
+        if action == "mood":
+            import pdb;pdb.set_trace()
+            stackdriver_logger.log_mood(arg[0])
+
         with open("logs.csv","a") as f:
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
 
