@@ -11,7 +11,7 @@ def submit_metric(
     """
     user = utils.readconfig("user","datamonitor")
     password = utils.readconfig("password","datamonitor")
-    logging.warning("client:logging - submitting metric post request {}".format(url))
+    logging.info("client:logging - submitting metric post request {}".format(url))
     response = requests.post(
             url,
             {
@@ -20,9 +20,9 @@ def submit_metric(
                 "value":value
                 }
             )
-    logging.warning("client:logger - recieved response")
-    logging.warning(response)
-    logging.warning(response.text)
+    logging.info("client:logger - recieved response")
+    logging.info(response)
+    logging.info(response.text)
 
 def log_mood(
         value=6.0,
