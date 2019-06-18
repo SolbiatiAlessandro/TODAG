@@ -9,6 +9,7 @@ import configparser
 import datetime
 from time import ctime
 CONFIG_PATH = "../config.ini"
+import logging
 TIME_FORMAT = "%Y/%m/%d-%H:%M:%S"
 
 def readconfig(arg, section="bin"):
@@ -53,9 +54,17 @@ class Logger():
         """
         if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
 
+        # TODAG GAE
+        # log todag activity to stackdriver
+        stackdriver_logger.log_todag_activity(1)
+
+        # log mood to stackdriver 
         if action == "mood":
-            # log mood to stackdriver (Todag GAE)
             stackdriver_logger.log_mood(arg[0])
+
+        # log checked_todo to stackdriver
+        if action == "checked_todo":
+            stackdriver_logger.log_todag_checked_time(arg[1])
 
         with open("logs.csv","a") as f:
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)

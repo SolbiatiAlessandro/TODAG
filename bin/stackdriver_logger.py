@@ -31,6 +31,22 @@ def log_mood(
             url="https://todag-239819.appspot.com/metric/mood",
             value=value)
 
+def log_todag_activity(
+        value=1
+        ):
+    submit_metric(
+            url="http://127.0.0.1:5000/metric/todag_activity",
+            value=value)
+
+def log_todag_checked_time(
+        value=1
+        ):
+    submit_metric(
+            url="http://127.0.0.1:5000/metric/todag_checked_time",
+            value=value)
+    
 if __name__ == "__main__":
-    log_mood(6.7)
+    #log_mood(6.7)
+    #log_todag_activity(2)
+    log_todag_checked_time(0.5)
 

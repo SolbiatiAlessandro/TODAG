@@ -120,6 +120,7 @@ if __name__ == "__main__":
     buffer_iterator = read_buffer()
     CARDS = loader.cards
 
+    logger.log_action("open","open.py")
     print_cards()
     try:
         while True:
