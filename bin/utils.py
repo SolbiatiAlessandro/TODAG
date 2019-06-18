@@ -54,7 +54,7 @@ class Logger():
         if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
 
         if action == "mood":
-            import pdb;pdb.set_trace()
+            # log mood to stackdriver (Todag GAE)
             stackdriver_logger.log_mood(arg[0])
 
         with open("logs.csv","a") as f:
