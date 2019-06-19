@@ -41,6 +41,21 @@ The implementation of the above mentioned workflow is found in bin/todo.py
 Reflections after using the TODAG for more then 6 months
 =======================================================
 
+## (28/05/19) 
+
 The first strength of the TODAG is when it makes you do things that you would otherwise not do. Remember, your evaluation of priority is often biased, whereas TODAG is not. Adding timing counter if you don't want to do something you can just do it for 1 minute just to check it. This on the long run really makes a difference on what you get done in your life, especially regarding the small things.
 
 The second strength of the TODAG is that is SO easy to get distracted if you don't use it. Your activity flow start digressing, LinkedIn, github, Twitter.. Even if is work related it still not focused and not productive. TODAG + the counter really gives you an amazing productivity boost
+
+## (19/06/19)
+
+The todo.py -t <card-uuid> changed a lot the use case of the TODAG. Turns out that using the TODAG prioritization feature takes effort, mainly because it needs to be calibrated. It has really great advantages of using the prioritization (you get so much stuff done) but then if is not a great period for mood or productivity or I don't have many stuff to do I will not use it. **The prioritization feature of the TODAG (calling python todo.py) is useful only is specific situation**. Example of situation where you don't want to use prioritization feature:
+1. Relax (if I am spending time relaxing with other people, then I allocate really few time on doing so I don't need prioritization)
+2. Strict deadlines/focused doing (if I don't feel there is so much stuff going on to  keep track)
+3. Unproductive period because of mood or other reasons (I don't feel doing a lot of stuff)
+
+Nonetheless I am using TODAG a lot! And that's because of the ecosystem of features that I build around that. The main things I use it for now are:
+
+- read notes I wrote about the card the previous time I worked on it (node multi-feature)
+- log time 
+- take metric for mood and productivity
