@@ -1,6 +1,9 @@
-DOCS
-==== child: higher level abstraction task
-parent: lower level abstraction task
+(what is this? this doc is about future ideas and how the development is going)
+
+TODAG DEFINITIONS
+=====
+- child: higher level abstraction task
+- parent: lower level abstraction task
 
 
 IDEAS/SPARSE FEATURES
@@ -71,7 +74,19 @@ This space is mainly for development ideas.
   -> how many different tasks of different kind are there
   -> how much did I work today? Day recap
 
+GAE TIME
+dashboard now is being built on a webapp (read more here http://www.lessand.ro/10/post)
 
+- [ ] write down iteration B for webapp
+main ideas:
+there are two routines, one is  (could be temporally combined at the end of day)
+End Of Day Routine
+ -> you see what you did during the day
+ -> metrics and working hours
+
+Start Of Day Routine
+ -> you see what is planned for tomorrow
+ -> todag prioritization gives you a draft and you can either confirm or modify it
 
 ITERATION A
 ====

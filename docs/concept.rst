@@ -1,4 +1,6 @@
- What's the idea behind TODAG?
+(what is this? this doc is for concept/past observations)
+
+# What's the idea behind TODAG?
 Build a tool that can help the planning of activities on any time-scale, and is able to embrace and reflect the abstraction of complex decision trees.
 
 The TODO process
@@ -59,3 +61,4 @@ Nonetheless I am using TODAG a lot! And that's because of the ecosystem of featu
 - read notes I wrote about the card the previous time I worked on it (node multi-feature)
 - log time 
 - take metric for mood and productivity
+
