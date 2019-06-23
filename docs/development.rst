@@ -74,6 +74,8 @@ This space is mainly for development ideas.
   -> how many different tasks of different kind are there
   -> how much did I work today? Day recap
 
+-> single note feature, instead of editing on the terminal, why no having a actual text file that I edit with vim?
+
 GAE TIME
 dashboard now is being built on a webapp (read more here http://www.lessand.ro/10/post)
 
