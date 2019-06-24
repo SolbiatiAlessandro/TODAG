@@ -90,6 +90,10 @@ Start Of Day Routine
  -> you see what is planned for tomorrow
  -> todag prioritization gives you a draft and you can either confirm or modify it
 
+-> put comments on the day, like the mood comments feature of datastudio?
+-> track productivity, should integrate some chrome extension like toby. When I am working on the task am I actually working on the task or I got distracted by workpalce and so on
+-> add count of tasks per day
+
 ITERATION A
 ====
 
