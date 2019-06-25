@@ -74,6 +74,8 @@ This space is mainly for development ideas.
   -> how many different tasks of different kind are there
   -> how much did I work today? Day recap
 
+-> single note feature, instead of editing on the terminal, why no having a actual text file that I edit with vim?
+
 GAE TIME
 dashboard now is being built on a webapp (read more here http://www.lessand.ro/10/post)
 
@@ -87,6 +89,15 @@ End Of Day Routine
 Start Of Day Routine
  -> you see what is planned for tomorrow
  -> todag prioritization gives you a draft and you can either confirm or modify it
+
+-> put comments on the day, like the mood comments feature of datastudio?
+-> track productivity, should integrate some chrome extension like toby. When I am working on the task am I actually working on the task or I got distracted by workpalce and so on
+-> add count of tasks per day
+-> for productivity is really interesting to intergrate chrome activity logger
+-> also before come oana try to put metrics that I can use when I am with her
+
+-> TODAG feature: when you search for cards make a feature like you can input the name of the card and he give you option for the code so you don;t need to copy paste all the time the card ID. this can be done in different part, in todo.py -t or in D.
+-> D feature, improve the printing, show also code of card
 
 ITERATION A
 ====
