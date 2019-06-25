@@ -96,6 +96,9 @@ Start Of Day Routine
 -> for productivity is really interesting to intergrate chrome activity logger
 -> also before come oana try to put metrics that I can use when I am with her
 
+-> TODAG feature: when you search for cards make a feature like you can input the name of the card and he give you option for the code so you don;t need to copy paste all the time the card ID. this can be done in different part, in todo.py -t or in D.
+-> D feature, improve the printing, show also code of card
+
 ITERATION A
 ====
 
