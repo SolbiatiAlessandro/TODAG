@@ -102,6 +102,41 @@ def find_components(cards, todo):
                 stack.append(child)
     return res
 
+def find_card(todos, cards, query):
+    """
+    args:
+    query (str) : query can be uuid or part of the name
+    todos are the active cards todo, cards are all the cards
+
+    todos = [(priority, UUID('564c7bd1-8266-4416-bdf5-ceb28405857e')]
+    cards = {UUID, card.object}
+
+    return index, card
+    """
+    found = "no"
+    res = []
+    for i, card in enumerate(todos):
+        card_object = cards[todos[i][1]]
+        if str(card[1]) == query:
+            # means that query was a todo code
+            found = "yes"
+            return i, card_object
+        if query.lower() in card_object.name.lower():
+            # query was just part of the name
+            found = "some"
+            res.append((i, card_object))
+            # here need to choose now just returning the first
+    if found == "no":
+        print("[todo.py] didn't find specified task -t {}".format(query))
+        return 0, None
+    for choice, index_card in enumerate(res):
+        print("[{}] {}".format(choice, index_card[1].name))
+    print("Choose the card:")
+    selected = input()
+    return res[int(selected)]
+
+
+
 def main():
     """script
 
@@ -125,12 +160,7 @@ def main():
     todos = get_todos(cards)
     index = 0
     if args.task is not None:
-        found = False
-        for i, card in enumerate(todos):
-            if str(card[1]) == args.task:
-                index, found = i, True
-        if not found:
-            print("[todo.py] didn't find specified task -t {}".format(args.task))
+        index, _ = find_card(todos,cards,args.task)
     print_todo(cards, todos, index)
     open_termdown()
     start_time = datetime.now()
