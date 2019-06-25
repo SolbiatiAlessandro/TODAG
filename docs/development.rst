@@ -93,6 +93,8 @@ Start Of Day Routine
 -> put comments on the day, like the mood comments feature of datastudio?
 -> track productivity, should integrate some chrome extension like toby. When I am working on the task am I actually working on the task or I got distracted by workpalce and so on
 -> add count of tasks per day
+-> for productivity is really interesting to intergrate chrome activity logger
+-> also before come oana try to put metrics that I can use when I am with her
 
 ITERATION A
 ====
