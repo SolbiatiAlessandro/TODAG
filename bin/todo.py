@@ -107,6 +107,8 @@ def find_components(cards, todo):
 
 def find_todo_card_from_query(todos, cards, query):
     """
+    find todo card (so only on the edge not internal) from a query
+
     args:
     query (str) : query can be uuid or part of the name
     todos are the active cards todo, cards are all the cards
@@ -137,8 +139,6 @@ def find_todo_card_from_query(todos, cards, query):
     print("Choose the card:")
     selected = input()
     return res[int(selected)]
-
-
 
 def main():
     """script

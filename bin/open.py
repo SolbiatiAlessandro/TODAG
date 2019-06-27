@@ -84,6 +84,8 @@ def backward_bfs(cards, todo):
 def read_card(cards):
     """utiliy to handle read card exceptions
 
+    it handle both UUID and queries, it return both internal or todo cards
+
     returns card
     """
     got = input()
