@@ -2,6 +2,7 @@
 import sys
 import csv
 from utils import Logger, Loader
+import todo
 import interactions
 sys.path.append('../TODAG')
 from card import card
@@ -81,12 +82,39 @@ def backward_bfs(cards, todo):
     return ordered_parents
 
 def read_card(cards):
-    """utiliy to handle read card exceptions"""
-    _read_id = input()
-    _read_card = cards.get(uuid.UUID(_read_id))
-    if not _read_card:
-        exit("error: CARD NOT EXISTING")
-    return _read_card
+    """utiliy to handle read card exceptions
+
+    returns card
+    """
+    got = input()
+    try:
+        _read_card = cards.get(uuid.UUID(got))
+        if _read_card is not None:
+            return _read_card
+    except:
+        # got is not a valid ID 
+        pass
+
+    query = got
+    found = "no"
+    res = []
+    for card_uuid, card_object in cards.items():
+        if card_object.name == query:
+            found = "yes"
+            return i, card_object
+        if query.lower() in card_object.name.lower():
+            # query was just part of the name
+            found = "some"
+            res.append(card_object)
+            # here need to choose now just returning the first
+    if found == "no":
+        exit("read_card:[ERROR] couldn't find any card matching {},\
+                either as UUID or query".format(got))
+    for choice, index_card in enumerate(res):
+        print("[{}] {}".format(choice, index_card.name))
+    print("Choose the card:")
+    selected = input()
+    return res[int(selected)]
 
 def read_buffer():
     """
@@ -119,6 +147,7 @@ if __name__ == "__main__":
     loader = Loader()
     buffer_iterator = read_buffer()
     CARDS = loader.cards
+    todos = todo.get_todos(CARDS, _logger=logger)
 
     logger.log_action("open","open.py")
     print_cards()
@@ -162,13 +191,10 @@ if __name__ == "__main__":
                     exit("Error: not implemented")
                 print( "Parent added succesfully")
             elif got == 'C':
-                print( "Input UUID of card to delete")
-                read_id = input()
-                read_card = CARDS.get(uuid.UUID(read_id))
-                if not read_card:
-                    exit("error: CARD NOT EXISTING")
-                logger.log_action("delete_card",read_card.name)
-                del(CARDS[uuid.UUID(read_id)])
+                print("what card you want to DELETE? (card UUID or query)")
+                Dcard =read_card(CARDS)
+                logger.log_action("delete_card",Dcard.name)
+                del(Dcard)
                 print( "Card deleted succesfully")
             elif got == 'D':
                 print( "Rewards on the DAG:\n")
@@ -201,13 +227,10 @@ if __name__ == "__main__":
                 else:
                     exit("error: reward index out of range")
             elif got == 'E':
-                print( "Input UUID of card to edit")
-                read_id = input()
-                read_card = CARDS.get(uuid.UUID(read_id))
-                if not read_card:
-                    exit("error: CARD NOT EXISTING")
-                read_card.edit()
-                logger.log_action("edit_card",read_card.uuid)
+                print("what card you want to examine? (card UUID or query)")
+                Ecard =read_card(CARDS)
+                Ecard.edit()
+                logger.log_action("edit_card",Ecard.uuid)
                 print( "Card edited succesfully")
             elif got == 'F':
                 try:
@@ -223,18 +246,17 @@ if __name__ == "__main__":
             elif got == 'G':
                 print_cards()
             elif got == 'H':
-                print("card id you want to examine")
-                read_id = input()
-                read_card = CARDS.get(uuid.UUID(read_id))
-                if not read_card:
-                    exit("error: CARD NOT EXISTING")
-                read_card.detail()
+                print("what card you want to examine? (card UUID or query)")
+                Hcard =read_card(CARDS)
+                Hcard.detail()
             elif got == 'I':
                 interactions.mood_interaction(logger)
             else:
                 print("[bin:open.py] {} choice not implemented, quitting program".format(got))
                 break
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         import pdb;pdb.set_trace()
         print(e)
         print("[bin:open.py] you did something illegal")

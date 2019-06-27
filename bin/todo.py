@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import interactions
 logger = None
 
-def get_todos(cards):
+def get_todos(cards, _logger=None):
     """
     traverses the DAG and find nodes with with all completed parents
     filter todos based on location contraints
@@ -14,6 +14,9 @@ def get_todos(cards):
     return: list[[weight,uuid]] with the todos sorted by priority of component
     """
     res = []
+    if _logger is None:
+        # bad design, this loggers are passed as global and if I use this function from open.py logger (global on todo.py) is None so I need to pass as an arg in the function
+        _logger = logger
 
     # get todos traversing the DAG
     for card_id, iter_card in cards.items():
@@ -49,7 +52,7 @@ def get_todos(cards):
             # by a factor of 100
             #
             if hasattr(cards[component], 'location_constraint'):
-                if cards[component].location_constraint == logger.location:
+                if cards[component].location_constraint == _logger.location:
                     weight += 100
 
         weight += cards[todo].get_reshake_priority()
@@ -102,7 +105,7 @@ def find_components(cards, todo):
                 stack.append(child)
     return res
 
-def find_card(todos, cards, query):
+def find_todo_card_from_query(todos, cards, query):
     """
     args:
     query (str) : query can be uuid or part of the name
@@ -111,7 +114,7 @@ def find_card(todos, cards, query):
     todos = [(priority, UUID('564c7bd1-8266-4416-bdf5-ceb28405857e')]
     cards = {UUID, card.object}
 
-    return index, card
+    return index (todos index), card
     """
     found = "no"
     res = []
@@ -160,7 +163,7 @@ def main():
     todos = get_todos(cards)
     index = 0
     if args.task is not None:
-        index, _ = find_card(todos,cards,args.task)
+        index, _ = find_todo_card_from_query(todos,cards,args.task)
     print_todo(cards, todos, index)
     open_termdown()
     start_time = datetime.now()
