@@ -63,7 +63,7 @@ def get_todos(cards, _logger=None):
     res.sort()
     return res[::-1]
 
-def print_todo(cards, todos, index):
+def print_todo(cards, todos, index, space=True):
     """
     print( a given todos with a given index in the list of todos,
     also traverse the DAG to find the connected component representative
@@ -74,7 +74,7 @@ def print_todo(cards, todos, index):
         todos: list[[weight, uuid]] with the todos
         index: int, index of the todo to print(
     """
-    print( "\n"*55)
+    if space: print( "\n"*55)
     weight, todo = todos[index]
     cards[todo].detail()
     logger.log_action("open_todo",cards[todo].uuid)
