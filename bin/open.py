@@ -17,8 +17,9 @@ def print_cards():
     calls the pretty_print( method on every card in the CARDS dict
     """
     print("\n=====cards=====")
-    for _, _card in CARDS.items():
-        _card.pretty_print()
+    for card_id, _card in CARDS.items():
+        if type(card_id) is uuid.UUID:
+            _card.pretty_print()
 
 def find_rewards(cards):
     """
@@ -26,8 +27,13 @@ def find_rewards(cards):
 
     return: list[uuid] with reward cards
     """
-    return [card_id for card_id, _card in cards.items()
-            if (_card.is_reward and not _card.done)]
+    rewards = []
+    for card_id, _card in cards.items():
+        if type(card_id) is uuid.UUID and \
+                _card.is_reward and \
+                not _card.done:
+                    rewards.append(card_id)
+    return rewards
 
 def validate(parent_id):
     """
@@ -101,14 +107,15 @@ def read_card(cards):
     found = "no"
     res = []
     for card_uuid, card_object in cards.items():
-        if card_object.name == query:
-            found = "yes"
-            return i, card_object
-        if query.lower() in card_object.name.lower():
-            # query was just part of the name
-            found = "some"
-            res.append(card_object)
-            # here need to choose now just returning the first
+        if type(card_uuid) is uuid.UUID:
+            if card_object.name == query:
+                found = "yes"
+                return i, card_object
+            if query.lower() in card_object.name.lower():
+                # query was just part of the name
+                found = "some"
+                res.append(card_object)
+                # here need to choose now just returning the first
     if found == "no":
         exit("read_card:[ERROR] couldn't find any card matching {},\
                 either as UUID or query".format(got))
@@ -164,7 +171,8 @@ if __name__ == "__main__":
                     "\n[F] check next item from todo buffer"+
                     "\n[G] print cards"+
                     "\n[H] examine single card"+
-                    "\n[I] mood dashboard")
+                    "\n[I] mood dashboard"+
+                    "\n[enter/return] quit")
 
             got = input()
             if got == 'A':
@@ -184,7 +192,7 @@ if __name__ == "__main__":
                     CARDS[new_card.uuid] = new_card
                     logger.log_action("add_card",new_card.uuid)
                 elif gott == 'A':
-                    print( "Input UUID of parent card:")
+                    print( "Input UUID/query of parent card:")
                     parent = read_card(CARDS)
                     parent.children.append(child.uuid)
                     child.parents.append(parent.uuid)
@@ -253,6 +261,9 @@ if __name__ == "__main__":
                 Hcard.detail()
             elif got == 'I':
                 interactions.mood_interaction(logger)
+            elif got == "":
+                print("[bin:open.py] quitting program")
+                break
             else:
                 print("[bin:open.py] {} choice not implemented, quitting program".format(got))
                 break

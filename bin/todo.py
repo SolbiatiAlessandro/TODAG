@@ -4,6 +4,7 @@ from utils import Logger, Loader, open_termdown
 import argparse
 from datetime import datetime, timedelta
 import interactions
+import uuid
 logger = None
 
 def get_todos(cards, _logger=None):
@@ -21,6 +22,7 @@ def get_todos(cards, _logger=None):
     # get todos traversing the DAG
     for card_id, iter_card in cards.items():
         add = 1
+        if type(card_id) is not uuid.UUID: continue
         for parent_id in iter_card.parents:
             # type(parent_id) = <class 'uuid.UUID'>
             parent = cards.get(parent_id)
@@ -74,11 +76,11 @@ def get_todos(cards, _logger=None):
                 if todo_card_id == card_id:
                     # put in front
                     sorted_todos.pop(index)
-                    sorted_todos = elem + sorted_todos
+                    sorted_todos = [elem] + sorted_todos
 
     return sorted_todos
 
-def print_todo(cards, todos, index, space=True):
+def print_todo(cards, todos, index, space=True, logger=True):
     """
     print( a given todos with a given index in the list of todos,
     also traverse the DAG to find the connected component representative
@@ -92,7 +94,7 @@ def print_todo(cards, todos, index, space=True):
     if space: print( "\n"*55)
     weight, todo = todos[index]
     cards[todo].detail()
-    logger.log_action("open_todo",cards[todo].uuid)
+    if logger: logger.log_action("open_todo",cards[todo].uuid)
     print( "Weight: " + str(weight) + "\n")
 
 def find_components(cards, todo):
@@ -136,16 +138,18 @@ def find_todo_card_from_query(todos, cards, query):
     found = "no"
     res = []
     for i, card in enumerate(todos):
-        card_object = cards[todos[i][1]]
-        if str(card[1]) == query:
-            # means that query was a todo code
-            found = "yes"
-            return i, card_object
-        if query.lower() in card_object.name.lower():
-            # query was just part of the name
-            found = "some"
-            res.append((i, card_object))
-            # here need to choose now just returning the first
+        card_id = todos[i][1]
+        if type(card_id) == uuid.UUID:
+            card_object = cards[card_id]
+            if str(card[1]) == query:
+                # means that query was a todo code
+                found = "yes"
+                return i, card_object
+            if query.lower() in card_object.name.lower():
+                # query was just part of the name
+                found = "some"
+                res.append((i, card_object))
+                # here need to choose now just returning the first
     if found == "no":
         print("[todo.py] didn't find specified task -t {}".format(query))
         return 0, None
