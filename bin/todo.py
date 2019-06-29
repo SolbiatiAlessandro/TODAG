@@ -78,7 +78,6 @@ def get_todos(cards, _logger=None):
 
     return sorted_todos
 
-
 def print_todo(cards, todos, index, space=True):
     """
     print( a given todos with a given index in the list of todos,

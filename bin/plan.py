@@ -1,4 +1,10 @@
 from utils import Logger, Loader, open_termdown
+try:
+    import card
+except:
+    import sys
+    sys.path.append("../TODAG")
+    import card
 import todo
 
 class planning_session():
@@ -9,7 +15,7 @@ class planning_session():
         self.logger = Logger()
         self.logger.log_action("open","plan.py")
         self.loader = Loader()
-        self.todos = todo.get_todos(self.loader.cards)
+        self.todos = todo.get_todos(self.loader.cards, _logger=self.logger)
 
     def _print_current_plan(self):
         print("==== CURRENT PLAN ====")
@@ -36,11 +42,10 @@ class planning_session():
             print("item replaced succesfully")
 
 
-    def _run_planning_session(self):
-        print("="*30)
-        print("Planning session for tomorrow")
-        print("="*30)
+    def _run_planning_session(self, todos_number):
+        print("== Planning session for tomorrow ==")
         print("\nhow many todos will you work on tomorrow? (int)")
+        todos_number = int(input())
         # the planned index are the one default given by todag
         self.planned_indexes = range(0, todos_number)
         self._print_current_plan()
@@ -66,6 +71,16 @@ class planning_session():
         else:
             print("[plan.py] quitting _run_planning_session")
 
+    def _print_saved_plan(self):
+        print("== in-memory plan ==")
+        saved_plan = self.cards.get("planning")
+        if saved_plan is None:
+            print("no saved plan")
+        else:
+            for card_id in plan:
+                self.cards[card_id].detail()
+        print("== ==")
+
 
     def run(self):
         """
@@ -74,16 +89,20 @@ class planning_session():
         and automatically select number of todos when todos will have a
         "time to complete" attribute implemented
         """
-        todos_number = int(input())
 
         try:
             while True:
                 print("\n\n=====prompt====="+
-                        "\n[A] run planning session")
+                        "\n[A] run planning session"+
+                        "\n[B] print current plan (memory)"+
+                        "\n[C] print saved plan (disk)")
                 got = input()
                 if got == "A":
                     self._run_planning_session()
-
+                if got == "B":
+                    self._print_current_plan()
+                if got == "C":
+                    self._print_saved_plan()
                 else:
                     print("[bin:plan.py] {} choice not implemented, quitting program".format(got))
                     break
