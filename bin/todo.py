@@ -61,7 +61,23 @@ def get_todos(cards, _logger=None):
         res[index] = (weight, todo)
 
     res.sort()
-    return res[::-1]
+    sorted_todos = res[::-1] # list(weight, UUID)
+
+    # check if there is a plan
+    plan = cards.get('planning') 
+    # plan is a list of UUID
+    if plan is not None:
+        for card_id in plan[::-1]:
+            # from less priority to higher priority
+            for index, elem in enumerate(sorted_todos):
+                weight, todo_card_id = elem
+                if todo_card_id == card_id:
+                    # put in front
+                    sorted_todos.pop(index)
+                    sorted_todos = elem + sorted_todos
+
+    return sorted_todos
+
 
 def print_todo(cards, todos, index, space=True):
     """
