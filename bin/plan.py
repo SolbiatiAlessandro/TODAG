@@ -6,6 +6,7 @@ except:
     sys.path.append("../TODAG")
     import card
 import todo
+import requests
 
 class planning_session():
     """
@@ -26,7 +27,7 @@ class planning_session():
                     self.todos, 
                     index, 
                     space=False,
-                    logger=False)
+                    _logger=False)
         print("====              ====")
 
     def _edit_current_plan(self):
@@ -97,6 +98,20 @@ class planning_session():
                 self.loader.cards[card_id].detail()
         print("== ==")
 
+    def submit_plan_to_datamonitor(self):
+        print("== submitting plan to datamonitor (from memory) ==")
+        saved_plan = self.loader.cards.get("planning")
+        if saved_plan is None:
+            print("no saved plan")
+        else:
+            requests.post(
+                    url="127.0.0.1:5000",
+                    data = {
+                        "plan":saved_plan
+                        })
+        print("== ==")
+
+
 
     def run(self):
         """
@@ -112,6 +127,7 @@ class planning_session():
                         "\n[A] run planning session"+
                         "\n[B] print current plan (memory)"+
                         "\n[C] print saved plan (disk)"+
+                        "\n[D] submit saved plan to datamonitor (disk)"+
                         "\n[enter/return] quit")
                 got = input()
                 if got == "A":
@@ -120,6 +136,8 @@ class planning_session():
                     self._print_current_plan()
                 elif got == "C":
                     self._print_saved_plan()
+                elif got == "D":
+                    self.submit_plan_to_datamonitor()
                 elif got == "":
                     print("[bin:plan.py] quitting program")
                     break
