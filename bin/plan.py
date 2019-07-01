@@ -105,7 +105,7 @@ class planning_session():
                 print(self.loader.cards[card_id].name)
         print("== ==")
 
-    def submit_plan_to_datamonitor(self, local=True):
+    def submit_plan_to_datamonitor(self, local=False):
         print("== submitting plan to datamonitor (from memory) ==")
         saved_plan_uuid = self.loader.cards.get("planning")
         if saved_plan_uuid is None:
