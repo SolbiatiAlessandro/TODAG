@@ -1,4 +1,4 @@
-from utils import Logger, Loader, open_termdown
+from utils import Logger, Loader, open_termdown, readconfig
 try:
     import card
 except:
@@ -16,7 +16,12 @@ class planning_session():
         self.logger = Logger()
         self.logger.log_action("open","plan.py")
         self.loader = Loader()
-        self.todos = todo.get_todos(self.loader.cards, _logger=self.logger)
+        self.todos = todo.get_todos(
+                self.loader.cards, 
+                _logger=self.logger,
+                planning=False) 
+        # don't want planning since I want
+        # pure todos to build plan from
         self.planned_indexes = []
 
     def _print_current_plan(self):
@@ -27,7 +32,8 @@ class planning_session():
                     self.todos, 
                     index, 
                     space=False,
-                    _logger=False)
+                    _logger=False,
+                    details=False)
         print("====              ====")
 
     def _edit_current_plan(self):
@@ -95,20 +101,36 @@ class planning_session():
             print("no saved plan")
         else:
             for card_id in saved_plan:
-                self.loader.cards[card_id].detail()
+                print("-----")
+                print(self.loader.cards[card_id].name)
         print("== ==")
 
-    def submit_plan_to_datamonitor(self):
+    def submit_plan_to_datamonitor(self, local=True):
         print("== submitting plan to datamonitor (from memory) ==")
-        saved_plan = self.loader.cards.get("planning")
-        if saved_plan is None:
+        saved_plan_uuid = self.loader.cards.get("planning")
+        if saved_plan_uuid is None:
             print("no saved plan")
         else:
-            requests.post(
-                    url="127.0.0.1:5000",
+            user = readconfig("user","datamonitor")
+            password = readconfig("password","datamonitor")
+            url="http://127.0.0.1:5000/metric/daily_plan" if local else "http://todag-239819.appspot.com/metric/daily_plan"
+
+            concatenated_uuid = ','.join(map(str, saved_plan_uuid))
+            concatenated_names = ""
+            for item_uuid in saved_plan_uuid:
+                concatenated_names+=self.loader.cards[item_uuid].name
+                concatenated_names+=","
+            concatenated_names = concatenated_names[:-1]
+            response = requests.post(
+                    url=url,
                     data = {
-                        "plan":saved_plan
+                        "username":user,
+                        "password":password,
+                        "concatenated_uuid":concatenated_uuid,
+                        "concatenated_names":concatenated_names
                         })
+            print(response)
+            print(response.reason)
         print("== ==")
 
 

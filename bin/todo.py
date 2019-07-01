@@ -7,7 +7,10 @@ import interactions
 import uuid
 logger = None
 
-def get_todos(cards, _logger=None):
+def get_todos(
+        cards, 
+        _logger=None,
+        planning=True):
     """
     traverses the DAG and find nodes with with all completed parents
     filter todos based on location contraints
@@ -68,7 +71,7 @@ def get_todos(cards, _logger=None):
     # check if there is a plan
     plan = cards.get('planning') 
     # plan is a list of UUID
-    if plan is not None:
+    if planning is True and plan is not None:
         for card_id in plan[::-1]:
             # from less priority to higher priority
             for index, elem in enumerate(sorted_todos):
@@ -80,7 +83,13 @@ def get_todos(cards, _logger=None):
 
     return sorted_todos
 
-def print_todo(cards, todos, index, space=True, _logger=True):
+def print_todo(
+        cards, 
+        todos, 
+        index, 
+        space=True, 
+        _logger=True,
+        details=True):
     """
     print( a given todos with a given index in the list of todos,
     also traverse the DAG to find the connected component representative
@@ -96,7 +105,11 @@ def print_todo(cards, todos, index, space=True, _logger=True):
     """
     if space: print( "\n"*55)
     weight, todo = todos[index]
-    cards[todo].detail()
+    if details:
+        cards[todo].detail()
+    else:
+        #print only name
+        print(cards[todo].name)
     if _logger: logger.log_action("open_todo",cards[todo].uuid)
     print( "Weight: " + str(weight) + "\n")
 
