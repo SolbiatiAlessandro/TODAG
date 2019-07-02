@@ -102,6 +102,8 @@ Start Of Day Routine
 -> planning is ok, but fix when todo.py go to next planning item. think how to do
 -> checked plan on todag app
 
+totally need to implement take a break
+
 ITERATION A
 ====
 
