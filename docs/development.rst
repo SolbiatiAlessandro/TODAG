@@ -5,7 +5,6 @@ TODAG DEFINITIONS
 - child: higher level abstraction task
 - parent: lower level abstraction task
 
-
 IDEAS/SPARSE FEATURES
 ====
 The main development workflow can be found in the git commit messages.
@@ -103,6 +102,7 @@ Start Of Day Routine
 -> checked plan on todag app
 
 totally need to implement take a break
+i need to think better about this taking a break , I often forget about it and just leave the logging going forever
 
 ITERATION A
 ====
