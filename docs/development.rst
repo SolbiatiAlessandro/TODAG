@@ -104,6 +104,8 @@ Start Of Day Routine
 totally need to implement take a break
 i need to think better about this taking a break , I often forget about it and just leave the logging going forever
 
+-> now that I have this myactivity logging , I can add some sort of 'analyise task' because at time I do a task that is like 2 hours and I think: how could I spend this much time on this shit?
+
 ITERATION A
 ====
 
