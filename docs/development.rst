@@ -106,6 +106,8 @@ i need to think better about this taking a break , I often forget about it and j
 
 -> now that I have this myactivity logging , I can add some sort of 'analyise task' because at time I do a task that is like 2 hours and I think: how could I spend this much time on this shit?
 
+-> i often quit by accident the task, shuold quit with q not just pressing enter
+
 ITERATION A
 ====
 
