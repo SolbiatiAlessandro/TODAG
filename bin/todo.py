@@ -1,4 +1,5 @@
 """this is a script that traverse the TODAG to find TODOs"""
+import logging
 import sys
 from utils import Logger, Loader, open_termdown
 import argparse
@@ -218,7 +219,10 @@ def main():
             elif got == "d" or got == 'done':
                 #check
                 card_done = cards[todos[index][1]]
-                interactions.checked_interaction(logger, str(card_done.uuid), start_time)
+                interactions.checked_interaction(
+                        logger, 
+                        card, 
+                        start_time)
                 #done
                 card_done.done = True
                 logger.log_action("completed_todo",card_done.uuid)
@@ -227,7 +231,10 @@ def main():
                 return
             elif got == "c" or got == 'checked':
                 card = cards[todos[index][1]]
-                interactions.checked_interaction(logger, str(card.uuid), start_time)
+                interactions.checked_interaction(
+                        logger, 
+                        card, 
+                        start_time)
             elif got == "w" or got == "why":
                 _, todo = todos[index]
                 logger.log_action("examined_todo",cards[todo].uuid)
@@ -251,7 +258,10 @@ def main():
                 got = input()
                 if got == "y":
                     card = cards[todos[index][1]]
-                    interactions.checked_interaction(logger, str(card.uuid), start_time)
+                    interactions.checked_interaction(
+                            logger, 
+                            card, 
+                            start_time)
                 else:
                     logger.log_action("quit","todo.py")
                     loader.write()
@@ -261,4 +271,5 @@ def main():
             exit()
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()

@@ -11,14 +11,16 @@ def submit_metric(
     """
     user = utils.readconfig("user","datamonitor")
     password = utils.readconfig("password","datamonitor")
-    logging.info("client:logging - submitting metric post request {}".format(url))
-    response = requests.post(
-            url,
-            {
+    payload = {
                 "user":user,
                 "password":password,
                 "value":value
                 }
+    logging.info("client:logging - submitting metric post request {}, payload: ".format(url))
+    logging.info(payload)
+    response = requests.post(
+            url,
+            json=payload
             )
     logging.info("client:logger - recieved response")
     logging.info(response)
@@ -39,10 +41,20 @@ def log_todag_activity(
             value=value)
 
 def log_todag_checked_time(
-        value=1
+        value={
+            'checked_time' : 1,
+            'checked_task_uuid': "test",
+            'checked_task_name' : "test",
+            'checked_task_description' : "test",
+            },
+        local=True,
         ):
+    url = "https://todag-239819.appspot.com/metric/todag_checked_time" if \
+            not local else\
+            "http://127.0.0.1:5000/metric/todag_checked_time"
+    logging.info("stackriver_logger:log_todag_checked_time submitting metric")
     submit_metric(
-            url="https://todag-239819.appspot.com/metric/todag_checked_time",
+            url=url,
             value=value)
     
 if __name__ == "__main__":

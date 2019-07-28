@@ -64,7 +64,29 @@ class Logger():
 
         # log checked_todo to stackdriver
         if action == "checked_todo":
-            stackdriver_logger.log_todag_checked_time(arg[1])
+            todo_information = arg[0]
+            duration = arg[1]
+            """ since we want more information on the checking process
+            we need to send a value like the following 
+            value={
+                'checked_time' : 1,
+                'checked_task_uuid': "test",
+                'checked_task_name' : "test",
+                'checked_task_description' : "test",
+                },
+            """
+            logging.info("logger: preparing payload checking_todo metric")
+            formatted_value_to_send = todo_information
+            formatted_value_to_send['checked_time'] = duration
+            logging.info(formatted_value_to_send)
+            stackdriver_logger.log_todag_checked_time(
+                    formatted_value_to_send
+                    )
+            arg[0] = '' # this is not to break the log.csv
+
+        """
+        this is used to see when a card was last checked
+        """
 
         with open("logs.csv","a") as f:
             # if there is no logs.csv means that Loader wasn't loaded yet (it download logs.csv ftom gcp)
