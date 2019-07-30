@@ -107,7 +107,6 @@ class card(object):
         """
         query_uuid = str(self.uuid)
         logs = pd.read_csv(open("logs.csv","r"))
-        import pdb;pdb.set_trace()
 
         checked = list(logs[logs.arg1 == query_uuid][logs.action == "checked_todo"]["date"])
 

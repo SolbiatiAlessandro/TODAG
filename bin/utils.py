@@ -52,6 +52,7 @@ class Logger():
         action: str to be written in action column
         *arg: will be casted to strings and logged
         """
+        arg = list(arg) # might need to overwrite
         if verbose: print("[utils:logger.py] logging {}, {}".format(str(action), str(arg)))
 
         # TODAG GAE
