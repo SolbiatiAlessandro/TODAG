@@ -47,7 +47,7 @@ def log_todag_checked_time(
             'checked_task_name' : "test",
             'checked_task_description' : "test",
             },
-        local=True,
+        local=False,
         ):
     url = "https://todag-239819.appspot.com/metric/todag_checked_time" if \
             not local else\
