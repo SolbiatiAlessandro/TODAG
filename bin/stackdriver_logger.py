@@ -53,6 +53,8 @@ def log_todag_checked_time(
             not local else\
             "http://127.0.0.1:5000/metric/todag_checked_time"
     logging.info("stackriver_logger:log_todag_checked_time submitting metric")
+    value['timeZone'] = 'America/Los_Angeles'
+    #value['timeZone'] = 'Europe/London'
     submit_metric(
             url=url,
             value=value)
