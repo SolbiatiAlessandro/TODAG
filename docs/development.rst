@@ -108,6 +108,10 @@ i need to think better about this taking a break , I often forget about it and j
 
 -> i often quit by accident the task, shuold quit with q not just pressing enter
 
+reiterating on the take a break feature, how can  I detect when I close my laptop?
+I  could send a signal that  i stop working when I close my laptop.
+https://apple.stackexchange.com/questions/104486/macbook-air-pro-run-script-upon-lid-close
+
 ITERATION A
 ====
 
