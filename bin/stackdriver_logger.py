@@ -18,6 +18,8 @@ def submit_metric(
                 }
     logging.info("client:logging - submitting metric post request {}, payload: ".format(url))
     logging.info(payload)
+    """
+    OFFLINE BRANCH, NO NON-LOCAL INTERACTIONS
     response = requests.post(
             url,
             json=payload
@@ -25,6 +27,8 @@ def submit_metric(
     logging.info("client:logger - recieved response")
     logging.info(response)
     logging.info(response.text)
+    """
+    logging.info("offline branch, all connections killed")
 
 def log_mood(
         value=6.0,
