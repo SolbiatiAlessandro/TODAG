@@ -105,7 +105,8 @@ class planning_session():
                 print(self.loader.cards[card_id].name)
         print("== ==")
 
-    def submit_plan_to_datamonitor(self, local=False):
+    def submit_plan_to_datamonitor(self, 
+            local=True):
         print("== submitting plan to datamonitor (from memory) ==")
         saved_plan_uuid = self.loader.cards.get("planning")
         if saved_plan_uuid is None:
@@ -113,6 +114,7 @@ class planning_session():
         else:
             user = readconfig("user","datamonitor")
             password = readconfig("password","datamonitor")
+            # non local deprecated
             url="http://127.0.0.1:5000/metric/daily_plan" if local else "http://todag-239819.appspot.com/metric/daily_plan"
 
             concatenated_uuid = ','.join(map(str, saved_plan_uuid))

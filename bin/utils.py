@@ -83,7 +83,13 @@ class Logger():
             stackdriver_logger.log_todag_checked_time(
                     formatted_value_to_send
                     )
-            arg[0] = '' # this is not to break the log.csv
+            csv_args = ['','','']
+            csv_args[0] = formatted_value_to_send['checked_task_name'] # this is not to break the log.csv
+            csv_args[1] = duration
+            csv_args[2] = formatted_value_to_send['checked_task_description'] # this is not to break the log.csv
+            csv_args[2] = csv_args[2].replace(',',';').replace('\n','---')
+            arg = csv_args # FIX csv formatting (hacky)
+
 
         """
         this is used to see when a card was last checked
