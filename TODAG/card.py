@@ -5,6 +5,8 @@ from card_utils import multiline_input
 from utils import TIME_FORMAT
 import pandas as pd
 from time import ctime
+import sys, tempfile, os
+from subprocess import call
 
 class card(object):
     """
@@ -48,7 +50,7 @@ class card(object):
             print( "name(str):")
             self.name = input()
 
-        print( "Edit description? [a (add), r (reset), else (no)] {}".format(self.description))
+        print( "Edit description? [a (add), r (reset), e (editor edit), else (no)] {}".format(self.description))
         edit = input()
         if edit == "r" or edit == "reset":
             print( "reset description(str):")
@@ -57,6 +59,20 @@ class card(object):
             print( "add description(str):")
             self.description += "\n\n(added on {})\n".format(ctime())
             self.description += multiline_input()
+        if edit == "e" or edit == "edit":
+            EDITOR = os.environ.get('EDITOR','vim') #that easy!
+            initial_message = bytes(str(self.description),encoding='utf8')
+
+            with tempfile.NamedTemporaryFile(suffix=".tmp") as tf:
+              tf.write(initial_message)
+              tf.flush()
+              call([EDITOR, tf.name])
+
+              # do the parsing with `tf` using regular File operations.
+              # for instance:
+              with open(tf.name,"r") as edited_file:
+                  self.description = edited_file.read()
+            
 
         print( "Edit priority? {}".format(self.priority if self.is_reward else "No priority"))
         edit = input()
