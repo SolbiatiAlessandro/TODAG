@@ -150,6 +150,8 @@ no need to figure out 'priority' every time, just add to parent,and set deadline
 OFFLINE ITERATION
 ========
 
+(beginning)
+
 Started offline branch.
 it feels like going  offline was an amazing thing, I feel now
 I focus more on product improvement compared to infra improvement. 
@@ -166,3 +168,8 @@ and it makes a lot of sense.
 - [ ] should I add a "elaboration session" where I actually write down stuff? Like what I think about the task. for instance social life, I had some great ideas, i would like not to write only the todo but also the ideas behind that. I could also use evernote, probably using evernote is better and just put a link as a 'launch and iterate'
 
  I am not sure how to find the balance between writing longer description or splitting cards. What  is exactly the cons of keeping all there? Too confused, I don't get focused on the single task I am working on. Should totally use a incremental process where the more it grows the more I split.
+
+(2 weeks later, 18.08)
+I have been using  it offline, it works, can be improved. Need to review my day so I can start allocating time for reflections and so on. 
+Make  sure review day works,  if it doesn't work still do it manually. At the end of the review there is a metric computation momemnt
+What to do in the review process? I would like to add some comments. Do I this on evernote? Or on the datamonitor
