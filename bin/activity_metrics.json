@@ -1,0 +1,16 @@
+{
+	"comment":[
+		"[ 1 ] activity_metrics are the metric that I track about any activity I do",
+		"enjoyment: float (-1, 1)",
+		"productivity: float (-1, 1)",
+		"scope: categorical metric, 0 is Facebook (Work), 1 is personal, 2 other",
+		"[ 2 ] activiry_rules is a map for activity to a baseline score definition",
+		"activity are string that are contained in google_myactivity context",
+		"IMPORTANT:this is a short version copied in TODAG, the original one is in DATAMONITOR"
+	],
+	"activity_metrics":[
+		"enjoyment",
+		"productivity",
+		"scope" 
+	]
+}

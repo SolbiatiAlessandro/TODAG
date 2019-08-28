@@ -4,13 +4,24 @@ import os
 from google.cloud import storage
 import stackdriver_logger
 import socket
-from uuid import getnode
+from uuid import getnode 
 import configparser
 import datetime
 from time import ctime
 CONFIG_PATH = "../config.ini"
 import logging
 TIME_FORMAT = "%Y/%m/%d-%H:%M:%S"
+from urllib.request import urlopen
+
+def check_connectivity():
+    """
+    return True  if online, false if offline
+    """
+    try:
+        urlopen('https://www.google.com', timeout=1)
+        return True
+    except Exception as err:
+        return False
 
 def readconfig(arg, section="bin"):
     """

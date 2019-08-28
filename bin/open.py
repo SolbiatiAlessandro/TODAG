@@ -211,7 +211,7 @@ if __name__ == "__main__":
                 rewards = find_rewards(CARDS)
                 for index, reward in enumerate(rewards):
                     print( "[{}]".format(index))
-                    CARDS[reward].detail()
+                    CARDS[reward].pretty_print()
                 print( "\n")
                 print( "Choose card you want backtrack from")
                 got_index = int(input())
@@ -222,6 +222,13 @@ if __name__ == "__main__":
                     CARDS[reward_id].detail()
                     parents = backward_bfs(CARDS, reward_id)
                     parents = parents[1:]
+                    for l, layer in enumerate(parents):
+                        print("-LAYER {}-".format(l))
+                        for p, parent in enumerate(layer):
+                            print("[{}]".format(p))
+                            CARDS[parent].pretty_print()
+                    """ 
+                    # this was an early attempt to print  the TODAG
                     ITEM_SIZE = 30
                     for layer in parents:
                         separator = (("="*ITEM_SIZE)+"|")*len(layer)
@@ -234,6 +241,7 @@ if __name__ == "__main__":
                         print(separator)
                         print(content)
                         print(separator)
+                    """
                 else:
                     exit("error: reward index out of range")
             elif got == 'E':
