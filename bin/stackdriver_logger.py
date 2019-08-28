@@ -5,7 +5,8 @@ import utils
 
 def submit_metric(
         url="http://127.0.0.1:5000/metric/mood",
-        value="6.0"
+        value="6.0",
+        online_loggingDEPRECATED=True,
         ):
     """
     """
@@ -18,13 +19,16 @@ def submit_metric(
                 }
     logging.info("client:logging - submitting metric post request {}, payload: ".format(url))
     logging.info(payload)
-    response = requests.post(
-            url,
-            json=payload
-            )
-    logging.info("client:logger - recieved response")
-    logging.info(response)
-    logging.info(response.text)
+    if not online_loggingDEPRECATED:
+        response = requests.post(
+                url,
+                json=payload
+                )
+        logging.info("client:logger - recieved response")
+        logging.info(response)
+        logging.info(response.text)
+    else:
+        logging.info("all non-offline logging is killed after deprecation")
 
 def log_mood(
         value=6.0,
@@ -47,7 +51,7 @@ def log_todag_checked_time(
             'checked_task_name' : "test",
             'checked_task_description' : "test",
             },
-        local=False,
+        local=True,
         ):
     url = "https://todag-239819.appspot.com/metric/todag_checked_time" if \
             not local else\

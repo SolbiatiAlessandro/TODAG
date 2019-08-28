@@ -110,7 +110,7 @@ def read_card(cards):
         if type(card_uuid) is uuid.UUID:
             if card_object.name == query:
                 found = "yes"
-                return i, card_object
+                return card_object
             if query.lower() in card_object.name.lower():
                 # query was just part of the name
                 found = "some"

@@ -147,7 +147,22 @@ no need to figure out 'priority' every time, just add to parent,and set deadline
 - [ ] think about some system to figure out: what increases my mood, what decreases my mood
   
 
-ITERATION B
-====
-- [ ] add feature: events (facebook events, codeforces contests)
-(more)
+OFFLINE ITERATION
+========
+
+Started offline branch.
+it feels like going  offline was an amazing thing, I feel now
+I focus more on product improvement compared to infra improvement. 
+is really true that looking backward any bad things look like positive.
+
+Now I am keeping the TODAG better shorter  then longer.
+I keep few cards, I document them, and I write a lot of stuff.
+
+You can see it as an evernote app with a prioritization schema , now I spend time
+on the todag as planning. Do you remember in china when the todag started when I
+had the idea of having planning/doing. Is this, now the planning is on the todag
+and it makes a lot of sense.
+
+- [ ] should I add a "elaboration session" where I actually write down stuff? Like what I think about the task. for instance social life, I had some great ideas, i would like not to write only the todo but also the ideas behind that. I could also use evernote, probably using evernote is better and just put a link as a 'launch and iterate'
+
+ I am not sure how to find the balance between writing longer description or splitting cards. What  is exactly the cons of keeping all there? Too confused, I don't get focused on the single task I am working on. Should totally use a incremental process where the more it grows the more I split.

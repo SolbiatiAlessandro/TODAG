@@ -83,7 +83,13 @@ class Logger():
             stackdriver_logger.log_todag_checked_time(
                     formatted_value_to_send
                     )
-            arg[0] = '' # this is not to break the log.csv
+            csv_args = ['','','']
+            csv_args[0] = formatted_value_to_send['checked_task_name'] # this is not to break the log.csv
+            csv_args[1] = duration
+            csv_args[2] = formatted_value_to_send['checked_task_description'] # this is not to break the log.csv
+            csv_args[2] = csv_args[2].replace(',',';').replace('\n','---')
+            arg = csv_args # FIX csv formatting (hacky)
+
 
         """
         this is used to see when a card was last checked
@@ -132,7 +138,8 @@ class Loader():
     """
     loads and write cards locally or from cloud
     """
-    def __init__(self, local=False):
+    def __init__(self, local=True):
+        self.local = local
         if not local:
             self.proxy = GCSproxy() 
             self.proxy.gcs_load('cards.pkl')
@@ -144,8 +151,9 @@ class Loader():
         clean env after ending
         """
         try:
-            os.system("rm cards.pkl")
-            os.system("rm logs.csv")
+            if not self.local:
+                os.system("rm cards.pkl")
+                os.system("rm logs.csv")
         except: pass
 
     def load_cards(self):
@@ -165,8 +173,9 @@ class Loader():
         """
         with open('cards.pkl', 'wb') as data:
             pickle.dump(self.cards, data)
-        self.proxy.gcs_write('logs.csv')
-        self.proxy.gcs_write('cards.pkl')
+        if not self.local:
+            self.proxy.gcs_write('logs.csv')
+            self.proxy.gcs_write('cards.pkl')
 
 class GCSproxy():
     """basic proxy to handle gcs APIs"""
