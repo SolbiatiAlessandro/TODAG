@@ -1,5 +1,8 @@
 """interactions routines"""
 from datetime import datetime
+from utils import check_connectivity
+from google.utils import add_checked_time_to_google_calendar
+import  logging
 
 def mood_interaction(logger, verbose=False):
     """
@@ -32,7 +35,18 @@ def checked_interaction(logger, card, start_time, verbose=False):
             'checked_task_uuid': str(card.uuid),
             'checked_task_name' : str(card.name),
             'checked_task_description' : str(card.description),
+            'checked_time' : str(duration)
             }
+    import pdb;pdb.set_trace()
+    online = check_connectivity()
+    if online:
+        logging.info("YOU ARE ONLINE, WILL ADD CHECKED TIME\
+                DIRECTLY TO GOOGLE CALENDAR")
+        add_checked_time_to_google_calendar(
+                todo_information
+                )
+    else:
+        logging.info("YOU ARE OFFLINE!! NO GOOGLE CALENDAR")
     logger.log_action("checked_todo",
             todo_information,
             duration,
