@@ -78,7 +78,7 @@ def add_checked_time_to_google_calendar(value):
             default_todag_activity_metric,
             value['checked_task_description']
             )
-    calendar = calendar_wrapper(token_pickle_path="./flaskr/google/token.pickle")
+    calendar = calendar_wrapper()
     checked_time_event = {
             'summary':'~WORKED ON -{}-'.format(value['checked_task_name']),
             'description':description,
