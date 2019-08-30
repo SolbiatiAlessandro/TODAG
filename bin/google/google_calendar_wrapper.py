@@ -13,7 +13,6 @@ class GoogleCalendarWrapper():
     https://developers.google.com/calendar/quickstart/python
     """
     def __init__(self, token_pickle_path='token.pickle'):
-        import pdb;pdb.set_trace()
         self.token_pickle_path = token_pickle_path
         self.login()
 
