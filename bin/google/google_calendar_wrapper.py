@@ -27,6 +27,8 @@ class GoogleCalendarWrapper():
         if os.path.exists(self.token_pickle_path):
             with open(self.token_pickle_path, 'rb') as token:
                 creds = pickle.load(token)
+        else:
+            logging.warning("NO token.pickle FOUND")
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:

@@ -37,7 +37,6 @@ def checked_interaction(logger, card, start_time, verbose=False):
             'checked_task_description' : str(card.description),
             'checked_time' : str(duration)
             }
-    import pdb;pdb.set_trace()
     online = check_connectivity()
     if online:
         logging.info("YOU ARE ONLINE, WILL ADD CHECKED TIME\
