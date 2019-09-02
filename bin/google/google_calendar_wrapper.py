@@ -59,19 +59,31 @@ class GoogleCalendarWrapper():
     def list_events(self, 
             calendarId='primary',
             start_time=None,
+            end_time=None,
             maxResults=10):
         """
         start_time : datetime.datetime.utcnow().isoformat() + '+01:00' # 'Z' indicates UTC time
         """
         # Call the Calendar API
+        logging.info('Getting events')
         if not start_time:
-            now = datetime.datetime.utcnow().isoformat() + '+01:00' # 'Z' indicates UTC time
+            start_time  = datetime.datetime.utcnow().isoformat() + '+01:00' # 'Z' indicates UTC time
+        if not end_time:
+            # call like [start_time, ] max results
+            events_result = self.service.events().list(
+                    calendarId=calendarId, 
+                    timeMin=start_time,
+                    maxResults=maxResults, 
+                    singleEvents=True,
+                    orderBy='startTime').execute()
         else:
-            now = start_time
-        logging.info('Getting the upcoming 10 events')
-        events_result = self.service.events().list(calendarId=calendarId, timeMin=now,
-                                            maxResults=maxResults, singleEvents=True,
-                                            orderBy='startTime').execute()
+            # call [start_time, end_time] no max results
+            events_result = self.service.events().list(
+                    calendarId=calendarId,
+                    timeMin=start_time,
+                    timeMax=end_time,
+                    singleEvents=True,
+                    orderBy='startTime').execute()
         events = events_result.get('items', [])
 
         if not events:

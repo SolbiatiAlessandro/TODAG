@@ -1,3 +1,7 @@
+"""
+module (script) that is generally run at the end of the day
+to recap on the current day and plan day ahead
+"""
 from utils import Logger, Loader, open_termdown, readconfig
 try:
     import card
@@ -7,6 +11,7 @@ except:
     import card
 import todo
 import requests
+from google.utils import compute_activity_metrics_from_calendar
 
 class planning_session():
     """
@@ -61,7 +66,6 @@ class planning_session():
             self.planned_indexes[self.planned_indexes.index(index)] = \
                     new_index
             print("item replaced succesfully")
-
 
     def _run_planning_session(self):
         print("== Planning session for tomorrow ==")
@@ -135,8 +139,6 @@ class planning_session():
             print(response.reason)
         print("== ==")
 
-
-
     def run(self):
         """
         now just asking for number of todo,
@@ -148,10 +150,13 @@ class planning_session():
         try:
             while True:
                 print("\n\n=====prompt====="+
+                        "\ntomorrow"+
                         "\n[A] run planning session"+
                         "\n[B] print current plan (memory)"+
                         "\n[C] print saved plan (disk)"+
                         "\n[D] submit saved plan to datamonitor (disk)"+
+                        "\ntoday"+
+                        "\n[E] compute activity metrics for today"+
                         "\n[enter/return] quit")
                 got = input()
                 if got == "A":
@@ -162,6 +167,9 @@ class planning_session():
                     self._print_saved_plan()
                 elif got == "D":
                     self.submit_plan_to_datamonitor()
+                elif got == "E":
+                    activity_metrics = compute_activity_metrics_from_calendar()
+                    print(activity_metrics)
                 elif got == "":
                     print("[bin:plan.py] quitting program")
                     break

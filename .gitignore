@@ -111,3 +111,7 @@ gcskey.json
 
 # config file
 config.ini
+
+#pickle
+*.pkl
+*.pickle
