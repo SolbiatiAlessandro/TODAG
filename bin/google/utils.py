@@ -5,9 +5,15 @@ import logging
 import json
 from datetime import datetime, timedelta
 from pytz import timezone
-from google.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
+import sys
+try:
+    from google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
+except:
+    from google.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
 
 GOOGLEFMT = "%Y-%m-%dT%H:%M:00"
+# should add Z for UTC time
+# now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
 ACTIVITY_METRICS_CONFIG = "./activity_metrics.json" # called from bin
 HARDCODED_TIMEZONE = 'Europe/London'
 
@@ -43,6 +49,20 @@ def _format_card_activity_metrics_to_string(activity_metrics):
     for metric, value in activity_metrics.items():
         string  += metric+" : "+str(value)+" |"
     return string[:-1]
+
+# integration function
+def _format_activity_metrics_string_to_dict(string):
+    """
+    "asd : 0 | csd : 1 | kk : 3"-> {'asd':0,...} 
+
+    copied to TODAG
+    """
+    args = map(lambda x: x.replace(' ',''), string.split("|"))
+    # args >>> ['asd:0', 'csd:1', 'kk:3']
+    return  {
+            arg.split(':')[0]:float(arg.split(':')[1]) for \
+                    arg in args
+            }
 
 def add_checked_time_to_google_calendar(value):
     """
@@ -94,3 +114,70 @@ def add_checked_time_to_google_calendar(value):
             }
     logging.info(checked_time_event)
     calendar.add_event(checked_time_event)
+
+def compute_activity_metrics_from_calendar(
+        datetime_day=None
+        ):
+    """
+    metrics are computed with EVENT DURATION * METRIC WEIGHT
+    so if a event has a productivity of 0.8, for 2 hours the productivity
+    metric for this event is 1.6 (hours of work)
+
+    Args:
+        datetime_day (datetime) to compute the metrics for
+        2011-06-03
+    example call: compute_activity_metrics_from_calendar("2019-09-01")
+
+    timeMax	(datetime)
+    Upper bound (exclusive) for an event's start time to filter by. 
+    2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. 
+
+    timeMin	(datetime)
+    Lower bound (exclusive) for an event's end time to filter by. 
+    2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. 
+    """
+    metrics_keys = json.load(open(ACTIVITY_METRICS_CONFIG,"r"))['activity_metrics']
+    total_metrics = {key: 0 for key in metrics_keys}
+
+    if datetime_day is None:
+        datetime_day = datetime.today().strftime("%Y-%m-%d")
+    timeMin = datetime_day+"T00:01:00+01:00"
+    timeMax = datetime_day+"T23:59:00+01:00"
+    calendar = calendar_wrapper()
+    events = calendar.list_events(start_time=timeMin,
+            end_time=timeMax)
+    logging.info("found {} events".format(len(events)))
+    for event in events:
+        logging.info(event['summary'])
+        event_start_time = datetime.strptime(
+                event['start']['dateTime'],
+                GOOGLEFMT+"+01:00"
+                )
+        event_end_time = datetime.strptime(
+                event['end']['dateTime'],
+                GOOGLEFMT+"+01:00"
+                )
+        event_duration_hours = ((event_end_time - event_start_time).seconds)/3600
+        logging.info("event duration = {}".format(event_duration_hours))
+        if event.get('description'):
+            # get metric from description
+            activity_metric_string = event['description'].split('~')[0]
+            try:
+                metrics = _format_activity_metrics_string_to_dict(
+                        activity_metric_string
+                        )
+                logging.info("adding metrics")
+                logging.info(metrics)
+                for key, metric in metrics.items():
+                    # here is the important formula TIME * METRIC
+                    total_metrics[key] += metric * event_duration_hours
+            except Exception:
+                logging.info("COULD NOT FORMAT DESCRIPTION")
+                logging.info(activity_metric_string)
+    return total_metrics
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    res = compute_activity_metrics_from_calendar("2019-09-01")
+    print("\n\nMETRICS FOR THE DAY:")
+    print(res)
