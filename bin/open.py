@@ -172,6 +172,8 @@ if __name__ == "__main__":
                     "\n[G] print cards"+
                     "\n[H] examine single card"+
                     "\n[I] mood dashboard"+
+                    "\n---"+
+                    "\n[J] explore Workplace ML tasks"
                     "\n[enter/return] quit")
 
             got = input()
@@ -269,6 +271,20 @@ if __name__ == "__main__":
                 Hcard.detail()
             elif got == 'I':
                 interactions.mood_interaction(logger)
+            elif got == 'J':
+                rewards = find_rewards(CARDS)
+                workplace_ml_index = 9 # explore todag from workplace ml
+                reward_id = rewards[workplace_ml_index]
+                print( "\n[REWARD]")
+                logger.log_action("explore_tree",CARDS[reward_id].uuid)
+                CARDS[reward_id].detail()
+                parents = backward_bfs(CARDS, reward_id)
+                parents = parents[1:]
+                for l, layer in enumerate(parents):
+                    print("-LAYER {}-".format(l))
+                    for p, parent in enumerate(layer):
+                        print("[{}]".format(p))
+                        CARDS[parent].pretty_print()
             elif got == "":
                 print("[bin:open.py] quitting program")
                 break
