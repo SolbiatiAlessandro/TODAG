@@ -173,3 +173,6 @@ and it makes a lot of sense.
 I have been using  it offline, it works, can be improved. Need to review my day so I can start allocating time for reflections and so on. 
 Make  sure review day works,  if it doesn't work still do it manually. At the end of the review there is a metric computation momemnt
 What to do in the review process? I would like to add some comments. Do I this on evernote? Or on the datamonitor
+
+what about tracking specific staff.
+I want to track sleep and meditation, I put specific bookmark when I create the event

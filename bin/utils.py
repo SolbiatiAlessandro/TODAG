@@ -138,6 +138,8 @@ class Logger():
             start = read_location.find('Longitude')+len("Longitude: -")
             end = start + 4
             location = float(read_location[start:end])
+            logging.info('populated location:')
+            logging.info(location)
             return location
         
         except Exception as e:
