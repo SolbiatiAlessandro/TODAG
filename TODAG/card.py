@@ -124,7 +124,12 @@ class card(object):
         query_uuid = str(self.uuid)
         logs = pd.read_csv(open("logs.csv","r"))
 
-        checked = list(logs[logs.arg1 == query_uuid][logs.action == "checked_todo"]["date"])
+        # this used to be logs.arg1 == query_uuid, but we changed
+        # the logging to send signal to google calendar, now the 
+        # reshake priority is computed with name. If two cards had
+        # the same name this would create a bug where they account
+        # for the same reshake priority
+        checked = list(logs[logs.arg1 == self.name][logs.action == "checked_todo"]["date"])
 
         if checked: # set last checked as last update
             last_updated = checked[-1]
