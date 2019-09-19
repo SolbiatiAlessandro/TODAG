@@ -36,6 +36,7 @@ OPERATIONS, PLANNING
 
 [level1] -> CAREER PROGRESSION:
 WORKPLACE ML, PERSONAL PROJECTS
+(where should I add here networking? before I had people, like: write  review to lam)
 
 [level2] -> SELF DEVELOPMENT:
 GYM, APPEREANCE, SOCIAL LIFE
