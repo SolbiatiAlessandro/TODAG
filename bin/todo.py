@@ -219,9 +219,10 @@ def main():
             elif got == "d" or got == 'done':
                 #check
                 card_done = cards[todos[index][1]]
+                import pdb;pdb.set_trace()
                 interactions.checked_interaction(
                         logger, 
-                        card, 
+                        card_done, 
                         start_time)
                 #done
                 card_done.done = True
