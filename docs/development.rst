@@ -176,3 +176,12 @@ What to do in the review process? I would like to add some comments. Do I this o
 
 what about tracking specific staff.
 I want to track sleep and meditation, I put specific bookmark when I create the event
+
+(22.09)
+Todag is going great. I am using a lot todo.py -t with arguemnt, and trying to get back to use todo.py.Documenting cards is great. 
+Feature requests:
+- more work on metric computation. Metric are computed in the weekly review. Extend work metric to all the week, add mood metric (that shhould be easy)
+- tracking without timer (just start time and end time), without pressure
+- ask about mood in task
+- ask about productivity in thetask
+
