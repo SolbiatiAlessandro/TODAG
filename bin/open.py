@@ -273,7 +273,7 @@ if __name__ == "__main__":
                 interactions.mood_interaction(logger)
             elif got == 'J':
                 rewards = find_rewards(CARDS)
-                workplace_ml_index = 9 # explore todag from workplace ml
+                workplace_ml_index = 8 # explore todag from workplace ml
                 reward_id = rewards[workplace_ml_index]
                 print( "\n[REWARD]")
                 logger.log_action("explore_tree",CARDS[reward_id].uuid)
