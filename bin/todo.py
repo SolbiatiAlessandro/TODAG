@@ -59,7 +59,9 @@ def get_todos(
             #
             if hasattr(cards[component], 'location_constraint'):
                 if cards[component].location_constraint == _logger.location:
-                    weight += 100
+                    weight += 1000
+                    cards[todo].debug_string += \
+                            "+location_constraint= {}\n".format(weight)
 
         weight += cards[todo].get_reshake_priority()
         cards[todo].debug_string += "+get_reshake_priority() = {}\n".format(weight)
