@@ -1547,3 +1547,7 @@ date,location,machine,action,arg1,arg2,arg3
 2019/10/01-11:49:51,None,132281831987612:AMOENUS.local,open_todo,f073fbc4-296d-452a-96d2-df3bc5481d9b,,
 2019/10/01-12:26:39,None,132281831987612:AMOENUS.local,checked_todo,CS294,0.6130555555555556,TODO:---- print homework---- print blog---- write medium---- keep oana in the loop------STATUS:---homework two---hw2; problem 2:---- (a) done---- (b)(i) done---- (b)(ii) done---- (b)(iii) done---- (b)(iv) done------DEADLINE 1 OCTOBER: INFRA FOR DQN---
 2019/10/01-12:26:41,None,132281831987612:AMOENUS.local,quit,todo.py,,
+2019/10/01-23:18:54,0.11,132281831987612:AMOENUS,open_todo,f073fbc4-296d-452a-96d2-df3bc5481d9b,,
+2019/10/02-00:11:24,0.11,132281831987612:AMOENUS,open_todo,f073fbc4-296d-452a-96d2-df3bc5481d9b,,
+2019/10/02-00:48:32,0.11,132281831987612:AMOENUS,checked_todo,CS294,0.6177777777777778,TODO:---- print homework---- print blog---- write medium---- keep oana in the loop------STATUS:---homework two---hw2; problem 2:---- (a) done---- (b)(i) done---- (b)(ii) done---- (b)(iii) done---- (b)(iv) done------DEADLINE 1 OCTOBER: INFRA FOR DQN---
+2019/10/02-00:48:32,0.11,132281831987612:AMOENUS,quit,todo.py,,
