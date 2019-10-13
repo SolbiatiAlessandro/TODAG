@@ -185,3 +185,13 @@ Feature requests:
 - ask about mood in task
 - ask about productivity in thetask
 
+(13.10)
+Still using it, at times I use todo.py alone for office tasks.
+IDEA: sunburst chart to represent todag, it read interactively from todag
+Width is priority ? click open another subburst from a different node.
+Every card has a mission, and that is the tooltip.
+CURRENT FEATURES REQUEST:
+- dashboard for time counter (4 work, 1 personal  a day)
+- automatically write weekly recap
+- open automaitcally links
+
