@@ -4,33 +4,15 @@ don't make cards to specifics, put subtasks in multiline description for that
 What to write into cards: current status of the project, what is the context I need to keep executing the next time.
 What not to write: history of the task. That can be written on evernote/tasks/quip
 
-lvl0
-FACEBOOK, PERSONAL PROJECTS,  LIFE
-
-lvl1 [LIFE]:
-SELF DEVELOPMENT,  OPERATIONS
-
-lvl2 [SELF DEVELOPMENT]:
-GYM, APPEREANCE, SOCIAL LIFE
-
-lvl1 [FACEBOOK]:
-PEOPLE, WORKPLACE ML
-
-lvl1 [PERSONAL PROJECTS]
-TODAG, CS294, FINANCIAL ML
-
-lvl2 [WORKPLACE ML]:
-(clean old tasks)
-[.. TASKS ..]
-
----
-(get logs.csv on github)
-
 [level0]
 CAREER PROGRESSION, WELL BEING, ADMINISTRATION
 
 [level1] -> WELL BEING :
 SELF DEVELOPMENT, PHYSICAL WELL BEING, MENTAL WELL BEING
+
+[level2] - >PHYSICAL WELL BEING (EX APPEREANCE)
+
+[level2] -> MENTAL WELL BEING
 
 [level1] -> ADMINISTRATION : 
 OPERATIONS, PLANNING
@@ -46,4 +28,4 @@ GYM, APPEREANCE, SOCIAL LIFE
 TODAG, CS294, FINANCIAL ML
 
 [level2] -> WORKPLACE ML:
-[.. TASKS ..]
+[...]
