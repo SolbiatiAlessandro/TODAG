@@ -194,4 +194,5 @@ CURRENT FEATURES REQUEST:
 - dashboard for time counter (4 work, 1 personal  a day)
 - automatically write weekly recap
 - open automaitcally links
+- deadlines: instead of setting  deadlines write [MONDAY] and automatically parse prioritise /send notification
 

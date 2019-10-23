@@ -38,7 +38,8 @@ def open_termdown():
     """
     open termdown stopwatch
     """
-    cmd="""osascript -e 'tell application "Terminal" to activate' -e 'tell application "Terminal" to do script "termdown"'"""
+    cmd="""osascript -e 'with timeout of 3 seconds' -e 'tell application "Terminal" to activate' -e 'tell application "Terminal" to do script "termdown"' -e 'end timeout'"""
+    print("[utils:open_termdown] if osascripts times out than just open terminal by hand and launch again TODAG")
     os.system(cmd)
 
 class Logger():
