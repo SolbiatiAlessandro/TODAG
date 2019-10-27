@@ -196,3 +196,12 @@ CURRENT FEATURES REQUEST:
 - open automaitcally links
 - deadlines: instead of setting  deadlines write [MONDAY] and automatically parse prioritise /send notification
 
+(27.10)
+Using todag daily, reduced how much I use todo.py -t. I went to a really nice configuration of my cards.rd
+I started offline journaling a lot, that looks like a good substitute for online journaling
+Some new ideas I got watching videos about wunderlist/todoist:
+- theme stuff (do ADMIN this on monday, PERSONAL PROJECT on Tuesday)
+- take ideas by using wunderlist/todoist
+- check how often I am using todo.py without argumenent -t
+
+
