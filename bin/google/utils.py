@@ -127,6 +127,8 @@ def compute_activity_metrics_from_calendar(
         datetime_day (datetime) to compute the metrics for
         2011-06-03
     example call: compute_activity_metrics_from_calendar("2019-09-01")
+    you can compute previous days with 
+    datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
 
     timeMax	(datetime)
     Upper bound (exclusive) for an event's start time to filter by. 
@@ -151,11 +153,13 @@ def compute_activity_metrics_from_calendar(
         logging.info(event['summary'])
         event_start_time = datetime.strptime(
                 event['start']['dateTime'],
-                GOOGLEFMT+"+01:00"
+                #GOOGLEFMT+"+01:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_end_time = datetime.strptime(
                 event['end']['dateTime'],
-                GOOGLEFMT+"+01:00"
+                #GOOGLEFMT+"+01:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_duration_hours = ((event_end_time - event_start_time).seconds)/3600
         logging.info("event duration = {}".format(event_duration_hours))

@@ -2,7 +2,7 @@
 module (script) that is generally run at the end of the day
 to recap on the current day and plan day ahead
 """
-from utils import Logger, Loader, open_termdown, readconfig
+from utils import Logger, Loader, open_termdown, readconfig, print_table
 try:
     import card
 except:
@@ -11,6 +11,7 @@ except:
     import card
 import todo
 import requests
+from datetime import datetime, timedelta
 from google.utils import compute_activity_metrics_from_calendar
 
 class planning_session():
@@ -150,13 +151,17 @@ class planning_session():
         try:
             while True:
                 print("\n\n=====prompt====="+
-                        "\ntomorrow"+
+                        "\n~tomorrow"+
                         "\n[A] run planning session"+
                         "\n[B] print current plan (memory)"+
                         "\n[C] print saved plan (disk)"+
                         "\n[D] submit saved plan to datamonitor (disk)"+
-                        "\ntoday"+
+                        "\n~today"+
                         "\n[E] compute activity metrics for today"+
+                        "\n~yesterday"+
+                        "\n[F] compute activity metrics for yesterday"+
+                        "\n~week"+
+                        "\n[G] compute productivity for the entire week"+
                         "\n[enter/return] quit")
                 got = input()
                 if got == "A":
@@ -169,7 +174,23 @@ class planning_session():
                     self.submit_plan_to_datamonitor()
                 elif got == "E":
                     activity_metrics = compute_activity_metrics_from_calendar()
-                    print(activity_metrics)
+                    print_table(activity_metrics, title="DAY ACTIVITY METRICS")
+                elif got == "F":
+                    yesterday = datetime.strftime(datetime.now() \
+                            - timedelta(1), '%Y-%m-%d') 
+                    activity_metrics = compute_activity_metrics_from_calendar(yesterday)
+                    print_table(activity_metrics, title="DAY ACTIVITY METRICS")
+                elif got == "G":
+                    week_productivity = {}
+                    for delta in reversed(range(7)):
+                        day = datetime.strftime(datetime.now() \
+                                - timedelta(delta), '%Y-%m-%d') 
+                        day_of_the_week = datetime.strftime(datetime.now() \
+                                - timedelta(delta), '%A') 
+                        activity_metrics = compute_activity_metrics_from_calendar(day)
+                        week_productivity[day_of_the_week] =\
+                                activity_metrics['productivity']
+                    print_table(week_productivity, title="WEEK PRODUCTIVITY")
                 elif got == "":
                     print("[bin:plan.py] quitting program")
                     break

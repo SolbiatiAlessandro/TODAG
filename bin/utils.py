@@ -13,6 +13,28 @@ import logging
 TIME_FORMAT = "%Y/%m/%d-%H:%M:%S"
 from urllib.request import urlopen
 
+def print_table(table, title="ACTIVITY METRICS"):
+    """
+    table : {'enjoyment': 0.0, 'productivity': 0.5833333333333334, 'scope': 0.0}
+    """
+    total_length = sum(map(len, table.keys())) + len(table.keys())
+    horizontal_divisor = "\n"+"_"*total_length+"\n"
+    formatted_string = ""
+    formatted_string += horizontal_divisor
+    formatted_string +=("|"+title+(" "*(total_length-len(title)-1))+"|")
+    header_string, values_string = "", ""
+    for name, value in  table.items():
+        header_string += name+"|"
+        values_string += '%.1f'%value
+        values_string += " " *(len(name)-3)+"|"
+    formatted_string += horizontal_divisor
+    formatted_string += header_string
+    formatted_string += horizontal_divisor
+    formatted_string += values_string
+    formatted_string += horizontal_divisor
+    print(formatted_string)
+
+
 def check_connectivity():
     """
     return True  if online, false if offline
