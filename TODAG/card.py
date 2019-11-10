@@ -5,6 +5,7 @@ from card_utils import multiline_input
 from utils import TIME_FORMAT
 import pandas as pd
 from time import ctime
+import logging
 import sys, tempfile, os
 from subprocess import call
 
@@ -250,3 +251,40 @@ class card(object):
         else:
             print( "{} | {}".format(self.name, self.description))
         if hasattr(self,'deadline'): print(self.deadline) 
+
+        # find links in the description and open them with browser
+        links = []
+        def get_link_start(description): 
+            LINK_STRING = 'http'
+            return description.find(LINK_STRING)
+        def get_link_end(description):
+            END_STRINGS = ["\n",","," "]
+            ends = [description.find(token) for token in END_STRINGS if description.find(token) != -1]
+            return min(ends) if ends else -1
+
+        import pdb;pdb.set_trace()
+        logging.info("parsing links in description")
+        offset = 0
+        match_start = get_link_start(self.description)
+        match_end = get_link_end(self.description[match_start:])
+        while match_start != -1 and match_end != -1:
+            index_start = offset + match_start
+            index_end = offset + match_start + match_end
+            link = self.description[index_start:index_end]
+            logging.info([match_start, match_end, offset,\
+                    index_start, index_end, link])
+            links.append(link)
+
+            offset = index_end
+            match_start = get_link_start(self.description[offset:])
+            match_end = get_link_end(self.description[offset+match_start:])
+
+        logging.info("opening links")
+        for link in links:
+            os.system("open {}".format(link))
+
+
+
+
+
+        

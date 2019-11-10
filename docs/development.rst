@@ -204,4 +204,9 @@ Some new ideas I got watching videos about wunderlist/todoist:
 - take ideas by using wunderlist/todoist
 - check how often I am using todo.py without argumenent -t
 
+(10.09)
+Using todag daily, bit of complaints since often I miss logging. I like the features that tells me how much I worked in the day.
+Now i will have some time to code. This are some of the feature I want to impelmenet:
+- sunburst chart for cards.rd
+
 

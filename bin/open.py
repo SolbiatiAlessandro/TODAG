@@ -2,12 +2,14 @@
 import sys
 import csv
 from utils import Logger, Loader
+import logging
 import todo
 import interactions
 sys.path.append('../TODAG')
 from card import card
 import uuid
 import argparse
+import visualise
 CARDS = None
 logger = None
 buffer_location = "./buffer.csv" # move this to a conflig and implement on cloud 
@@ -145,7 +147,49 @@ def write_buffer(buffer_list):
         for row in buffer_list:
             _writer.writerow(row)
 
+def generate_sunburst_data(
+        cards
+        ):
+    """
+    generates data to plot sunburst chart in plotly
+
+    it should look like:
+
+    fig =go.Figure(go.Sunburst(
+        labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+        parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+        values=[10, 14, 160, 10, 2, 6, 6, 4, 4],
+    ))
+    """
+    logging.info("generating sunburst data")
+    sunburst_data = {
+            'labels':[],
+            'parents':[],
+            'values':[],
+            }
+    for card_id, iter_card in cards.items():
+        label = iter_card.name
+        value = iter_card.priority
+        # how to deal with cards with no priority?
+        value = 1 if value == 0 else value 
+        parent = ""
+        if iter_card.children:
+            # todag children is a sunburst parent
+            parent_id = iter_card.children[0]
+            parent_iter = cards.get(parent_id)
+            parent = parent_iter.name
+        sunburst_data['labels'].append(label)
+        sunburst_data['values'].append(value)
+        sunburst_data['parents'].append(parent)
+        logging.info("generated new sunburst data triplet")
+        logging.info([label, value, parent])
+    logging.info(sunburst_data)
+    return sunburst_data
+
+
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+
     # argparse 
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--location', type=float, help='0.1 to force home, 0.13 to force work', nargs='?')
@@ -172,7 +216,8 @@ if __name__ == "__main__":
                     "\n[G] print cards"+
                     "\n[H] examine single card"+
                     "\n[I] mood dashboard"+
-                    "\n---"+
+                    "\n[M] visualise cards"+
+                    "\n--work---"+
                     "\n[J] explore Workplace ML tasks"
                     "\n[enter/return] quit")
 
@@ -285,6 +330,10 @@ if __name__ == "__main__":
                     for p, parent in enumerate(layer):
                         print("[{}]".format(p))
                         CARDS[parent].pretty_print()
+            elif got == 'M':
+                logger.log_action("visualise_cards_sunburst")
+                sunburst_data = generate_sunburst_data(CARDS)
+                visualise.draw_sunburst(sunburst_data)
             elif got == "":
                 print("[bin:open.py] quitting program")
                 break
