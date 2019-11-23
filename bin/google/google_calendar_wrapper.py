@@ -138,7 +138,7 @@ class GoogleCalendarWrapper():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    #logging.basicConfig(level=logging.INFO)
     calendar = GoogleCalendarWrapper()
     events = calendar.list_events()
     assert events

@@ -262,7 +262,6 @@ class card(object):
             ends = [description.find(token) for token in END_STRINGS if description.find(token) != -1]
             return min(ends) if ends else -1
 
-        import pdb;pdb.set_trace()
         logging.info("parsing links in description")
         offset = 0
         match_start = get_link_start(self.description)

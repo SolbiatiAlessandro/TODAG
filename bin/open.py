@@ -168,6 +168,7 @@ def generate_sunburst_data(
             'values':[],
             }
     for card_id, iter_card in cards.items():
+        if type(card_id) is str and card_id == "planning": continue
         label = iter_card.name
         value = iter_card.priority
         # how to deal with cards with no priority?
@@ -188,7 +189,7 @@ def generate_sunburst_data(
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    #logging.basicConfig(level=logging.INFO)
 
     # argparse 
     parser = argparse.ArgumentParser()

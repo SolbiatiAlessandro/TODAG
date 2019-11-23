@@ -153,13 +153,13 @@ def compute_activity_metrics_from_calendar(
         logging.info(event['summary'])
         event_start_time = datetime.strptime(
                 event['start']['dateTime'],
-                #GOOGLEFMT+"+01:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
-                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
+                GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                #GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_end_time = datetime.strptime(
                 event['end']['dateTime'],
-                #GOOGLEFMT+"+01:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
-                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
+                GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                #GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_duration_hours = ((event_end_time - event_start_time).seconds)/3600
         logging.info("event duration = {}".format(event_duration_hours))
@@ -181,7 +181,7 @@ def compute_activity_metrics_from_calendar(
     return total_metrics
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    #logging.basicConfig(level=logging.INFO)
     res = compute_activity_metrics_from_calendar("2019-09-01")
     print("\n\nMETRICS FOR THE DAY:")
     print(res)
