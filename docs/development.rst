@@ -204,9 +204,16 @@ Some new ideas I got watching videos about wunderlist/todoist:
 - take ideas by using wunderlist/todoist
 - check how often I am using todo.py without argumenent -t
 
-(10.09)
+(10.11)
 Using todag daily, bit of complaints since often I miss logging. I like the features that tells me how much I worked in the day.
 Now i will have some time to code. This are some of the feature I want to impelmenet:
 - sunburst chart for cards.rd
+
+(25.11)
+oana ask me to get the todag, thinking of putting some coding for the occasions
+- tempfile don't work for windows, think of a more complex solution where instead of opening the temp file on vim I open some sort of quip, gdocs. Even better that app that ferrucio use to have for roadmapping: notion.so
+
+(01.12)
+I want to add docker so we can run TODAG on any machine
 
 
