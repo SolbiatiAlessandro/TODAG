@@ -19,7 +19,33 @@ The utility is developed using OOP methodologies, and adhereing to the [Google P
 You can read about the roadmap of the project in the [development.md](https://github.com/SolbiatiAlessandro/TODAG/blob/master/docs/development.rst) file.
 
 ---
-## Usage
+## Docker Usage
+
+You can run todag on docker
+```
+git clone https://github.com/SolbiatiAlessandro/TODAG
+docker build . -t todag
+docker run -v <absolute-path-to-TODAG>:/TODAG -it todag /bin/bash
+(docker) python3 /TODAG/bin/open.py
+```
+
+Checklist of things to do to run todag properly (This should be automated)
+1. inside TODAG/bin initialise a logs.csv file with 
+```
+date,location,machine,action,arg1,arg2,arg3
+```
+2. inside TODAG/bin initialise cards.pickle with a dictionary
+```
+import pickle as pkl
+pkl.dump({}, open("cards.pickle","wb"}))
+```
+3. authenticate google calendar (it will run automatically a dialog box),
+this should populate a `credentials.json` and a `token.pickle` inside
+TODAG/bin
+
+
+---
+## Local Usage
 
 If you want to run the TODAG on your local iOS machine you need to do the following.
 

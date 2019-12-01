@@ -1,7 +1,7 @@
 """utils for TODAG scripts"""
 import pickle 
 import os
-from google.cloud import storage
+#from google.cloud import storage
 import stackdriver_logger
 import socket
 from uuid import getnode 

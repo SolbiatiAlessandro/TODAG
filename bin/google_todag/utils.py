@@ -9,7 +9,7 @@ import sys
 try:
     from google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
 except:
-    from google.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
+    from google_todag.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
 
 GOOGLEFMT = "%Y-%m-%dT%H:%M:00"
 # should add Z for UTC time

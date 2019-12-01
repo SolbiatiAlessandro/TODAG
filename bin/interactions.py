@@ -1,7 +1,7 @@
 """interactions routines"""
 from datetime import datetime
 from utils import check_connectivity
-from google.utils import add_checked_time_to_google_calendar
+from google_todag.utils import add_checked_time_to_google_calendar
 import  logging
 
 def mood_interaction(logger, verbose=False):
