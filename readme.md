@@ -26,6 +26,8 @@ You can run todag on docker
 git clone https://github.com/SolbiatiAlessandro/TODAG
 docker build . -t todag
 docker run -v <absolute-path-to-TODAG>:/TODAG -it todag /bin/bash
+(docker + virtual machine) eval $(docker-machine env default --shell linux)
+(windows 10 Home) winpty docker run -v //c/Users/Asus/TODAG://TODAG -it todag
 (docker) python3 /TODAG/bin/open.py
 ```
 
