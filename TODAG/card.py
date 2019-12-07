@@ -64,7 +64,7 @@ class card(object):
             EDITOR = os.environ.get('EDITOR','vim') #that easy!
             initial_message = bytes(str(self.description),encoding='utf8')
 
-            with tempfile.NamedTemporaryFile(suffix=".tmp") as tf:
+            with open("temp.txt","w") as tf: 
               tf.write(initial_message)
               tf.flush()
               call([EDITOR, tf.name])

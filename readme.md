@@ -24,12 +24,23 @@ You can read about the roadmap of the project in the [development.md](https://gi
 If you want to run the TODAG on your local iOS machine you need to do the following.
 
 ```
+[macOS]
 git clone https://github.com/SolbiatiAlessandro/TODAG
 cd TODAG
 virtualenv venv -p python3
 source venv/bin/activate
 (venv) pip install -r requirements.txt
 ``` 
+
+```
+[windows]
+[macOS]
+git clone https://github.com/SolbiatiAlessandro/TODAG
+cd TODAG
+virtualenv venv -p python3
+venv\scripts\activate.bat
+(venv) pip install -r requirements.txt
+```
 
 Inside the bin folder there are the two scripts to use the TODAG:
 - **open.py**: create new todos in the DAG, delete or print the DAG
