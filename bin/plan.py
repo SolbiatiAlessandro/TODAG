@@ -12,7 +12,7 @@ except:
 import todo
 import requests
 from datetime import datetime, timedelta
-from google.utils import compute_activity_metrics_from_calendar
+from google_todag.utils import compute_activity_metrics_from_calendar
 
 class planning_session():
     """

@@ -123,7 +123,7 @@ class card(object):
         if you annotate str: query_uuid it 'memoize' last variable
         """
         query_uuid = str(self.uuid)
-        logs = pd.read_csv(open("logs.csv","r"))
+        logs = pd.read_csv(open("logs.csv","r"), encoding="ISO-8859-1")
 
         # this used to be logs.arg1 == query_uuid, but we changed
         # the logging to send signal to google calendar, now the 

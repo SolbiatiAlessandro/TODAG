@@ -9,7 +9,7 @@ import sys
 try:
     from google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
 except:
-    from google.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
+    from google_todag.google_calendar_wrapper import GoogleCalendarWrapper as calendar_wrapper
 
 GOOGLEFMT = "%Y-%m-%dT%H:%M:00"
 # should add Z for UTC time
@@ -153,13 +153,13 @@ def compute_activity_metrics_from_calendar(
         logging.info(event['summary'])
         event_start_time = datetime.strptime(
                 event['start']['dateTime'],
-                GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
-                #GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
+                #GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_end_time = datetime.strptime(
                 event['end']['dateTime'],
-                GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
-                #GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
+                #GOOGLEFMT+"-05:00" # UNCOMMENT BELOW FOR LEGAL HOUR CHANGE
+                GOOGLEFMT + "Z" # UNCOMMENT ABOVE FOR LEGAL HOUR CHANGE
                 )
         event_duration_hours = ((event_end_time - event_start_time).seconds)/3600
         logging.info("event duration = {}".format(event_duration_hours))
