@@ -252,7 +252,7 @@ if __name__ == "__main__":
                 print("what card you want to DELETE? (card UUID or query)")
                 Dcard =read_card(CARDS)
                 logger.log_action("delete_card",Dcard.name)
-                del(Dcard)
+                del(CARDS[Dcard.uuid])
                 print( "Card deleted succesfully")
             elif got == 'D':
                 print( "Rewards on the DAG:\n")
