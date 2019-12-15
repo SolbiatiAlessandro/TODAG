@@ -1,0 +1,129 @@
+*Short summary of H2 2019:*
+
+I joined the company at the end of the last half, right out of college. After joined Workplace ML I got immediately excited about the product and started to have a handful of project ideas to build. With the help of Lila, Riccardo and Anna **I committed to working on 10 of these projects** Roughly speaking, 3 of them were part of the expectations at the beginning of this half (Edge Stories in Feed Ranking, WAIST for front-end, and Feed Analyser), all the others were all opportunities that were just too exciting to leave on the table! 
+
+I have loved seeing all 10 of them shipped to Workplace users, but more importantly, I loved the **transformational learning experience** that this has been for me: both for engineering practices at Facebook, and for also passions I explored, like Reinforcement Learning. I also learnt how to work in a team and ship real impact, plus the vision and mission for the Workplace product. 
+
+I see this half as an **extremely successful ramp-up half**, where I built a solid foundation around our products and processes. I am extremely excited to start H1 2020 with this strong foundation and challenge myself to bigger and more impactful projects. More specifically, given the familiarity and understanding I acquired about Newsfeed, I am looking forward to take more responsibility in big areas of the product (Predictors, Training Features) and drive deeper change to impact Workplace on the long run. 
+
+
+
+Legend for project size:
+[L]  : required continued effort for the entire half
+[M] : required effort for a quarter
+[S]  : required effort for 2/3 weeks
+
+
+# PROJECT IMPACT
+
+**Workplace Newsfeed Ranking**
+
+1. **[L]** Reinforcement Learning (RL) for Personalisation [launch post on Workplace ML XFN](https://fb.workplace.com/groups/942279722578412/permalink/1538682382938140/)]: we saw potential in personalising newsfeed introducing a new class of Reinforcement Learning predictor models to optimise for our top-line metrics. With my work this half I was able to deploy end-to-end the first RL predictors to Workplace Newsfeed, this will enable us to run RL experiments next half and will also enable other teams that use the same Newsfeed infrastructure (Facebook NewsFeed, Facebook Stories and Facebook Watch) to run RL experiments as well. I reached the three milestones I set at the beginning of the half:
+    1. Built the data pipeline to train the models on Workplace data ([12+ diffs](https://our.internmc.facebook.com/intern/diffs/search/2140452109578950?query=%7B%22key%22%3A%22AND%22%2C%22children%22%3A[%7B%22key%22%3A%22EQUALS_ME%22%2C%22field%22%3A%22DIFF_AUTHOR_FBID%22%2C%22value%22%3Anull%7D%2C%7B%22key%22%3A%22EQUALS_ANY_OF_DIFF_STATUSES%22%2C%22field%22%3A%22DIFF_STATUS%22%2C%22value%22%3A[%223%22]%7D%2C%7B%22key%22%3A%22CONTAINS_ALL_TEXT%22%2C%22field%22%3A%22DIFF_CONTENTS%22%2C%22value%22%3A%22RL%22%7D]%7D&start=0))
+    2. Created and published the RL predictor workflow on FbLearner ([80+ manual workflow runs on FBLearner](https://our.internmc.facebook.com/intern/fblearner/runs?esq=%7B%22key%22%3A%22AND%22%2C%22children%22%3A[%7B%22key%22%3A%22EQUALS_ANY_OF_FBLEARNER_RUN_OWNER%22%2C%22field%22%3A%22FBLEARNER_owner_unixname%22%2C%22value%22%3A[%7B%22title%22%3A%22Alessandro%20Solbiati%22%2C%22fbid%22%3A%221545097978%22%7D]%7D%2C%7B%22key%22%3A%22EQUALS_ANY_OF_FBLEARNER_WORKFLOW%22%2C%22field%22%3A%22FBLEARNER_workflow_name%22%2C%22value%22%3A[%7B%22title%22%3A%22rl.workflow.end_to_end.train.workflow_instance%22%2C%22fbid%22%3A%2257119787%22%7D]%7D]%7D&sort_by=last_updated&sort_direction=desc&grouping=None))
+    3. Exported (PyTorch) predictor models to Newsfeed ML infra (Caffe2) ([500+ sloc contributed to the Reinforcement Learning framework from AML](https://our.internmc.facebook.com/intern/diff/D18300387/))
+2. **[L]** (Feed Analyser) Dislike Predictors in Ranking [launch post on Workplace Changelog](https://fb.workplace.com/groups/149862928860546/permalink/744079679438865/) : after running ranking analysis with Feed Analyser (OVM), we discovered that we were not using the dislike predictor, that predicts the likelihood of a user hiding or unfollowing a post. We introduced this prediction in the ranking score computation for newsfeed and we affected the following metrics: **reactions +1.45%, newsfeed:reactions:overall +1.64%, feed_reactions +1.60%**
+3. **[M]** Edge Stories Diversity Rules [launch post on Workplace Changelog](https://fb.workplace.com/groups/149862928860546/permalink/682824818897685/) : historically edge stories (e.g. Anna commented) have been too frequent in NewsFeed, we reduced the number of consecutive edge stories by adding new custom demotion rules in the ranking configs. Important metrics were impacted: **comments: +2.27%, comments_num_words: +2.79% comments, vpvs: +0.78, post_with_long_feed_vpvs: +0.97%**
+
+**[M] Why am I seeing this post (WAIST)**
+
+[[external launch post](https://fb.workplace.com/groups/1356131371113317/permalink/2734511999941907/)] [[internal launch post](https://fb.workplace.com/groups/149862928860546/permalink/744997839347049/)] built end-to-end the “Why Am I Seeing This Post” unit to explain different ranking signals for specific posts that appear in newsfeed:
+
+1. *Ranking*: extracted ranking signals from the feed ranking infra e.g. “You have posts from this person more than others” and implemented controllers to send them to web interface
+2. *Web Backend*: built the feature in the facebook blue backend adding a new option in the three dots menu (chevron) in newsfeed
+3. *Web Frontend*: built 4+ react components following design from Joseph to display the dialogue using the new React front-end guidelines from Workplace Galahad instead of the current non-compliant version we would have inherited from Facebook WAIST.
+
+We finally **launched the unit to external customers** meeting the expected timeline that we agreed at the beginning of the works, and the feature had received incredibly good feedback.
+
+**[L] On-boarding**
+
+As part of my expectation for the half, I on-boarded on the team, learning a lot of different technologies and aspect of the codebase outside of my comfort zone such as Flow, Fblearner, Dataswarm, Folly, Hack, WWW, React, GraphQL, Presto, Hive and Scuba. This allowed me to:
+
+* Successfully respond to a [SEV 3](https://our.internmc.facebook.com/intern/sevmanager/view/s/186478) "Workplace feed broken on C1" on my first on-call
+* Successfully respond to [UBN task on my second oncall](https://our.internmc.facebook.com/intern/tasks/?t=58525618), when I promptlyfixed a [dataswarm pipeline](https://our.internmc.facebook.com/intern/diff/D18881889/) that would have broken newsfeed in 6 hours without external guidance.
+* More generally have high development productivity, **shipping 10 different projects** during the entire half (between Impact and Better Engineering) in different codebases.
+
+**Others**
+
+* **[M]** Trending RHC [launch-post ](https://fb.workplace.com/groups/942279722578412/permalink/1541382072668171/) : Collaborated with Raja (contributed 50%) on improving Trending Stories in the Right Hand Column of Workplace. Enabled the work on the unit adding vpv logging and monitoring dashboard of the unit. In Q4 shipped an improvement in the ranking policy that increased Trending VPVs (Trending Posts Viewed) by 8.32%
+* **[S]** Group Management pages [launch-post ](https://fb.workplace.com/groups/149862928860546/permalink/741655409681292/) :contributed (roughly 20% capacity) to the Group Management project by building the initial react components and pages for group management page, then was later taken by our Front End engineering Achim when he joined the tea] 
+* **[S]** Filtering Happy-Faceversaries [launch-post ](https://fb.workplace.com/groups/149862928860546/permalink/741807646332735/) :I noticed this annoying bug of Timeline Posts from unknown people in Newsfeed (e.g. Happy Faceversaries) and I proposed to build a new filter in the Newsfeed Infra. It turned out to be a known major issue at big customers like GSK and the fix had a big impact as reported by our partnership tip.
+* **[S]** Hackathon Project - Name Pronunciation [launch-post ](https://fb.workplace.com/groups/942279722578412/permalink/1541386436001068/) : I joined my team-mates Matic and Ciprian in LON 29 Hackathon to build a new feature (contributed 50%) to set the pronunciation of your name (with text-to-speech) and display it on your profile and chat for people to read. We shipped the hackathon project internally for dogfooding.
+* **[S]** Story Hovercard [launch-post ](https://fb.workplace.com/groups/149862928860546/permalink/747673652412801/):built and ship a new hover-card for story permalinks inside posts on Workplace, this was part of my onboarding.
+
+
+# BETTER ENGINEERING
+
+**Newsfeed Ranking**
+
+* **[L]** Feature Engineering [launch post on Workplace Content Personalisation Eng ](https://fb.workplace.com/groups/561268468031537/permalink/579568009534916/)[dashboard](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_newsfeed/training_infra/?events=%7B%22594930897913683%22%3A%7B%22594930897913683%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%2C%22filter_2%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%7D%2C%22446512469306220%22%3A%7B%22446512469306220%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%2C%22filter_1%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%7D%2C%22573907420081046%22%3A%7B%22start_date%22%3A%7B%22data%22%3A%222019-11-12%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22end_date%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22573907420081046%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%7D%7D) :engineering work for improving prediction models data to lay a solid foundation for H1 2020 work on predictor models improvement.
+    * Doubled the number of Workplace specific features for predictor models (e.g. adding Workplace Company Size, Workplace Company Days from Launch to the predictors model).
+    * Analysed the downsampling of our training data (we are using only 20% of available) and set up recurring queries to identify exactly in which components downsampling happens.
+    * Analysed the reliability of our models' features, discovering that we log Workplace feature only for 20% of the users, created recurring workflows to examine the coverage and health of features
+    * Aggregated all the queries in the Workplace Newsfeed | [Training Infra](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_newsfeed/training_infra/?events=%7B%22594930897913683%22%3A%7B%22594930897913683%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%2C%22filter_2%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%7D%2C%22446512469306220%22%3A%7B%22446512469306220%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%2C%22filter_1%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%7D%2C%22573907420081046%22%3A%7B%22start_date%22%3A%7B%22data%22%3A%222019-11-12%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22end_date%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22573907420081046%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%7D%7D) dashboard for monitoring purposes
+* **[M]** Workplace Newsfeed dashboard [dashboard ](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_newsfeed/training_infra/?events=%7B%22594930897913683%22%3A%7B%22594930897913683%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%2C%22filter_2%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22594930897913683%22%7D%7D%2C%22446512469306220%22%3A%7B%22446512469306220%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%2C%22filter_1%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22446512469306220%22%7D%7D%2C%22573907420081046%22%3A%7B%22start_date%22%3A%7B%22data%22%3A%222019-11-12%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22end_date%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%2C%22573907420081046%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22573907420081046%22%7D%7D%7D) :I created a unified dashboard to collect all existing and new information about newsfeed, the dashboard is now live on a TV around our desks on the 4-th floor. Besides the two views mentioned above, I created other three views for other projects I worked on
+    * Workplace Newsfeed | [Workplace Trending Stories](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_trending_stories/trending_vpv/?events=%7B%22387372208816615%22%3A%7B%22date_start_channel_go%22%3A%7B%22data%22%3A%222019-11-10%22%2C%22publisher_id%22%3A%22387372208816615%22%7D%2C%22387372208816615%22%3A%7B%22data%22%3A%222019-11-10%22%2C%22publisher_id%22%3A%22387372208816615%22%7D%7D%2C%22584808955590513%22%3A%7B%22date_end_channel_go%22%3A%7B%22data%22%3A%222019-12-09%22%2C%22publisher_id%22%3A%22584808955590513%22%7D%2C%22584808955590513%22%3A%7B%22data%22%3A%222019-12-09%22%2C%22publisher_id%22%3A%22584808955590513%22%7D%7D%7D)
+    * Workplace Newsfeed | [Workplace Notes](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_notes/simple_metrics_page_template/?events=%7B%222448689121853074%22%3A%7B%222448689121853074%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%222448689121853074%22%7D%2C%22filter_2%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%222448689121853074%22%7D%7D%2C%22437474663624421%22%3A%7B%22437474663624421%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22437474663624421%22%7D%2C%22filter_1%22%3A%7B%22data%22%3Anull%2C%22publisher_id%22%3A%22437474663624421%22%7D%7D%2C%22424189581835382%22%3A%7B%22start_date%22%3A%7B%22data%22%3A%222019-11-12%22%2C%22publisher_id%22%3A%22424189581835382%22%7D%2C%22end_date%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22424189581835382%22%7D%2C%22424189581835382%22%3A%7B%22data%22%3A%222019-12-10%22%2C%22publisher_id%22%3A%22424189581835382%22%7D%7D%7D)
+    * Workplace Newsfeed | [Topline Metrics](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_newsfeed/newsfeed_topline/)
+
+**Documentation**
+
+* **Team Documentation** [Workplace ML Wiki](https://our.internmc.facebook.com/intern/wiki/Workplace_Engineering/Workplace_Teams/Workplace_ML/) *:* I am naturally passionate about writing wikis, thus I enjoyed from day-1 investing major effort to improve our team wikis:
+    * reorganised the team wiki structure, creating “[Team Workplace ML](https://our.internmc.facebook.com/intern/wiki/Workplace_Engineering/Workplace_Teams/Workplace_ML/)” a (surprisingly beautiful) main wiki for our team, where I spent my first weeks collecting and listing all existing docs from other team members
+    * written 5+ official team wikis, including the major [Workplace Feed - Ranking Configs ](https://our.internmc.facebook.com/intern/wiki/Workplace_Engineering/Workplace_Teams/Workplace_ML/News_Feed/Workplace_Feed_-_Ranking_Configurations/) and [Workplace Feed Analyser ](https://our.internmc.facebook.com/intern/wiki/Workplace_Engineering/Workplace_Teams/Workplace_ML/News_Feed/workplace_feed_analyzer/)
+    * actively participated in the Workplace Docathon, where also thanks to my contribution Workplace ML [ranked 2nd in the entire workplace org ](https://our.internmc.facebook.com/intern/unidash/dashboard/workplace_wiki/analytics/?events=%7B%22527873921103593%22%3A%7B%22527873921103593%22%3A%7B%22data%22%3A%22Workplace%20Teamwork%20Communication%22%2C%22publisher_id%22%3A%22527873921103593%22%7D%2C%22select_workplace_teams%22%3A%7B%22data%22%3A%22Workplace%20Teamwork%20Communication%22%2C%22publisher_id%22%3A%22527873921103593%22%7D%7D%7D) for wiki quality
+    * Wrote 8+ wikis for my ongoing projects and experiments so that other people can quickly get async context on what I am doing: for instance “[Personalised Value Models for Workplace Feed ](https://our.internmc.facebook.com/intern/wiki/Users/lessandro/personalised_value_models_for_workplace_feed/)”, a 20+ pages technical wiki for my Reinforcement Learning project.
+
+
+# DIRECTION
+
+**Reinforcement Learning (RL) in Workplace ** [RL for Ranking in Workplace (Note) ](https://fb.workplace.com/notes/alessandro-solbiati/reinforcement-learning-for-ranking-workplace-ml-and-instagram-home-core-ranking-/169753490891232/)* *
+
+* *I am really passionate about Reinforcement Learning and I believe is a really powerful family of Machine Learning algorithms: as soon as I joined the team this half I searched for some application to Workplace Newsfeed.* *
+
+* I scoped the problem finding an appropriate project for the maturity of Workplace Newsfeed, pitched to the senior engineers on the team (Ciprian, Riccardo and Nesh) that promptly supported me, and planned the milestones/success state for the project.
+* I executed on all the milestones finding 3 PoCs (Vivek, Kittipat, Devin) in MPK for the different part of the project and got them involved after initial unresponsiveness. I coordinated with them not only to build the Predictor for Workplace, but to ship a major patch to the ML (PyTorch) infra. This impacted the roadmap of three teams proactively working on RL this half in Ranking that were slowed down by the same blocker, namely Facebook Newsfeed Ranking, Facebook Stories Ranking and Facebook (as theymentioned in these [comments](https://fb.workplace.com/groups/942279722578412/permalink/1538682382938140/?comment_id=1539259196213792), even if they didn’t ship anything yet).
+* I proactively shared the project with different teams writing a note “[Reinforcement Learning for Ranking: Workplace ML and Instagram Home Core Ranking (H2 2019) ](https://fb.workplace.com/notes/alessandro-solbiati/reinforcement-learning-for-ranking-workplace-ml-and-instagram-home-core-ranking-/169753490891232/)”. The note got re-shared in 7 different XFN groups, fostering the attention toward RL for teams that didn’t explore the area yet. I managed to scope out two potential future collaboration (separated from the 4 above) with [Rohit ](https://fb.workplace.com/profile.php?id=100035217256621) from Workplace Notification and [Yu Liu](https://fb.workplace.com/profile.php?id=100028896562843)from Facebook Video Chaining (Seattle), they both look forward to replicate my experiments in their team for H1 2020, also taking advantage of the existing ML infra I fixed. I would be their main PoC for this project next half.
+
+
+**Feature Engineering** [Content Personalisation Eng H2 2019 update post ](https://fb.workplace.com/groups/561268468031537/permalink/579568009534916/)* *
+
+ I see Machine Learning as a major growth area for me, so I decided to dedicate effort around Prediction Models. 
+
+* I led the improvement of predictors training data, planning the better engineering work that me, Arwa and Riccardo executed in Q4. This involved brainstorming and splitting new features creation between the three of us, plus splitting the infra investigation and infra fixing work between me and Arwa.
+* The project became the central theme of the NYC offsite for me and Arwa, where I found and organised meetings with 3 different PoCs from Facebook Feed Data NYC to give us pointer to speed up our infra fixing work.
+
+
+**Why Am I seeing this Post** [external launch post ](https://fb.workplace.com/groups/1356131371113317/permalink/2734511999941907/) [internal launch post](https://fb.workplace.com/groups/149862928860546/permalink/744997839347049/)
+
+ After hearing from customers that they didn’t understand how Workplace Newsfeed works, I saw a business need for this kind of feature in our product and I proposed the idea to the team. 
+
+* I drove the whole project from beginning to end, strictly collaborating with PM (Anna), Designer (Joseph) and PMM (Alexandra) without additional engineers. 
+* I familiarised myself with the launch process to customers, managing announcements and translations, launching successfully to 100% customer according to our timeline.
+
+
+*Filtering Happy-Faceversaries [internal launch-post ](https://fb.workplace.com/groups/149862928860546/permalink/741807646332735/)**
+
+ I saw the need for this small ranking feature from my daily usage of the product and I proposed the idea to the Feed Eng team. I then worked closely with PM (Anna) and Partnership (Nico Cinefra) to ship the feature successfully 100% customers.
+
+
+# PEOPLE
+
+**Hiring**
+
+* **Bootcamp Support** [Team Insights Query ](https://our.internmc.facebook.com/intern/teaminsights/?start_date=1561935600&end_date=1575936000&rollup=Direct&selected_tab=TABLE&employee_ids[0]=100013146661984&metrics[0]=TASKS_BOOTCAMPED): created most [bootcamp tasks (11) in the team for the half. ](https://our.internmc.facebook.com/intern/teaminsights/?start_date=1561935600&end_date=1575936000&rollup=Direct&selected_tab=TABLE&employee_ids[0]=100013146661984&metrics[0]=TASKS_BOOTCAMPED) I supported bootcampers live and remote (MPK) with tasks from Feature Engineering and WAIST. I also kept Bootcamp tasks as a priority in planning, e.g. setting up the Trending Stories project as a collection of Bootcamp Tasks created half by me and half by Raja. 4 of the 11 bootcamp tasks were specifically designed for Mobile Eng Bootcampers considering our team, to address our specific headcount need. We didn’t hire them, but I play a part in convincing them into joining Workplace. Two of the three Bootcampers that worked on this project joined Workplace ([Alex Miragal ](https://fb.workplace.com/profile.php?id=100041681761872) joined Work Groups, [Yash ](https://fb.workplace.com/profile.php?id=100039828632506) joined OCC).
+* *External Referrals [Team Insights Query ](https://our.internmc.facebook.com/intern/teaminsights/?start_date=1561935600&end_date=1576022400&rollup=Recursive&selected_tab=TABLE&metrics[0]=REFERRALS&employee_ids[0]=607106268): I contacted lots of my colleagues from University that I thought might be a good fit for Facebook and I referred 20 of them (out of the 10 that disclosed their interview outcome, 1 got hired and 3 are interviewing). I currently rank 3rd in the entire Workplace org by number of [referrals ](https://our.internmc.facebook.com/intern/teaminsights/?start_date=1561935600&end_date=1576022400&rollup=Recursive&selected_tab=TABLE&metrics[0]=REFERRALS&employee_ids[0]=607106268).
+
+
+**Work Collaboration**
+
+* **Finding PoCs in other offices:** the person I worked most closely in the half after Riccardo has been [Vivek Narayanan ](https://our.internmc.facebook.com/intern/profile/?id=809009796), a senior ML engineer in Feed Relevance in MPK. I contacted him at the beginning of the half, and built a strong relationship that turned out to be extremely prolific in terms of technical and personal growth: besides being the main PoCs of my RL project, Vivek taught me the inside out of FBLearner, Flow, Bento Notebook, PyTorch and Caffe2.* *Beside Vivek, the half was full of strong PoCs from other offices that guided me with my projects:
+    * [Kittipat Virochsiri](https://fb.workplace.com/profile.php?id=100004530977094) from Applied Machine Learning team in MPK has taught me a lot about Machine Learning models with his 8 years experience of ML at Facebook for Reinforcement Learning
+    * [Brandon Philial](https://fb.workplace.com/profile.php?id=100018597315406) from OVM team in MPK has been my main PoCs for Feed Analyzer
+    * [Caven Yang](https://fb.workplace.com/profile.php?id=100019172168690) from FAST Data in NYC has been my main PoCs for Prediction Models Datada
+* **Supported Arwa during the half:** during the half I developed a close work relationship with Arwa, and I had the opportunity to support her setting up 1:1s (4 in total) where went through her half planning, brainstorming on ways to make her half more solid finding projects that she would find meaningful. Out of this meetings we decided to scope out the Feature Engineering project as something we would work together for the rest of the half. I am particularly proud of this point since this small effort from my side had the huge reward of making the work environment in the team significantly more enjoyable and friendly.
+* **Communication on Workplace:** I have been effective in my communication through my activity on Workplace. I posted a weekly recap on my timeline to share updates on all my projects. I received positive feedback regarding this practice, that pushed me to publish a total of 27 weekly recaps in the entire half, one per week since I joined the team.
+* **Sent 48 Thanks in the half**: besides the thanks I received  this half (*12*, especially from bootcampers appreciating my effort in helping them e.g [(1)](https://our.internmc.facebook.com/intern/thanks?tab=MY_THANKS&direction=ALL&thanks_ids[0]=2757470314311405) [(2)](https://our.internmc.facebook.com/intern/thanks?tab=MY_THANKS&direction=ALL&thanks_ids[0]=442327710029116) [(3)](https://our.internmc.facebook.com/intern/thanks?tab=MY_THANKS&direction=ALL&thanks_ids[0]=368152574066234)) ), I am proud of the high number of thanks I sent in the whole half (*48*). This high number come from the lots of collaboration I had, where I always took the opportunity to thanks people for their effort in contributing to my success.
+
+
+
