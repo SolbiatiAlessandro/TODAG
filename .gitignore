@@ -103,7 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-
 # gcs
 gcskey.json
 
@@ -111,6 +110,6 @@ gcskey.json
 config.ini
 
 #pickle
-*.pkl
-*.pickle
-*.csv
+# *.pkl
+# *.pickle
+# *.csv
