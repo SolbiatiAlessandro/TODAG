@@ -2,8 +2,8 @@
 DOCS: https://docs.google.com/document/d/1VHZJSoK4fqb6DR07V2g1IyUS5IRgM0ZrZaKO3D6V2UI/edit#
 
 # INFRA
-nothing left
+[ ] CICD (todo with Oana?) https://github.com/SolbiatiAlessandro/MIAproject/issues/5
 
 # YOUTUBE TRANSLATION ENCYCLOPEDIA
-[ ] move to big mac
+[- ] move to big mac, check if generate video works, also check about sleep time, does the computer goes to sleep in the night?
 [ ] set recurrent job
