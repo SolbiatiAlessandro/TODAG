@@ -215,5 +215,11 @@ oana ask me to get the todag, thinking of putting some coding for the occasions
 
 (01.12)
 I want to add docker so we can run TODAG on any machine
+DONE
 
+(13.01.2020)
+Integrate Notion
+read about this library
+https://github.com/jamalex/notion-py
+make roadmapping on notion and execute with TODAG
 
