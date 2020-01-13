@@ -1,22 +1,25 @@
-(THIS COMES FROM NOTION AND TODAG)
+(THIS COMES FROM TODAG)
 planning quip: https://fb.quip.com/VegvAvXwmkMd
 technical quip: https://fb.quip.com/yuDDA2gU4wky (Personalised Value Models for Workplace Feed)
 master task: T53546224
 
-PLANNING/PEOPLE(on quip)
+# PLANNING/PEOPLE
+(on quip)
 [-] horizon ppl
 [-] FAIR ppl
 [x] milestones
 [x] MPK (RL Consulting for my project)
 [x] NYC (SeqToSeq, VM tuning)
 
-EXPERIMENTS[x] launch experiments
+## EXPERIMENTS
+[x] launch experiments
 [x] "workplace_comment_boosting" : check that experiment is not broken, be sure data don't get deleted
 [-x] "workplace_comment_boosting_v2" : new experiments , wait results, check with riccardo why is not getting exposure, probably because of universe parameter
-[x] launch new experiments
+[x] launch new experiments 
 [x] fix training data
 [-x] train model [DEADLINE 1 NOVEMBER]
 [- ] publishing, check vivek group chat if need to do some infra work with ONNX to publish predictor
+
 
 - INFRA [DEADLINE 1 OCTOBER]
 [x] write dag with FAST RL framework

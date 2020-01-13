@@ -8,6 +8,7 @@ from time import ctime
 import logging
 import sys, tempfile, os
 from subprocess import call
+from notion_todag.notion_wrapper import NotionBlock
 
 class card(object):
     """
@@ -36,6 +37,8 @@ class card(object):
         self.location_constraint = None
         self.deadline = None
         self.debug_string = ""
+        # cards can be synced with notion pages
+        self.notionURL = ""
 
     def edit(self):
         """
@@ -240,6 +243,31 @@ class card(object):
                                         self.priority))
         else:
             print( "{} | {}".format(self.uuid, self.name))
+
+    def load_from_notion(self):
+        """
+        """
+        if (not hasattr(self, "notionURL") or self.notionURL == ''):
+            logging.info("no notionURL found, not loading text from notion")
+            return
+        logging.info("getting description field from Notion")
+        block = NotionBlock(self.notionURL)
+        self.description = block.get_TODAG_field()
+        
+
+    def upload_to_notion(self, force=True):
+        """
+        force: ask user to upload notion link
+        """
+        print("SYNC WITH NOTION utility")
+        if (not hasattr(self, "notionURL") or self.notionURL == '') and force:
+            print("no notionURL found, \
+                    input the link of notion card you want to sync with")
+            self.notionURL = input()
+        if hasattr(self, "notionURL") and self.notionURL != '':
+            logging.info("uploading card content to notion")
+            block = NotionBlock(self.notionURL)
+            block.set_TODAG_field(self.description)
 
     def detail(self):
         """

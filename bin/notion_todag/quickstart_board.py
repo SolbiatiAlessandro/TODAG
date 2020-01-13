@@ -20,4 +20,10 @@ for row in cv.collection.get_rows():
         print(row.estimated_value)
     print("CONTENT:")
     for child in row.children:
-        print(child.title)
+        if(hasattr(child, "title")):
+            print(child.title)
+        if(hasattr(child, "type")):
+            print(child.type)
+        print("----")
+
+    row.children[0].title = "This comes from TODAG 2"

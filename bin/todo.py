@@ -202,9 +202,12 @@ def main():
     index = 0
     if args.task is not None:
         index, _ = find_todo_card_from_query(todos,cards,args.task)
+    card = cards[todos[index][1]]
+    card.load_from_notion()
     print_todo(cards, todos, index)
     open_termdown()
     start_time = datetime.now()
+    # load come descriptin from notion
     while True:
         try:
             got = input()
@@ -216,12 +219,12 @@ def main():
                         "w, why -> why am I to do this task?\n"+
                         "m, mood -> right now I am feeling ..\n"+
                         "e, edit -> update the task\n"+
+                        "n, notion -> sync with notion (upload text)\n"
                         "tdb, TODAG debugger\n"+
                         "")
             elif got == "d" or got == 'done':
                 #check
                 card_done = cards[todos[index][1]]
-                import pdb;pdb.set_trace()
                 interactions.checked_interaction(
                         logger, 
                         card_done, 
@@ -253,10 +256,17 @@ def main():
             elif got == "e" or got == "edit":
                 _, todo = todos[index]
                 cards[todo].edit()
+            elif got == "n" or got == "notion":
+                _, todo = todos[index]
+                cards[todo].upload_to_notion()
             elif got == "tdb":
                 _, todo = todos[index]
                 cards[todo]._debug()
             else:
+                print("CLOSING TODO")
+                #uploads to notion only if there is already a notion link
+                _, todo = todos[index]
+                cards[todo].upload_to_notion(force=False)
                 print("do you want to check? [y]/[n] -> close")
                 got = input()
                 if got == "y":
