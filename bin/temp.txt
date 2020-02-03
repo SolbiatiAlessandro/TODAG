@@ -4,27 +4,17 @@ technical quip: https://fb.quip.com/yuDDA2gU4wky (Personalised Value Models for 
 master task: T53546224
 
 PLANNING/PEOPLE(on quip)
-[-] horizon ppl
-[-] FAIR ppl
-[x] milestones
-[x] MPK (RL Consulting for my project)
-[x] NYC (SeqToSeq, VM tuning)
+[ ] write a wiki for James, New Bert ppl, Video Chaining (https://fb.quip.com/N6LSAojzypdX)
+[ ] make tutorial from reagent (https://github.com/facebookresearch/ReAgent/blob/master/docs/rasp_tutorial.rst) and (https://reagent.ai/usage.html)
+[ ] think about making an internal course on RL with ReAgent tutorial
+(test)
 
-EXPERIMENTS[x] launch experiments
-[x] "workplace_comment_boosting" : check that experiment is not broken, be sure data don't get deleted
-[-x] "workplace_comment_boosting_v2" : new experiments , wait results, check with riccardo why is not getting exposure, probably because of universe parameter
-[x] launch new experiments
-[x] fix training data
-[-x] train model [DEADLINE 1 NOVEMBER]
-[- ] publishing, check vivek group chat if need to do some infra work with ONNX to publish predictor
+EXPERIMENTS
+[ ] launch online experiment
+[ ] double check with riccardo
 
-- INFRA [DEADLINE 1 OCTOBER]
-[x] write dag with FAST RL framework
-[x] write operators DAP -> SHIP
-[x] write comments operator
+INFRA
+[ ] implement viewership operator
 
-- EXPLORATION
-[-] which rules we can tune
-([ ] explore this idea that different companies,  different bucket if there is  statistical significance in doing  it(read nikolay))
-([ ] ludmila tool)
+EXPLORATION
 ([ ] OVM training data)
